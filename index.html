@@ -11,7 +11,7 @@
 --bg:#000;--card:#161616;--card2:#1E1E1E;
 --gold:#CDFF00;--dim:rgba(205,255,0,.12);--glow:rgba(205,255,0,.25);
 --text:#FFF;--sec:rgba(255,255,255,.55);--ter:rgba(255,255,255,.3);
---blue:#60A5FA;--purple:#C084FC;--green:#34D399;--yellow:#FBBF24;--red:#F87171;
+--blue:#60A5FA;--purple:#C084FC;--green:#4ade80;--yellow:#FBBF24;--red:#F87171;
 --ease:cubic-bezier(.16,1,.3,1);--safe-top:54px;--safe-bottom:34px;
 }
 body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;overflow:hidden;color:var(--text)}
@@ -106,7 +106,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .vp-text{font-size:14px;font-weight:600;color:var(--gold);opacity:.85;letter-spacing:.3px}
 .vp-text span{color:var(--sec);font-weight:400;font-size:11px;display:block;margin-top:2px}
 .p1-cta{margin-top:auto;width:100%}
-.p1-note{font-size:11px;color:var(--ter);margin-top:10px}
+.p1-note{font-size:11px;color:var(--sec);margin-top:12px;opacity:.65}
 
 /* ===== P2: SCENARIO CAROUSEL ===== */
 #p2{display:flex;flex-direction:column;padding:var(--safe-top) 0 var(--safe-bottom)}
@@ -115,7 +115,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .p2-sub{font-size:13px;color:var(--sec);margin-top:6px;line-height:1.5}
 .carousel-wrap{flex:1;overflow:hidden;position:relative;margin-top:20px}
 .carousel{display:flex;transition:transform .5s var(--ease);height:100%;padding:0 24px;gap:16px}
-.car-card{min-width:calc(100% - 48px);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;background:var(--card);border:1px solid rgba(255,255,255,.08)}
+.car-card{min-width:calc(100% - 48px);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;background:var(--card);border:1px solid rgba(255,255,255,.08)}
 .car-card.active-card{border-color:var(--gold);box-shadow:0 0 20px rgba(205,255,0,.06)}
 .car-anim{flex:1;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:260px}
 .car-info{padding:16px 20px 20px}
@@ -172,13 +172,14 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 #p3>*{flex-shrink:0}
 #p3::-webkit-scrollbar{display:none}
 .tm-title{font-size:26px;font-weight:900;line-height:1.15;margin-bottom:8px}
-.tm-sub{font-size:13px;color:var(--sec);line-height:1.6;margin-bottom:16px}
+.tm-sub{font-size:13px;color:rgba(255,255,255,.45);line-height:1.6;margin-bottom:24px}
+.tm-sub strong{color:rgba(255,255,255,.55);font-weight:700}
 /* crash chart — muted, single color */
 .tm-chart{position:relative;height:80px;margin-bottom:16px;background:var(--card);border-radius:12px;padding:10px 14px 6px;overflow:hidden}
 .tm-chart svg{width:100%;height:100%}
 .tm-chart-labels{position:absolute;top:8px;left:14px;right:14px;display:flex;justify-content:space-between;font-size:10px;font-weight:700}
-.tm-chart-labels .tm-cl-start{color:rgba(255,255,255,.5)}
-.tm-chart-labels .tm-cl-end{color:rgba(255,255,255,.5)}
+.tm-chart-labels .tm-cl-start{color:#4ade80}
+.tm-chart-labels .tm-cl-end{color:#f87171}
 .tm-chart-tag{position:absolute;bottom:6px;right:14px;font-size:8px;color:var(--ter);letter-spacing:.5px}
 /* timeline — muted dots */
 .tm-timeline{display:flex;gap:0;margin-bottom:16px;position:relative;padding:4px 0}
@@ -190,11 +191,11 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .tm-tl-event{font-size:8px;color:var(--ter);margin-top:1px;line-height:1.2}
 /* combined hook + strategy card */
 .tm-combo-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px 16px;margin-bottom:0}
-.tm-hook-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:4px}
-.tm-hook-body{font-size:12px;color:var(--sec);line-height:1.6}
-.tm-hook-body strong{color:rgba(255,255,255,.8)}
+.tm-hook-title{font-size:14px;font-weight:800;color:var(--gold);margin-bottom:4px}
+.tm-hook-body{font-size:12px;color:rgba(255,255,255,.4);line-height:1.6}
+.tm-hook-body strong{color:rgba(255,255,255,.5);font-weight:600}
 .tm-combo-divider{height:1px;background:rgba(255,255,255,.06);margin:10px 0}
-.tm-strat-header{font-size:10px;font-weight:700;color:var(--ter);margin-bottom:8px;letter-spacing:.5px;text-transform:uppercase}
+.tm-strat-header{font-size:10px;font-weight:700;color:rgba(255,255,255,.3);margin-bottom:8px;letter-spacing:.5px;text-transform:uppercase}
 .tm-strat-params{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}
 .tm-sp{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.03)}
 .tm-sp:last-child{border-bottom:none}
@@ -204,14 +205,14 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 /* ctas — pinned bottom */
 .p3-cta{margin-top:auto;padding-top:16px;padding-bottom:12px}
 .p3-cta .btn-gold{margin-bottom:10px}
-.p3-skip{display:block;width:100%;padding:14px;background:transparent;color:var(--sec);font-weight:600;font-size:13px;border:1px solid rgba(255,255,255,.15);border-radius:14px;cursor:pointer;font-family:inherit;text-align:center;transition:all .2s}
-.p3-skip:hover{border-color:var(--gold);color:var(--text)}
+.p3-skip{display:block;width:100%;padding:12px;background:transparent;color:var(--ter);font-weight:600;font-size:11px;border:none;border-radius:14px;cursor:pointer;font-family:inherit;text-align:center;transition:all .2s;margin-top:0}
+.p3-skip:hover{color:var(--text)}
 .p-val-input{font-size:12px;font-weight:600;background:var(--bg);border:1px solid var(--gold);border-radius:6px;color:var(--text);padding:4px 8px;width:100px;font-family:inherit;outline:none;display:none}
 .p-val-input.active{display:inline-block}
 .how-step:last-child{margin-bottom:0}
 .how-num{width:22px;height:22px;border-radius:50%;background:var(--dim);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
 .how-text{font-size:12px;color:var(--sec);line-height:1.5}
-.p3-cta{margin-top:16px;padding-top:12px;padding-bottom:8px}
+.p3-cta{margin-top:auto;padding:28px 0 16px;position:sticky;bottom:0;background:linear-gradient(transparent 0%,#000 60%)}
 .p3-note{font-size:11px;color:var(--ter);text-align:center;margin-top:8px}
 
 /* ===== P4: AGENT OFFICE / HOME ===== */
@@ -279,8 +280,8 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .hc-msg.user-msg{flex-direction:row-reverse}
 .hc-av{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
 .hc-body{flex:1;max-width:85%}
-.hc-name{font-size:9px;font-weight:700;color:var(--sec);margin-bottom:2px}
-.hc-text{font-size:12px;line-height:1.6;color:rgba(255,255,255,.85);background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:10px 12px}
+.hc-name{font-size:10px;font-weight:700;color:var(--sec);margin-bottom:2px}
+.hc-text{font-size:12px;line-height:1.6;color:rgba(255,255,255,.85);background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 12px}
 .hc-text strong{color:var(--text)}
 .hc-text.user-bub{background:var(--dim);border-color:rgba(205,255,0,.2);color:var(--gold)}
 .hc-typing{display:flex;gap:3px;padding:10px 12px;background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;width:50px}
@@ -394,7 +395,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .budget-input .curr{font-size:18px;color:var(--sec)}
 .budget-input .amt{font-size:24px;font-weight:800;flex:1;background:none;border:none;color:var(--text);font-family:inherit;outline:none;width:60px}
 .budget-input .unit{font-size:13px;color:var(--sec)}
-.budget-note{font-size:11px;color:var(--sec);margin-top:8px;line-height:1.5}
+.budget-note{font-size:11px;color:var(--sec);margin-top:12px;line-height:1.5;background:rgba(205,255,0,.04);border:1px solid rgba(205,255,0,.1);border-radius:10px;padding:10px 12px}
 /* Subscription fee */
 .sub-sec{margin-top:12px;background:var(--card);border-radius:14px;padding:16px;border:1px solid rgba(205,255,0,.1)}
 .sub-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
@@ -427,7 +428,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .p7-chat::-webkit-scrollbar{width:2px}
 .p7-chat::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
 /* Reuse hc-msg styles */
-.guard-card{background:var(--card);border:1px solid rgba(205,255,0,.15);border-radius:12px;padding:14px;margin-top:4px}
+.guard-card{background:var(--card);border:1px solid rgba(205,255,0,.15);border-radius:14px;padding:14px;margin-top:4px}
 .guard-card h5{font-size:12px;font-weight:700;margin-bottom:8px}
 .guard-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:11px;color:rgba(255,255,255,.85)}
 .guard-check{color:var(--green);font-weight:700}
@@ -438,7 +439,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .auto-card-info{flex:1}
 .auto-card-name{font-size:12px;font-weight:700}
 .auto-card-desc{font-size:10px;color:var(--sec)}
-.summary-card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px;margin-top:4px}
+.summary-card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px;margin-top:4px}
 .summary-card h5{font-size:12px;font-weight:700;margin-bottom:8px}
 .sum-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:11px}
 .sum-row:last-child{border-bottom:none}
@@ -456,7 +457,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .hp-bal-wrap{flex:1}
 .hp-live{font-size:10px;color:var(--green);font-weight:700;display:flex;align-items:center;gap:5px;margin-bottom:6px;letter-spacing:1.5px}
 .hp-live .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.2s infinite;box-shadow:0 0 8px var(--green)}
-.hp-bal{font-size:32px;font-weight:900;letter-spacing:-.8px;line-height:1}
+.hp-bal{font-size:28px;font-weight:900;letter-spacing:-.8px;line-height:1;font-variant-numeric:tabular-nums}
 .hp-pnl{font-size:13px;font-weight:700;margin-top:4px}
 .hp-strat{font-size:11px;color:var(--sec);margin-top:4px;letter-spacing:.2px}
 .hp-actions{display:flex;gap:8px;padding-top:4px}
@@ -515,13 +516,13 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 /* Quick Actions panel */
 .qa-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);z-index:50;opacity:0;pointer-events:none;transition:opacity .3s}
 .qa-overlay.show{opacity:1;pointer-events:auto}
-.qa-panel{position:absolute;bottom:0;left:0;right:0;background:var(--card);border-radius:20px 20px 0 0;padding:20px 20px calc(var(--safe-bottom) + 12px);z-index:51;transform:translateY(100%);transition:transform .35s var(--ease)}
+.qa-panel{position:absolute;bottom:0;left:0;right:0;background:var(--card);border-radius:16px 16px 0 0;padding:20px 20px calc(var(--safe-bottom) + 12px);z-index:51;transform:translateY(100%);transition:transform .35s var(--ease)}
 .qa-panel.show{transform:translateY(0)}
 .qa-panel-title{font-size:15px;font-weight:800;text-align:center;margin-bottom:16px}
 .qa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.qa-item{background:var(--card2);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:all .2s}
+.qa-item{background:var(--card2);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:all .2s}
 .qa-item:active{transform:scale(.95)}
-.qa-item-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.qa-item-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
 .qa-item-name{font-size:11px;font-weight:600;color:var(--sec)}
 /* Agent bounce when speaking */
 .p4-station.active .px-char{animation:agentBounce .4s var(--ease)}
@@ -708,8 +709,8 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
   <div class="tm-chart">
     <div class="tm-chart-labels"><span class="tm-cl-start">$36,000</span><span class="tm-cl-end">$25,400</span></div>
     <svg viewBox="0 0 320 52" fill="none" preserveAspectRatio="none">
-      <defs><linearGradient id="crashFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff" stop-opacity=".08"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
-      <path d="M0,4 C20,4 40,5 70,8 C100,11 120,14 150,22 C170,28 185,32 210,40 C230,45 260,48 280,44 C300,41 310,38 320,36" stroke="rgba(255,255,255,.35)" stroke-width="1.5" stroke-linecap="round"/>
+      <defs><linearGradient id="crashFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f87171" stop-opacity=".2"/><stop offset="100%" stop-color="#f87171" stop-opacity="0"/></linearGradient></defs>
+      <path d="M0,4 C20,4 40,5 70,8 C100,11 120,14 150,22 C170,28 185,32 210,40 C230,45 260,48 280,44 C300,41 310,38 320,36" stroke="#f87171" stroke-width="1.5" stroke-linecap="round"/>
       <path d="M0,4 C20,4 40,5 70,8 C100,11 120,14 150,22 C170,28 185,32 210,40 C230,45 260,48 280,44 C300,41 310,38 320,36 L320,52 L0,52Z" fill="url(#crashFill)"/>
     </svg>
     <div class="tm-chart-tag">BTC/USD · MAY 7–14, 2022</div>
@@ -717,11 +718,11 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 
   <!-- Timeline milestones -->
   <div class="tm-timeline">
-    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:rgba(255,255,255,.4)"></div><div class="tm-tl-day">May 7</div><div class="tm-tl-price">$36,000</div><div class="tm-tl-event">Calm</div></div>
-    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:rgba(255,255,255,.3)"></div><div class="tm-tl-day">May 8</div><div class="tm-tl-price">$34,000</div><div class="tm-tl-event">UST wobbles</div></div>
-    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:rgba(255,255,255,.25)"></div><div class="tm-tl-day">May 9</div><div class="tm-tl-price">$31,000</div><div class="tm-tl-event">UST depegs</div></div>
-    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:rgba(255,255,255,.2)"></div><div class="tm-tl-day">May 12</div><div class="tm-tl-price">$25,400</div><div class="tm-tl-event">Bottom</div></div>
-    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:rgba(255,255,255,.35)"></div><div class="tm-tl-day">May 14</div><div class="tm-tl-price">$30,000</div><div class="tm-tl-event">Recovery</div></div>
+    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:#4ade80"></div><div class="tm-tl-day">May 7</div><div class="tm-tl-price">$36,000</div><div class="tm-tl-event">Calm</div></div>
+    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:#facc15"></div><div class="tm-tl-day">May 8</div><div class="tm-tl-price">$34,000</div><div class="tm-tl-event">UST wobbles</div></div>
+    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:#f87171"></div><div class="tm-tl-day">May 9</div><div class="tm-tl-price">$31,000</div><div class="tm-tl-event">UST depegs</div></div>
+    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:#ef4444;width:10px;height:10px"></div><div class="tm-tl-day">May 12</div><div class="tm-tl-price" style="color:#f87171">$25,400</div><div class="tm-tl-event">Bottom</div></div>
+    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:#4ade80"></div><div class="tm-tl-day">May 14</div><div class="tm-tl-price">$30,000</div><div class="tm-tl-event">Recovery</div></div>
   </div>
 
   <!-- Combined: Hook + Strategy Preview -->
@@ -743,7 +744,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 
   <div class="p3-cta">
     <button class="btn-gold" onclick="goPage('p4');startHomeSimulation()">Start Free Simulation</button>
-    <button class="p3-skip" onclick="goPage('p5')">Skip this and set up my strategy →</button>
+    <button class="p3-skip" onclick="goPage('p5')">Skip this and set up my strategy</button>
   </div>
 </div>
 
