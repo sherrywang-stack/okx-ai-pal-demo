@@ -188,15 +188,13 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .tm-tl-day{font-size:9px;font-weight:700;color:var(--sec)}
 .tm-tl-price{font-size:10px;font-weight:800;color:var(--sec);margin-top:1px}
 .tm-tl-event{font-size:8px;color:var(--ter);margin-top:1px;line-height:1.2}
-/* hook */
-.tm-hook-card{background:rgba(205,255,0,.04);border:1px solid rgba(205,255,0,.1);border-radius:12px;padding:12px 14px;margin-bottom:14px}
+/* combined hook + strategy card */
+.tm-combo-card{background:var(--card);border:1px solid rgba(205,255,0,.1);border-radius:14px;padding:14px 16px;margin-bottom:0}
 .tm-hook-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:4px}
 .tm-hook-body{font-size:12px;color:var(--sec);line-height:1.6}
 .tm-hook-body strong{color:var(--gold)}
-/* strategy card */
-.tm-strat-preview{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:12px 14px;margin-bottom:0}
-.tm-strat-header{font-size:12px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.tm-strat-agents{font-size:10px;color:var(--ter);margin-bottom:8px;letter-spacing:.3px}
+.tm-combo-divider{height:1px;background:rgba(255,255,255,.06);margin:10px 0}
+.tm-strat-header{font-size:11px;font-weight:700;color:var(--sec);margin-bottom:8px;letter-spacing:.3px;text-transform:uppercase}
 .tm-strat-params{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}
 .tm-sp{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.03)}
 .tm-sp:last-child{border-bottom:none}
@@ -726,16 +724,12 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
     <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--green)"></div><div class="tm-tl-day">May 14</div><div class="tm-tl-price">$30,000</div><div class="tm-tl-event">Recovery</div></div>
   </div>
 
-  <!-- Hook — the emotional turn -->
-  <div class="tm-hook-card">
+  <!-- Combined: Hook + Strategy Preview -->
+  <div class="tm-combo-card">
     <div class="tm-hook-title">What if you had an AI team back then?</div>
     <div class="tm-hook-body">Watch 5 agents <strong>detect the crash</strong>, <strong>protect your portfolio</strong>, and <strong>buy the dip</strong> — all automatically.</div>
-  </div>
-
-  <!-- Strategy preview — your AI team's battle plan -->
-  <div class="tm-strat-preview">
-    <div class="tm-strat-header"><span>🧠</span> DCA + Crash Protection Strategy</div>
-    <div class="tm-strat-agents">👨‍💼 Fund Mgr · 🔬 Researcher · 📐 Strategist · 🛡 Sentinel · ⚡ Trader</div>
+    <div class="tm-combo-divider"></div>
+    <div class="tm-strat-header">DCA + Crash Protection Strategy</div>
     <div class="tm-strat-params">
       <div class="tm-sp"><span class="tm-sp-l">Budget</span><span class="tm-sp-v">$10,000 USDT</span></div>
       <div class="tm-sp"><span class="tm-sp-l">DCA Amount</span><span class="tm-sp-v">$1,250/day</span></div>
@@ -745,10 +739,10 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
       <div class="tm-sp"><span class="tm-sp-l">Risk Mode</span><span class="tm-sp-v">Defensive</span></div>
     </div>
   </div>
-  <div class="tm-footnote">Based on real BTC market data · ~30 sec simulation</div>
+  <div class="tm-footnote">Simulation uses real BTC data · No real money · ~30 seconds</div>
 
   <div class="p3-cta">
-    <button class="btn-gold" onclick="goPage('p4');startHomeSimulation()">Launch Time Machine</button>
+    <button class="btn-gold" onclick="goPage('p4');startHomeSimulation()">Start Free Simulation</button>
     <button class="p3-skip" onclick="goPage('p5')">Skip this and set up my strategy →</button>
   </div>
 </div>
