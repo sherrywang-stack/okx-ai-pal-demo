@@ -472,7 +472,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 #scrOffice .pixel-floor{position:absolute;inset:0;background:repeating-conic-gradient(#2A2218 0% 25%,#332A1E 0% 50%) 0 0/20px 20px;opacity:.5}
 #scrOffice .pixel-wall{position:absolute;top:0;left:0;right:0;height:35%;background:linear-gradient(180deg,#1A1510,#221C14);border-bottom:2px solid #3D3428}
 /* Transfer screen */
-#scrTransfer,#scrStrategy{padding:10px 16px;background:var(--card);display:flex;flex-direction:column}
+#scrTransfer,#scrStrategy,#scrPortfolio,#scrHistory,#scrAlerts,#scrSettings{padding:10px 16px;background:var(--card);display:flex;flex-direction:column}
 .scr-title{font-size:13px;font-weight:800;margin-bottom:2px}
 .scr-subtitle{font-size:10px;color:var(--sec);margin-bottom:8px}
 .xfer-token{display:flex;align-items:center;gap:10px;background:var(--bg);border-radius:10px;padding:8px 10px;margin-bottom:8px}
@@ -962,6 +962,81 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
         <div class="guard-row"><span class="guard-row-label">Daily report</span><span class="guard-row-val" style="color:var(--green)">9 AM UTC</span></div>
       </div>
       <button class="btn-gold" id="guardSaveBtn" onclick="confirmGuardrails()" style="margin-top:8px;padding:10px;font-size:12px">Confirm Guardrails</button>
+    </div>
+    <!-- Screen: Portfolio -->
+    <div class="hp-scr" id="scrPortfolio">
+      <div class="scr-strat-back" onclick="switchScreen('scrOffice')">← Back</div>
+      <div class="scr-title">Portfolio</div>
+      <div style="background:var(--bg);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:12px;margin-top:6px">
+        <div style="display:flex;justify-content:space-between;font-size:11px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="color:var(--ter)">Total Value</span><span style="font-weight:700">$5,000.00</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="color:var(--ter)">BTC</span><span>0.00929 <span style="color:var(--sec)">($625)</span></span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="color:var(--ter)">USDT Cash</span><span>$4,375</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;padding:5px 0"><span style="color:var(--ter)">P&L Today</span><span style="color:var(--green)">+$0.00 (0.00%)</span></div>
+      </div>
+      <div style="text-align:center;font-size:9px;color:var(--ter);margin-top:8px">Next DCA buy: tomorrow 9 AM UTC</div>
+    </div>
+    <!-- Screen: Trade History -->
+    <div class="hp-scr" id="scrHistory">
+      <div class="scr-strat-back" onclick="switchScreen('scrOffice')">← Back</div>
+      <div class="scr-title">Trade History</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px;flex:1;overflow-y:auto">
+        <div style="background:var(--bg);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px">
+          <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:var(--green);font-weight:700">BUY</span><span style="color:var(--ter);font-size:9px">just now</span></div>
+          <div style="font-size:11px;color:var(--sec)">0.00929 BTC @ $67,240</div>
+          <div style="font-size:10px;color:var(--ter);margin-top:2px">DCA Tranche 1 · $625 USDT</div>
+        </div>
+        <div style="background:var(--bg);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;opacity:.5">
+          <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:var(--sec);font-weight:700">PENDING</span><span style="color:var(--ter);font-size:9px">tomorrow 9 AM</span></div>
+          <div style="font-size:11px;color:var(--sec)">~0.0093 BTC @ market</div>
+          <div style="font-size:10px;color:var(--ter);margin-top:2px">DCA Tranche 2 · $625 USDT</div>
+        </div>
+      </div>
+    </div>
+    <!-- Screen: Alerts -->
+    <div class="hp-scr" id="scrAlerts">
+      <div class="scr-strat-back" onclick="switchScreen('scrOffice')">← Back</div>
+      <div class="scr-title">Alert Rules</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px;flex:1;overflow-y:auto">
+        <div style="background:var(--bg);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:11px;font-weight:600">Trade alerts</div><div style="font-size:9px;color:var(--ter)">Notify on trades > $500</div></div>
+          <div style="width:32px;height:18px;border-radius:9px;background:var(--green);position:relative"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;right:2px"></div></div>
+        </div>
+        <div style="background:var(--bg);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:11px;font-weight:600">Daily report</div><div style="font-size:9px;color:var(--ter)">Summary at 9 AM UTC</div></div>
+          <div style="width:32px;height:18px;border-radius:9px;background:var(--green);position:relative"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;right:2px"></div></div>
+        </div>
+        <div style="background:var(--bg);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:11px;font-weight:600">Risk alerts</div><div style="font-size:9px;color:var(--ter)">Drawdown > -10% warning</div></div>
+          <div style="width:32px;height:18px;border-radius:9px;background:var(--green);position:relative"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;right:2px"></div></div>
+        </div>
+        <div style="background:var(--bg);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-size:11px;font-weight:600">Market moves</div><div style="font-size:9px;color:var(--ter)">BTC ±5% price swings</div></div>
+          <div style="width:32px;height:18px;border-radius:9px;background:var(--green);position:relative"><div style="width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;right:2px"></div></div>
+        </div>
+      </div>
+    </div>
+    <!-- Screen: Settings -->
+    <div class="hp-scr" id="scrSettings">
+      <div class="scr-strat-back" onclick="switchScreen('scrOffice')">← Back</div>
+      <div class="scr-title">Settings</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px;flex:1;overflow-y:auto">
+        <div style="background:var(--bg);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer">
+          <div><div style="font-size:11px;font-weight:600">AI Subscription</div><div style="font-size:9px;color:var(--ter)">Pro Plan · $29/month</div></div>
+          <span style="color:var(--ter);font-size:12px">›</span>
+        </div>
+        <div style="background:var(--bg);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer">
+          <div><div style="font-size:11px;font-weight:600">Notifications</div><div style="font-size:9px;color:var(--ter)">Push, Email, In-app</div></div>
+          <span style="color:var(--ter);font-size:12px">›</span>
+        </div>
+        <div style="background:var(--bg);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer">
+          <div><div style="font-size:11px;font-weight:600">Risk Preferences</div><div style="font-size:9px;color:var(--ter)">Defensive mode</div></div>
+          <span style="color:var(--ter);font-size:12px">›</span>
+        </div>
+        <div style="background:var(--bg);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer">
+          <div><div style="font-size:11px;font-weight:600">AI Account</div><div style="font-size:9px;color:var(--ter)">Sub-account under your OKX</div></div>
+          <span style="color:var(--ter);font-size:12px">›</span>
+        </div>
+      </div>
     </div>
   </div>
   <!-- Bottom: AI Chat -->
@@ -1713,6 +1788,9 @@ function qaAction(action){
     switchScreen('scrTransfer');
     addMsg('hpChat','👔','Fund Manager','Transfer screen ready. Choose an amount and confirm when ready.','rgba(205,255,0,.06)');
   } else if(action==='portfolio'){
+    switchScreen('scrPortfolio');
+    addMsg('hpChat','👔','Fund Manager','Here\'s your current portfolio breakdown.','rgba(205,255,0,.06)');
+  } else if(action==='portfolio_OLD'){
     switchScreen('scrOffice');
     addMsg('hpChat','👔','Fund Manager','Here\'s your current portfolio:','rgba(205,255,0,.06)');
     setTimeout(function(){
@@ -1726,28 +1804,17 @@ function qaAction(action){
         +'<div style="text-align:center;font-size:9px;color:var(--ter);margin-top:4px">Next DCA buy: tomorrow 9 AM UTC</div></div>');
     },400);
   } else if(action==='history'){
-    addMsg('hpChat','👔','Fund Manager','Recent trade activity:','rgba(205,255,0,.06)');
-    setTimeout(function(){
-      addHTML('hpChat','<div style="background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;font-size:11px;line-height:1.8">'
-        +'<div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:6px">TRADE HISTORY</div>'
-        +'<div style="padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="color:var(--green)">BUY</span> 0.00929 BTC @ $67,240 <span style="color:var(--ter);font-size:9px;float:right">just now</span></div>'
-        +'<div style="padding:4px 0;color:var(--sec)">No other trades yet — strategy just started</div></div>');
-    },400);
+    switchScreen('scrHistory');
+    addMsg('hpChat','👔','Fund Manager','Here\'s your recent trade activity.','rgba(205,255,0,.06)');
   } else if(action==='strategies'){
     switchScreen('scrStratList');
     addMsg('hpChat','👔','Fund Manager','Here are your active strategies. Tap any to view details and adjust guardrails.','rgba(205,255,0,.06)');
   } else if(action==='alerts'){
-    addMsg('hpChat','👔','Fund Manager','Your current alert settings:','rgba(205,255,0,.06)');
-    setTimeout(function(){
-      addHTML('hpChat','<div style="background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;font-size:11px;line-height:1.8">'
-        +'<div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:6px">ALERT SETTINGS</div>'
-        +'<div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);padding:4px 0"><span style="color:var(--sec)">Trade alerts</span><span style="color:var(--green)">✓ Trades &gt; $500</span></div>'
-        +'<div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);padding:4px 0"><span style="color:var(--sec)">Daily report</span><span style="color:var(--green)">✓ 9 AM UTC</span></div>'
-        +'<div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);padding:4px 0"><span style="color:var(--sec)">Risk alerts</span><span style="color:var(--green)">✓ Drawdown &gt; -10%</span></div>'
-        +'<div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:var(--sec)">Market alerts</span><span style="color:var(--green)">✓ BTC ±5% moves</span></div></div>');
-    },400);
+    switchScreen('scrAlerts');
+    addMsg('hpChat','👔','Fund Manager','Your alert rules. Toggle any to enable/disable.','rgba(205,255,0,.06)');
   } else if(action==='settings'){
-    addMsg('hpChat','👔','Fund Manager','Settings: You can manage your AI subscription, notification preferences, and account details from your OKX app settings. Need help with anything specific?','rgba(205,255,0,.06)');
+    switchScreen('scrSettings');
+    addMsg('hpChat','👔','Fund Manager','Manage your subscription, notifications, and preferences.','rgba(205,255,0,.06)');
   }
 }
 
