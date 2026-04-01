@@ -174,31 +174,21 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .tm-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700;text-transform:uppercase;margin-top:16px;margin-bottom:10px;background:var(--dim);padding:6px 12px;border-radius:20px;border:1px solid rgba(205,255,0,.15)}
 .tm-title{font-size:24px;font-weight:900;line-height:1.2;margin-bottom:6px}
 .tm-sub{font-size:13px;color:var(--sec);line-height:1.6;margin-bottom:16px}
-.tm-narrative{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;border-left:3px solid var(--red);font-size:12px;line-height:1.7;color:rgba(255,255,255,.85)}
-.tm-narrative strong{color:var(--text)}
-.tm-narrative .tm-date{color:var(--gold);font-weight:700}
+.tm-sim-info{display:flex;gap:10px;margin-bottom:20px;justify-content:center}
+.tm-sim-row{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--sec);background:var(--card);padding:6px 10px;border-radius:8px}
+.tm-sim-row span:first-child{font-size:13px}
 .tm-timeline{display:flex;gap:0;margin-bottom:16px;position:relative}
 .tm-timeline::before{content:'';position:absolute;top:12px;left:12px;right:12px;height:2px;background:rgba(255,255,255,.08)}
 .tm-tl-item{flex:1;text-align:center;position:relative}
 .tm-tl-dot{width:8px;height:8px;border-radius:50%;margin:8px auto 6px;position:relative;z-index:1}
 .tm-tl-day{font-size:9px;font-weight:700;color:var(--sec)}
 .tm-tl-event{font-size:8px;color:var(--ter);margin-top:2px;line-height:1.3}
-.tm-setup{background:var(--card);border-radius:14px;padding:12px 14px;margin-bottom:14px}
-.tm-setup-title{font-size:10px;font-weight:700;color:var(--sec);letter-spacing:1px;margin-bottom:8px}
-.tm-setup-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
-.tm-setup-row:last-child{border-bottom:none}
-.tm-setup-label{color:var(--sec)}
-.tm-setup-val{font-weight:600}
-.tm-setup-edit{font-size:9px;color:var(--gold);cursor:pointer;padding:2px 6px;border:1px solid rgba(205,255,0,.2);border-radius:4px;margin-left:6px}
-.tm-heads-up{background:rgba(205,255,0,.04);border:1px solid rgba(205,255,0,.1);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:11px;line-height:1.6;color:var(--sec)}
-.tm-heads-up strong{color:var(--gold)}
 .p3-cta{padding-top:4px;padding-bottom:8px}
 .p3-cta .btn-gold{margin-bottom:10px}
 .p3-skip{display:block;width:100%;padding:14px;background:transparent;color:var(--sec);font-weight:600;font-size:13px;border:1px solid rgba(255,255,255,.2);border-radius:14px;cursor:pointer;font-family:inherit;text-align:center;transition:all .2s}
 .p3-skip:hover{border-color:var(--gold);color:var(--text)}
 .p-val-input{font-size:12px;font-weight:600;background:var(--bg);border:1px solid var(--gold);border-radius:6px;color:var(--text);padding:4px 8px;width:100px;font-family:inherit;outline:none;display:none}
 .p-val-input.active{display:inline-block}
-.tm-setup-val.editing{display:none}
 .how-step:last-child{margin-bottom:0}
 .how-num{width:22px;height:22px;border-radius:50%;background:var(--dim);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
 .how-text{font-size:12px;color:var(--sec);line-height:1.5}
@@ -677,13 +667,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 <div class="pg" id="p3">
   <div class="tm-badge">⏳ TIME MACHINE</div>
   <div class="tm-title">Go Back to<br>May 2022</div>
-  <div class="tm-sub">You're about to travel back in time. Your AI team will face a real BTC crash — using actual market data.</div>
-
-  <div class="tm-narrative">
-    <strong>Mission Briefing</strong><br>
-    It's <span class="tm-date">May 7, 2022</span>. BTC is at <strong>$36,000</strong>. Your AI team has just started a DCA strategy. In the next 72 hours, BTC will crash <strong style="color:var(--red)">28%</strong> during the Luna/UST collapse.<br><br>
-    Your 5 AI agents don't know this yet. Watch them <strong>detect the danger</strong>, <strong>protect your funds</strong>, and <strong>buy the dip</strong> — all in real-time.
-  </div>
+  <div class="tm-sub">It's May 7. BTC is $36,000. In 72 hours it crashes <strong style="color:var(--red)">28%</strong>.<br>Watch your AI team handle it — with real data.</div>
 
   <div class="tm-timeline">
     <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--green)"></div><div class="tm-tl-day">May 7</div><div class="tm-tl-event">Calm<br>markets</div></div>
@@ -693,21 +677,15 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
     <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--green)"></div><div class="tm-tl-day">May 13-14</div><div class="tm-tl-event">Recovery<br>begins</div></div>
   </div>
 
-  <div class="tm-setup">
-    <div class="tm-setup-title">YOUR SIMULATION SETUP</div>
-    <div class="tm-setup-row"><span class="tm-setup-label">Budget</span><span><span class="tm-setup-val" id="paramBudget">$10,000</span><input class="p-val-input" id="inputBudget" value="10,000" data-suffix="" data-prefix="$"><span class="tm-setup-edit" onclick="toggleParamEdit('Budget')">Edit</span></span></div>
-    <div class="tm-setup-row"><span class="tm-setup-label">Strategy</span><span class="tm-setup-val">Smart DCA + Protection</span></div>
-    <div class="tm-setup-row"><span class="tm-setup-label">Stop-Loss</span><span><span class="tm-setup-val" id="paramSL" style="color:var(--green)">-15%</span><input class="p-val-input" id="inputSL" value="15" data-suffix="%" data-prefix="-"><span class="tm-setup-edit" onclick="toggleParamEdit('SL')">Edit</span></span></div>
-    <div class="tm-setup-row"><span class="tm-setup-label">DCA Amount</span><span><span class="tm-setup-val" id="paramDCA">$1,250/day</span><input class="p-val-input" id="inputDCA" value="1,250" data-suffix="/day" data-prefix="$"><span class="tm-setup-edit" onclick="toggleParamEdit('DCA')">Edit</span></span></div>
-  </div>
-
-  <div class="tm-heads-up">
-    <strong>What you'll see:</strong> Your AI agents chatting, a live BTC price chart, and real-time portfolio changes. It's a lot — but that's the point. You're watching <strong>5 agents work together</strong> in a crisis. Takes ~30 seconds.
+  <div class="tm-sim-info">
+    <div class="tm-sim-row"><span>💰</span><span>$10,000 budget</span></div>
+    <div class="tm-sim-row"><span>🧠</span><span>Smart DCA + Protection</span></div>
+    <div class="tm-sim-row"><span>⏱</span><span>~30 sec simulation</span></div>
   </div>
 
   <div class="p3-cta">
-    <button class="btn-gold" onclick="goPage('p4');startHomeSimulation()">Go Back to May 2022</button>
-    <button class="p3-skip" onclick="goPage('p5')">I'm experienced — skip to strategy setup →</button>
+    <button class="btn-gold" onclick="goPage('p4');startHomeSimulation()">Start Simulation →</button>
+    <button class="p3-skip" onclick="goPage('p5')">Skip to strategy setup →</button>
   </div>
 </div>
 
@@ -918,15 +896,12 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
   <div class="qa-panel" id="qaPanel">
     <div class="qa-panel-title">Quick Actions</div>
     <div class="qa-grid">
-      <div class="qa-item" onclick="switchScreen('scrTransfer')"><div class="qa-item-icon" style="background:rgba(205,255,0,.1)">💸</div><div class="qa-item-name">Transfer</div></div>
-      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(248,113,113,.1)">🏧</div><div class="qa-item-name">Withdraw</div></div>
-      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(96,165,250,.1)">📊</div><div class="qa-item-name">Portfolio</div></div>
-      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(251,191,36,.1)">📝</div><div class="qa-item-name">Trade History</div></div>
-      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(192,132,252,.1)">🧠</div><div class="qa-item-name">Strategies</div></div>
-      <div class="qa-item" onclick="switchScreen('scrStrategy')"><div class="qa-item-icon" style="background:rgba(52,211,153,.1)">🛡</div><div class="qa-item-name">Guardrails</div></div>
-      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(205,255,0,.06)">📈</div><div class="qa-item-name">Performance</div></div>
-      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(251,191,36,.06)">🔔</div><div class="qa-item-name">Alerts</div></div>
-      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(255,255,255,.06)">⚙️</div><div class="qa-item-name">Settings</div></div>
+      <div class="qa-item" onclick="qaAction('transfer')"><div class="qa-item-icon" style="background:rgba(205,255,0,.1)">💸</div><div class="qa-item-name">Transfer</div></div>
+      <div class="qa-item" onclick="qaAction('portfolio')"><div class="qa-item-icon" style="background:rgba(96,165,250,.1)">📊</div><div class="qa-item-name">Portfolio</div></div>
+      <div class="qa-item" onclick="qaAction('history')"><div class="qa-item-icon" style="background:rgba(251,191,36,.1)">📝</div><div class="qa-item-name">Trade History</div></div>
+      <div class="qa-item" onclick="qaAction('strategies')"><div class="qa-item-icon" style="background:rgba(192,132,252,.1)">🧠</div><div class="qa-item-name">Strategies</div></div>
+      <div class="qa-item" onclick="qaAction('alerts')"><div class="qa-item-icon" style="background:rgba(251,191,36,.06)">🔔</div><div class="qa-item-name">Alerts</div></div>
+      <div class="qa-item" onclick="qaAction('settings')"><div class="qa-item-icon" style="background:rgba(255,255,255,.06)">⚙️</div><div class="qa-item-name">Settings</div></div>
     </div>
   </div>
   <!-- Toast popup -->
@@ -1042,28 +1017,7 @@ function updateStrategyRec(){
 })();
 
 // ====== STRATEGY ======
-function toggleParamEdit(key){
-  var val=document.getElementById('param'+key);
-  var inp=document.getElementById('input'+key);
-  var btn=val.closest('.tm-setup-row')?val.closest('.tm-setup-row').querySelector('.tm-setup-edit'):val.parentElement.querySelector('.tm-setup-edit');
-  if(inp.classList.contains('active')){
-    var v=inp.value.trim();
-    val.textContent=inp.dataset.prefix+v+inp.dataset.suffix;
-    inp.classList.remove('active');
-    val.classList.remove('editing');
-    btn.textContent='Edit';
-    btn.style.borderColor='rgba(205,255,0,.2)';
-    btn.style.color='var(--gold)';
-  } else {
-    inp.classList.add('active');
-    val.classList.add('editing');
-    btn.textContent='Save';
-    btn.style.borderColor='var(--green)';
-    btn.style.color='var(--green)';
-    inp.focus();
-    inp.select();
-  }
-}
+
 function selectSubTier(el){
   document.querySelectorAll('.sub-tier').forEach(function(c){c.classList.remove('sel')});
   el.classList.add('sel');
@@ -1584,6 +1538,7 @@ function toggleQuickActions(){
   else{ov.classList.add('show');pn.classList.add('show')}
 }
 
+var launchTimers=[];
 function startLaunch(){
   var chat=document.getElementById('hpChat');
   var toast=document.getElementById('launchToast');
@@ -1592,9 +1547,9 @@ function startLaunch(){
   ph.innerHTML='<div class="hc-av" style="background:rgba(205,255,0,.06)">👔</div><div class="hc-body"><div class="hc-typing"><span></span><span></span><span></span></div></div>';
   chat.appendChild(ph);
   // Show toast popup — compact pill, quick dismiss
-  setTimeout(function(){toast.classList.add('show')},300);
-  setTimeout(function(){toast.classList.add('hide')},2200);
-  setTimeout(function(){toast.classList.remove('show','hide')},2700);
+  launchTimers.push(setTimeout(function(){toast.classList.add('show')},300));
+  launchTimers.push(setTimeout(function(){toast.classList.add('hide')},2200));
+  launchTimers.push(setTimeout(function(){toast.classList.remove('show','hide')},2700));
   // Agent chat messages after toast
   var msgs=[
     {t:1800,icon:'👔',name:'Fund Manager',text:'Team assembled. Scanning markets now…',bg:'rgba(205,255,0,.06)',agent:'manager'},
@@ -1606,7 +1561,8 @@ function startLaunch(){
   ];
   var agentMap={manager:0,researcher:1,strategist:2,sentinel:3,trader:4};
   msgs.forEach(function(m){
-    setTimeout(function(){
+    launchTimers.push(setTimeout(function(){
+      if(isPaused) return; // Skip if paused
       // Remove typing placeholder on first message
       var oldPh=document.getElementById('hpPlaceholder');if(oldPh)oldPh.remove();
       // Light this agent's dot + bounce
@@ -1618,20 +1574,21 @@ function startLaunch(){
       d.innerHTML='<div class="hc-av" style="background:'+m.bg+'">'+m.icon+'</div><div class="hc-body"><div class="hc-name">'+m.name+'<span style="font-size:8px;color:var(--ter);font-weight:400;margin-left:6px">just now</span></div><div class="hc-text">'+m.text+'</div></div>';
       chat.appendChild(d);setTimeout(function(){d.classList.add('show')},30);
       chat.scrollTop=chat.scrollHeight;
-    },m.t);
+    },m.t));
   });
   // Update balance after last message
-  setTimeout(function(){
+  launchTimers.push(setTimeout(function(){
+    if(isPaused) return;
     document.getElementById('hpBal').textContent='$5,000.00';
     document.getElementById('hpPnl').innerHTML='<span style="color:var(--green)">+$0.00 (0.00%)</span>';
     document.querySelectorAll('#p8 .p4-station').forEach(function(s){s.classList.remove('active')});
-  },14500);
+  },14500));
   // Rotating placeholder suggestions
   var hpPhs=['Ask: "Why BTC first?"','Ask: "What if BTC drops 10%?"','Ask: "Show me the full plan"','Ask: "When is the next buy?"','Talk to your AI team...'];
   var hpPhIdx=0;
   setInterval(function(){
     var inp=document.getElementById('hpInp');
-    if(inp&&!inp.value&&document.getElementById('p8').classList.contains('active')){
+    if(inp&&!inp.value&&document.getElementById('p8').classList.contains('active')&&!isPaused){
       hpPhIdx=(hpPhIdx+1)%hpPhs.length;
       inp.setAttribute('placeholder',hpPhs[hpPhIdx]);
     }
@@ -1646,12 +1603,18 @@ function togglePause(){
   var label=document.getElementById('pauseLabel');
   var live=document.querySelector('.hp-live');
   if(isPaused){
+    // Kill all pending launch timers
+    launchTimers.forEach(function(t){clearTimeout(t)});
+    launchTimers=[];
+    // Remove typing placeholder if present
+    var ph=document.getElementById('hpPlaceholder');if(ph)ph.remove();
     btn.classList.add('paused');
     icon.textContent='▶';
     label.textContent='Resume';
     live.innerHTML='<div class="dot" style="background:var(--red);box-shadow:0 0 8px var(--red);animation:none"></div><span style="color:var(--red)">PAUSED</span>';
-    // Pause all agent dots
+    // Stop all agent dots + remove active bounce
     document.querySelectorAll('#scrOffice .px-dot').forEach(function(d){d.className='px-dot'});
+    document.querySelectorAll('#p8 .p4-station').forEach(function(s){s.classList.remove('active')});
     addMsg('hpChat','👔','Fund Manager','<strong style="color:var(--red)">Strategy paused.</strong> All AI activity stopped. No trades will execute until you resume. Your funds remain safe in your AI Account.','rgba(248,113,113,.08)');
   } else {
     btn.classList.remove('paused');
@@ -1660,6 +1623,49 @@ function togglePause(){
     live.innerHTML='<div class="dot"></div>LIVE';
     document.querySelectorAll('#scrOffice .px-dot').forEach(function(d){d.className='px-dot on'});
     addMsg('hpChat','👔','Fund Manager','<strong style="color:var(--green)">Strategy resumed.</strong> All agents are back online. Monitoring markets and resuming normal operations.','rgba(205,255,0,.06)');
+  }
+}
+
+function qaAction(action){
+  toggleQuickActions();
+  if(action==='transfer'){
+    switchScreen('scrTransfer');
+    addMsg('hpChat','👔','Fund Manager','Transfer screen ready. Choose an amount and confirm when ready.','rgba(205,255,0,.06)');
+  } else if(action==='portfolio'){
+    switchScreen('scrOffice');
+    addMsg('hpChat','👔','Fund Manager','Here\'s your current portfolio:','rgba(205,255,0,.06)');
+    setTimeout(function(){
+      addHTML('hpChat','<div style="background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;font-size:11px;line-height:1.8">'
+        +'<div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:6px">PORTFOLIO SUMMARY</div>'
+        +'<div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);padding:4px 0"><span style="color:var(--sec)">Total Value</span><strong>$5,000.00</strong></div>'
+        +'<div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);padding:4px 0"><span style="color:var(--sec)">BTC Position</span><span>0.00929 BTC ($625)</span></div>'
+        +'<div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);padding:4px 0"><span style="color:var(--sec)">Cash Reserve</span><span>$4,375 USDT</span></div>'
+        +'<div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:var(--sec)">P&L Today</span><span style="color:var(--green)">+$0.00 (0.00%)</span></div>'
+        +'<div style="margin-top:6px;text-align:center;font-size:10px;color:var(--ter)">Next DCA buy: tomorrow 9 AM UTC</div></div>');
+    },400);
+  } else if(action==='history'){
+    addMsg('hpChat','👔','Fund Manager','Recent trade activity:','rgba(205,255,0,.06)');
+    setTimeout(function(){
+      addHTML('hpChat','<div style="background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;font-size:11px;line-height:1.8">'
+        +'<div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:6px">TRADE HISTORY</div>'
+        +'<div style="padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="color:var(--green)">BUY</span> 0.00929 BTC @ $67,240 <span style="color:var(--ter);font-size:9px;float:right">just now</span></div>'
+        +'<div style="padding:4px 0;color:var(--sec)">No other trades yet — strategy just started</div></div>');
+    },400);
+  } else if(action==='strategies'){
+    switchScreen('scrStrategy');
+    addMsg('hpChat','👔','Fund Manager','Your strategy and guardrails. Tap <strong>Edit</strong> to adjust any setting.','rgba(205,255,0,.06)');
+  } else if(action==='alerts'){
+    addMsg('hpChat','👔','Fund Manager','Your current alert settings:','rgba(205,255,0,.06)');
+    setTimeout(function(){
+      addHTML('hpChat','<div style="background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;font-size:11px;line-height:1.8">'
+        +'<div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:6px">ALERT SETTINGS</div>'
+        +'<div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);padding:4px 0"><span style="color:var(--sec)">Trade alerts</span><span style="color:var(--green)">✓ Trades &gt; $500</span></div>'
+        +'<div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);padding:4px 0"><span style="color:var(--sec)">Daily report</span><span style="color:var(--green)">✓ 9 AM UTC</span></div>'
+        +'<div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);padding:4px 0"><span style="color:var(--sec)">Risk alerts</span><span style="color:var(--green)">✓ Drawdown &gt; -10%</span></div>'
+        +'<div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:var(--sec)">Market alerts</span><span style="color:var(--green)">✓ BTC ±5% moves</span></div></div>');
+    },400);
+  } else if(action==='settings'){
+    addMsg('hpChat','👔','Fund Manager','Settings: You can manage your AI subscription, notification preferences, and account details from your OKX app settings. Need help with anything specific?','rgba(205,255,0,.06)');
   }
 }
 
