@@ -501,6 +501,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .slc-status{font-size:8px;font-weight:700;letter-spacing:.5px;padding:2px 6px;border-radius:4px}
 .slc-status.live{background:rgba(74,222,128,.12);color:var(--green)}
 .slc-status.paused{background:rgba(248,113,113,.1);color:var(--red)}
+.slc-desc{font-size:9px;color:var(--ter);margin-bottom:5px;line-height:1.3}
 .slc-mid{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px}
 .slc-bal{color:var(--sec)}
 .slc-pnl{font-weight:600}
@@ -553,7 +554,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 <div class="pg active" id="p1">
   <div class="p1-badge">OKX AI PAL</div>
   <div class="p1-title">Meet Your AI<br>Trading Team</div>
-  <div class="p1-sub">5 AI specialists working 24/7, managing your crypto like a personal hedge fund.</div>
+  <div class="p1-sub">5 AI specialists working 24/7, managing your crypto like a personal trading team.</div>
   <!-- Pixel Office Scene -->
   <div class="pixel-office-wrap p1-office">
     <div class="pixel-floor"></div>
@@ -941,11 +942,13 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
       <div class="strat-list" id="stratListItems">
         <div class="strat-list-card" onclick="openStratDetail(0)">
           <div class="slc-top"><span class="slc-name">Smart DCA + Protection</span><span class="slc-status live">LIVE</span></div>
+          <div class="slc-desc">Auto-buy BTC daily with crash protection guardrails</div>
           <div class="slc-mid"><span class="slc-bal">$5,000 USDT</span><span class="slc-pnl" style="color:var(--green)">+$0.00 (0.00%)</span></div>
           <div class="slc-bot"><span>DCA $1,250/day</span><span>Stop-loss -15%</span></div>
         </div>
         <div class="strat-list-card paused" onclick="openStratDetail(1)">
           <div class="slc-top"><span class="slc-name">Delta Neutral Arb</span><span class="slc-status paused">PAUSED</span></div>
+          <div class="slc-desc">Long spot + short perp to collect funding rate yield</div>
           <div class="slc-mid"><span class="slc-bal">$0 USDT</span><span class="slc-pnl" style="color:var(--sec)">—</span></div>
           <div class="slc-bot"><span>Funding rate arb</span><span>~15% APY</span></div>
         </div>
@@ -963,7 +966,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
         <div class="guard-row"><span class="guard-row-label">Alert threshold</span><span class="guard-row-val" id="grAlert">$500</span><span class="guard-row-edit" onclick="editGuard('grAlert','$500')">Edit</span></div>
         <div class="guard-row"><span class="guard-row-label">Daily report</span><span class="guard-row-val" style="color:var(--green)">9 AM UTC</span></div>
       </div>
-      <button class="btn-gold" onclick="confirmGuardrails()" style="margin-top:8px;padding:10px;font-size:12px">Save Changes</button>
+      <button class="btn-gold" id="guardSaveBtn" onclick="confirmGuardrails()" style="margin-top:8px;padding:10px;font-size:12px">Confirm Guardrails</button>
     </div>
   </div>
   <!-- Bottom: AI Chat -->
@@ -1590,6 +1593,8 @@ function editGuard(id,currentVal){
 }
 
 function confirmGuardrails(){
+  // Reset button for future use
+  var btn=document.getElementById('guardSaveBtn');btn.textContent='Confirm Guardrails';btn.onclick=function(){confirmGuardrails()};
   addMsg('hpChat','','','',null,true).querySelector('.hc-text').textContent='Guardrails confirmed!';
   setTimeout(function(){
     // Show AI Account disclaimer
@@ -1721,8 +1726,9 @@ function qaAction(action){
         +'<div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);padding:4px 0"><span style="color:var(--sec)">Total Value</span><strong>$5,000.00</strong></div>'
         +'<div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);padding:4px 0"><span style="color:var(--sec)">BTC Position</span><span>0.00929 BTC ($625)</span></div>'
         +'<div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);padding:4px 0"><span style="color:var(--sec)">Cash Reserve</span><span>$4,375 USDT</span></div>'
-        +'<div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:var(--sec)">P&L Today</span><span style="color:var(--green)">+$0.00 (0.00%)</span></div>'
-        +'<div style="margin-top:6px;text-align:center;font-size:10px;color:var(--ter)">Next DCA buy: tomorrow 9 AM UTC</div></div>');
+        +'<div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);padding:4px 0"><span style="color:var(--sec)">P&amp;L Today</span><span style="color:var(--green)">+$0.00 (0.00%)</span></div>'
+        +'<div style="margin-top:6px;height:28px"><svg viewBox="0 0 200 28" fill="none" style="width:100%;height:100%"><defs><linearGradient id="pnlFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4ade80" stop-opacity=".2"/><stop offset="100%" stop-color="#4ade80" stop-opacity="0"/></linearGradient></defs><path d="M0,20 C20,18 40,16 60,14 C80,14 100,14 120,13 C140,12 160,10 180,8 C190,7 200,6 200,6" stroke="#4ade80" stroke-width="1.5"/><path d="M0,20 C20,18 40,16 60,14 C80,14 100,14 120,13 C140,12 160,10 180,8 C190,7 200,6 200,6 L200,28 L0,28Z" fill="url(#pnlFill)"/></svg></div>'
+        +'<div style="text-align:center;font-size:9px;color:var(--ter);margin-top:4px">Next DCA buy: tomorrow 9 AM UTC</div></div>');
     },400);
   } else if(action==='history'){
     addMsg('hpChat','👔','Fund Manager','Recent trade activity:','rgba(205,255,0,.06)');
@@ -1762,9 +1768,19 @@ function openStratDetail(idx){
     document.getElementById('grStopLoss').textContent='-5%';document.getElementById('grStopLoss').style.color='var(--red)';
     document.getElementById('grAlert').textContent='$1,000';
   }
+  // Switch button to Save mode
+  var btn=document.getElementById('guardSaveBtn');
+  btn.textContent='Save Changes';
+  btn.onclick=function(){saveStratChanges()};
   switchScreen('scrStrategy');
   var name=idx===0?'Smart DCA + Protection':'Delta Neutral Arb';
   addMsg('hpChat','👔','Fund Manager','Viewing <strong>'+name+'</strong> — edit guardrails below, then tap <strong>Save Changes</strong> when done.','rgba(205,255,0,.06)');
+}
+function saveStratChanges(){
+  var name=document.getElementById('scrStratName').textContent;
+  addMsg('hpChat','','','',null,true).querySelector('.hc-text').innerHTML='<span style="color:var(--green)">✓ '+name+' guardrails saved</span>';
+  addMsg('hpChat','👔','Fund Manager','Changes applied. Your AI team will use the updated guardrails starting now.','rgba(205,255,0,.06)');
+  switchScreen('scrStratList');
 }
 
 function handleHpChat(){
