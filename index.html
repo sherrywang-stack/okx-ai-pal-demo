@@ -169,6 +169,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 
 /* ===== P3: STRATEGY PARAMS ===== */
 #p3{display:flex;flex-direction:column;padding:var(--safe-top) 20px var(--safe-bottom);overflow-y:auto}
+#p3>*{flex-shrink:0}
 #p3::-webkit-scrollbar{display:none}
 .p3-tag{font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700;text-transform:uppercase;margin-top:16px;margin-bottom:8px}
 .p3-title{font-size:22px;font-weight:800;line-height:1.2;margin-bottom:16px}
@@ -179,13 +180,16 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .p-label{font-size:12px;color:var(--sec);flex:1}
 .p-val{font-size:13px;font-weight:600}
 .p-edit{font-size:10px;color:var(--gold);font-weight:600;cursor:pointer;padding:3px 8px;border:1px solid rgba(205,255,0,.2);border-radius:6px;flex-shrink:0}
+.p-val-input{font-size:13px;font-weight:600;background:var(--bg);border:1px solid var(--gold);border-radius:6px;color:var(--text);padding:4px 8px;width:120px;font-family:inherit;outline:none;display:none}
+.p-val-input.active{display:block}
+.p-val.editing{display:none}
 .p3-how{background:var(--card);border-radius:14px;padding:16px;margin-bottom:20px}
 .p3-how h4{font-size:13px;font-weight:700;margin-bottom:10px}
 .how-step{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
 .how-step:last-child{margin-bottom:0}
 .how-num{width:22px;height:22px;border-radius:50%;background:var(--dim);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
 .how-text{font-size:12px;color:var(--sec);line-height:1.5}
-.p3-cta{margin-top:auto;padding-top:12px}
+.p3-cta{margin-top:16px;padding-top:12px;padding-bottom:8px}
 .p3-note{font-size:11px;color:var(--ter);text-align:center;margin-top:8px}
 
 /* ===== P4: AGENT OFFICE / HOME ===== */
@@ -527,13 +531,6 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
       <div class="vp-item"><div class="vp-text">Detect crashes before they hit<span>Researcher scans markets & on-chain data 24/7</span></div></div>
     </div>
   </div>
-  <div class="p1-proof">
-    <div class="p1-proof-item"><div class="p1-proof-num">$1,600</div><div class="p1-proof-label">saved in crash sim</div></div>
-    <div class="p1-proof-divider"></div>
-    <div class="p1-proof-item"><div class="p1-proof-num">24/7</div><div class="p1-proof-label">monitoring</div></div>
-    <div class="p1-proof-divider"></div>
-    <div class="p1-proof-item"><div class="p1-proof-num">5</div><div class="p1-proof-label">AI agents</div></div>
-  </div>
   <div class="p1-cta">
     <button class="btn-gold" onclick="goPage('p2')">Try a Free Simulation</button>
     <div class="p1-note">Watch them handle a real BTC crash — 2 min, no sign-up</div>
@@ -626,15 +623,15 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
   <div class="p3-title">Smart DCA with<br>Downside Protection</div>
   <div class="param-card">
     <h4>Simulation Setup</h4>
-    <div class="p-row"><div class="p-label">Budget</div><div class="p-val">$10,000 USDT</div><div class="p-edit" onclick="this.textContent='✓'">Edit</div></div>
+    <div class="p-row"><div class="p-label">Budget</div><div class="p-val" id="paramBudget">$10,000 USDT</div><input class="p-val-input" id="inputBudget" value="10,000" data-suffix=" USDT" data-prefix="$"><div class="p-edit" onclick="toggleParamEdit('Budget')">Edit</div></div>
     <div class="p-row"><div class="p-label">Period</div><div class="p-val">May 7 – 14, 2022</div></div>
     <div class="p-row"><div class="p-label">Asset</div><div class="p-val">BTC/USDT</div></div>
   </div>
   <div class="param-card" style="margin-top:8px">
     <h4>Strategy Parameters</h4>
-    <div class="p-row"><div class="p-label">DCA Frequency</div><div class="p-val">Daily</div><div class="p-edit" onclick="this.textContent='✓'">Edit</div></div>
-    <div class="p-row"><div class="p-label">DCA Amount</div><div class="p-val">$1,250/day</div><div class="p-edit" onclick="this.textContent='✓'">Edit</div></div>
-    <div class="p-row"><div class="p-label">Stop-Loss</div><div class="p-val" style="color:var(--green)">-15% max drawdown</div><div class="p-edit" onclick="this.textContent='✓'">Edit</div></div>
+    <div class="p-row"><div class="p-label">DCA Frequency</div><div class="p-val">Daily</div></div>
+    <div class="p-row"><div class="p-label">DCA Amount</div><div class="p-val" id="paramDCA">$1,250/day</div><input class="p-val-input" id="inputDCA" value="1,250" data-suffix="/day" data-prefix="$"><div class="p-edit" onclick="toggleParamEdit('DCA')">Edit</div></div>
+    <div class="p-row"><div class="p-label">Stop-Loss</div><div class="p-val" id="paramSL" style="color:var(--green)">-15% max drawdown</div><input class="p-val-input" id="inputSL" value="15" data-suffix="% max drawdown" data-prefix="-"><div class="p-edit" onclick="toggleParamEdit('SL')">Edit</div></div>
     <div class="p-row"><div class="p-label">Re-Entry Signal</div><div class="p-val">RSI oversold</div></div>
     <div class="p-row"><div class="p-label">Position Sizing</div><div class="p-val">3 tranches</div></div>
   </div>
@@ -921,6 +918,30 @@ function selectGoal(el,idx){
 })();
 
 // ====== STRATEGY ======
+function toggleParamEdit(key){
+  var val=document.getElementById('param'+key);
+  var inp=document.getElementById('input'+key);
+  var btn=val.parentElement.querySelector('.p-edit');
+  if(inp.classList.contains('active')){
+    // Save
+    var v=inp.value.trim();
+    val.textContent=inp.dataset.prefix+v+inp.dataset.suffix;
+    inp.classList.remove('active');
+    val.classList.remove('editing');
+    btn.textContent='Edit';
+    btn.style.borderColor='rgba(205,255,0,.2)';
+    btn.style.color='var(--gold)';
+  } else {
+    // Edit
+    inp.classList.add('active');
+    val.classList.add('editing');
+    btn.textContent='Save';
+    btn.style.borderColor='var(--green)';
+    btn.style.color='var(--green)';
+    inp.focus();
+    inp.select();
+  }
+}
 function selectStrat(el){
   document.querySelectorAll('.s-card').forEach(function(c){c.classList.remove('sel')});
   el.classList.add('sel');
@@ -1066,7 +1087,7 @@ function startHomeSimulation(){
     // Phase 0: All agents appear + compact team card
     {t:300,fn:function(){['ag0','ag1','ag2','ag3','ag4'].forEach(function(id,i){setTimeout(function(){lightAgent(id,'on')},i*150)})}},
     {t:800,fn:function(){
-      addMsg(chat,'👔','Fund Manager','Team ready. Starting <strong>May 2022 simulation</strong> — $10,000 deployed.','rgba(205,255,0,.06)');
+      addMsg(chat,'👔','Fund Manager','Hi Sherry! I\'m your AI Fund Manager. We\'ve got your <strong>DCA order starting May 7, 2022</strong> — $10,000 budget locked in. Let\'s see what this team can do for you during that major BTC crash.','rgba(205,255,0,.06)');
     }},
     {t:2200,fn:function(){
       addHTML(chat,'<div style="background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:10px 12px;font-size:11px;line-height:1.8">'
