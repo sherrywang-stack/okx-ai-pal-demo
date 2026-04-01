@@ -171,27 +171,42 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 #p3{display:flex;flex-direction:column;padding:var(--safe-top) 20px var(--safe-bottom);overflow-y:auto}
 #p3>*{flex-shrink:0}
 #p3::-webkit-scrollbar{display:none}
-.tm-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700;text-transform:uppercase;margin-top:16px;margin-bottom:10px;background:var(--dim);padding:6px 12px;border-radius:20px;border:1px solid rgba(205,255,0,.15)}
-.tm-title{font-size:28px;font-weight:900;line-height:1.15;margin-bottom:10px}
-.tm-sub{font-size:14px;color:var(--sec);line-height:1.6;margin-bottom:20px}
-.tm-tl-price{font-size:10px;font-weight:700;color:var(--sec);margin-top:2px}
-.tm-hook{font-size:14px;color:var(--sec);line-height:1.6;margin-bottom:12px;padding:0 2px}
-.tm-strat-preview{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px 16px;margin-bottom:0}
-.tm-strat-header{font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.tm-strat-params{display:grid;grid-template-columns:1fr 1fr;gap:6px 20px}
-.tm-sp{display:flex;justify-content:space-between;font-size:11px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.tm-title{font-size:26px;font-weight:900;line-height:1.15;margin-bottom:8px}
+.tm-sub{font-size:13px;color:var(--sec);line-height:1.6;margin-bottom:16px}
+/* crash chart */
+.tm-chart{position:relative;height:80px;margin-bottom:16px;background:var(--card);border-radius:12px;padding:10px 14px 6px;overflow:hidden}
+.tm-chart svg{width:100%;height:100%}
+.tm-chart-labels{position:absolute;top:8px;left:14px;right:14px;display:flex;justify-content:space-between;font-size:10px;font-weight:700}
+.tm-chart-labels .tm-cl-start{color:var(--green)}
+.tm-chart-labels .tm-cl-end{color:var(--red)}
+.tm-chart-tag{position:absolute;bottom:6px;right:14px;font-size:8px;color:var(--ter);letter-spacing:.5px}
+/* timeline */
+.tm-timeline{display:flex;gap:0;margin-bottom:16px;position:relative;padding:4px 0}
+.tm-timeline::before{content:'';position:absolute;top:16px;left:16px;right:16px;height:2px;background:rgba(255,255,255,.06)}
+.tm-tl-item{flex:1;text-align:center;position:relative}
+.tm-tl-dot{width:10px;height:10px;border-radius:50%;margin:6px auto 5px;position:relative;z-index:1}
+.tm-tl-day{font-size:9px;font-weight:700;color:var(--sec)}
+.tm-tl-price{font-size:10px;font-weight:800;color:var(--sec);margin-top:1px}
+.tm-tl-event{font-size:8px;color:var(--ter);margin-top:1px;line-height:1.2}
+/* hook */
+.tm-hook-card{background:rgba(205,255,0,.04);border:1px solid rgba(205,255,0,.1);border-radius:12px;padding:12px 14px;margin-bottom:14px}
+.tm-hook-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:4px}
+.tm-hook-body{font-size:12px;color:var(--sec);line-height:1.6}
+.tm-hook-body strong{color:var(--gold)}
+/* strategy card */
+.tm-strat-preview{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:12px 14px;margin-bottom:0}
+.tm-strat-header{font-size:12px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.tm-strat-agents{font-size:10px;color:var(--ter);margin-bottom:8px;letter-spacing:.3px}
+.tm-strat-params{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}
+.tm-sp{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.03)}
 .tm-sp:last-child{border-bottom:none}
 .tm-sp-l{color:var(--ter)}
 .tm-sp-v{color:var(--sec);font-weight:600}
-.tm-timeline{display:flex;gap:0;margin-bottom:20px;position:relative;padding:8px 0}
-.tm-timeline::before{content:'';position:absolute;top:20px;left:12px;right:12px;height:2px;background:rgba(255,255,255,.08)}
-.tm-tl-item{flex:1;text-align:center;position:relative}
-.tm-tl-dot{width:10px;height:10px;border-radius:50%;margin:8px auto 6px;position:relative;z-index:1}
-.tm-tl-day{font-size:10px;font-weight:700;color:var(--sec)}
-.tm-tl-event{font-size:9px;color:var(--ter);margin-top:2px;line-height:1.3}
-.p3-cta{margin-top:auto;padding-top:12px;padding-bottom:8px}
+.tm-footnote{font-size:9px;color:var(--ter);text-align:center;margin-top:8px;letter-spacing:.3px}
+/* ctas */
+.p3-cta{margin-top:auto;padding-top:10px;padding-bottom:8px}
 .p3-cta .btn-gold{margin-bottom:10px}
-.p3-skip{display:block;width:100%;padding:14px;background:transparent;color:var(--sec);font-weight:600;font-size:13px;border:1px solid rgba(255,255,255,.2);border-radius:14px;cursor:pointer;font-family:inherit;text-align:center;transition:all .2s}
+.p3-skip{display:block;width:100%;padding:14px;background:transparent;color:var(--sec);font-weight:600;font-size:13px;border:1px solid rgba(255,255,255,.15);border-radius:14px;cursor:pointer;font-family:inherit;text-align:center;transition:all .2s}
 .p3-skip:hover{border-color:var(--gold);color:var(--text)}
 .p-val-input{font-size:12px;font-weight:600;background:var(--bg);border:1px solid var(--gold);border-radius:6px;color:var(--text);padding:4px 8px;width:100px;font-family:inherit;outline:none;display:none}
 .p-val-input.active{display:inline-block}
@@ -674,6 +689,18 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
   <div class="tm-title">Go Back to<br>May 2022</div>
   <div class="tm-sub">It's May 7, 2022. BTC is at <strong>$36,000</strong> — but over the next 5 days, it crashes <strong style="color:var(--red)">30%</strong> to <strong style="color:var(--red)">$25,400</strong> as the Luna/UST collapse sends shockwaves through crypto.</div>
 
+  <!-- Mini crash chart — visual drama -->
+  <div class="tm-chart">
+    <div class="tm-chart-labels"><span class="tm-cl-start">$36,000</span><span class="tm-cl-end">$25,400</span></div>
+    <svg viewBox="0 0 320 52" fill="none" preserveAspectRatio="none">
+      <defs><linearGradient id="crashFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f87171" stop-opacity=".25"/><stop offset="100%" stop-color="#f87171" stop-opacity="0"/></linearGradient></defs>
+      <path d="M0,4 C20,4 40,5 70,8 C100,11 120,14 150,22 C170,28 185,32 210,40 C230,45 260,48 280,44 C300,41 310,38 320,36" stroke="#f87171" stroke-width="2" stroke-linecap="round"/>
+      <path d="M0,4 C20,4 40,5 70,8 C100,11 120,14 150,22 C170,28 185,32 210,40 C230,45 260,48 280,44 C300,41 310,38 320,36 L320,52 L0,52Z" fill="url(#crashFill)"/>
+    </svg>
+    <div class="tm-chart-tag">BTC/USD · MAY 7–14, 2022</div>
+  </div>
+
+  <!-- Timeline milestones -->
   <div class="tm-timeline">
     <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--green)"></div><div class="tm-tl-day">May 7</div><div class="tm-tl-price">$36,000</div><div class="tm-tl-event">Calm</div></div>
     <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--yellow)"></div><div class="tm-tl-day">May 8</div><div class="tm-tl-price">$34,000</div><div class="tm-tl-event">UST wobbles</div></div>
@@ -682,20 +709,26 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
     <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--green)"></div><div class="tm-tl-day">May 14</div><div class="tm-tl-price">$30,000</div><div class="tm-tl-event">Recovery</div></div>
   </div>
 
-  <div class="tm-hook"><strong style="color:var(--text)">What if you had an AI team back then?</strong></div>
-  <div class="tm-hook" style="margin-top:-4px">Watch 5 agents detect the crash, protect your portfolio, and buy the dip — all automatically.</div>
+  <!-- Hook — the emotional turn -->
+  <div class="tm-hook-card">
+    <div class="tm-hook-title">What if you had an AI team back then?</div>
+    <div class="tm-hook-body">Watch 5 agents <strong>detect the crash</strong>, <strong>protect your portfolio</strong>, and <strong>buy the dip</strong> — all automatically.</div>
+  </div>
 
+  <!-- Strategy preview — your AI team's battle plan -->
   <div class="tm-strat-preview">
-    <div class="tm-strat-header"><span>👔</span> Fund Manager's Simulation Setup</div>
+    <div class="tm-strat-header"><span>🧠</span> DCA + Crash Protection Strategy</div>
+    <div class="tm-strat-agents">👨‍💼 Fund Mgr · 🔬 Researcher · 📐 Strategist · 🛡 Sentinel · ⚡ Trader</div>
     <div class="tm-strat-params">
-      <div class="tm-sp" style="grid-column:1/-1"><span class="tm-sp-l">Strategy</span><span class="tm-sp-v">Smart DCA + Protection</span></div>
       <div class="tm-sp"><span class="tm-sp-l">Budget</span><span class="tm-sp-v">$10,000 USDT</span></div>
       <div class="tm-sp"><span class="tm-sp-l">DCA Amount</span><span class="tm-sp-v">$1,250/day</span></div>
       <div class="tm-sp"><span class="tm-sp-l">Stop-Loss</span><span class="tm-sp-v" style="color:var(--red)">-15%</span></div>
       <div class="tm-sp"><span class="tm-sp-l">Take-Profit</span><span class="tm-sp-v" style="color:var(--green)">+20%</span></div>
       <div class="tm-sp"><span class="tm-sp-l">Rebalance</span><span class="tm-sp-v">Every 24h</span></div>
+      <div class="tm-sp"><span class="tm-sp-l">Risk Mode</span><span class="tm-sp-v">Defensive</span></div>
     </div>
   </div>
+  <div class="tm-footnote">Based on real BTC market data · ~30 sec simulation</div>
 
   <div class="p3-cta">
     <button class="btn-gold" onclick="goPage('p4');startHomeSimulation()">Launch Time Machine</button>
