@@ -167,25 +167,38 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .yield-label{position:absolute;top:16px;left:16px;font-size:10px;font-weight:700;color:var(--green);letter-spacing:1px}
 .yield-apy{position:absolute;bottom:12px;right:16px;font-size:12px;font-weight:800;color:var(--green);opacity:0;animation:saveIn 4s ease-in-out infinite}
 
-/* ===== P3: STRATEGY PARAMS ===== */
+/* ===== P3: TIME MACHINE BRIEFING ===== */
 #p3{display:flex;flex-direction:column;padding:var(--safe-top) 20px var(--safe-bottom);overflow-y:auto}
 #p3>*{flex-shrink:0}
 #p3::-webkit-scrollbar{display:none}
-.p3-tag{font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700;text-transform:uppercase;margin-top:16px;margin-bottom:8px}
-.p3-title{font-size:22px;font-weight:800;line-height:1.2;margin-bottom:16px}
-.param-card{background:var(--card);border-radius:14px;padding:16px;margin-bottom:12px}
-.param-card h4{font-size:13px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px}
-.p-row{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);gap:8px}
-.p-row:last-child{border-bottom:none}
-.p-label{font-size:12px;color:var(--sec);flex:1}
-.p-val{font-size:13px;font-weight:600}
-.p-edit{font-size:10px;color:var(--gold);font-weight:600;cursor:pointer;padding:3px 8px;border:1px solid rgba(205,255,0,.2);border-radius:6px;flex-shrink:0}
-.p-val-input{font-size:13px;font-weight:600;background:var(--bg);border:1px solid var(--gold);border-radius:6px;color:var(--text);padding:4px 8px;width:120px;font-family:inherit;outline:none;display:none}
-.p-val-input.active{display:block}
-.p-val.editing{display:none}
-.p3-how{background:var(--card);border-radius:14px;padding:16px;margin-bottom:20px}
-.p3-how h4{font-size:13px;font-weight:700;margin-bottom:10px}
-.how-step{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
+.tm-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700;text-transform:uppercase;margin-top:16px;margin-bottom:10px;background:var(--dim);padding:6px 12px;border-radius:20px;border:1px solid rgba(205,255,0,.15)}
+.tm-title{font-size:24px;font-weight:900;line-height:1.2;margin-bottom:6px}
+.tm-sub{font-size:13px;color:var(--sec);line-height:1.6;margin-bottom:16px}
+.tm-narrative{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;border-left:3px solid var(--red);font-size:12px;line-height:1.7;color:rgba(255,255,255,.85)}
+.tm-narrative strong{color:var(--text)}
+.tm-narrative .tm-date{color:var(--gold);font-weight:700}
+.tm-timeline{display:flex;gap:0;margin-bottom:16px;position:relative}
+.tm-timeline::before{content:'';position:absolute;top:12px;left:12px;right:12px;height:2px;background:rgba(255,255,255,.08)}
+.tm-tl-item{flex:1;text-align:center;position:relative}
+.tm-tl-dot{width:8px;height:8px;border-radius:50%;margin:8px auto 6px;position:relative;z-index:1}
+.tm-tl-day{font-size:9px;font-weight:700;color:var(--sec)}
+.tm-tl-event{font-size:8px;color:var(--ter);margin-top:2px;line-height:1.3}
+.tm-setup{background:var(--card);border-radius:14px;padding:12px 14px;margin-bottom:14px}
+.tm-setup-title{font-size:10px;font-weight:700;color:var(--sec);letter-spacing:1px;margin-bottom:8px}
+.tm-setup-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+.tm-setup-row:last-child{border-bottom:none}
+.tm-setup-label{color:var(--sec)}
+.tm-setup-val{font-weight:600}
+.tm-setup-edit{font-size:9px;color:var(--gold);cursor:pointer;padding:2px 6px;border:1px solid rgba(205,255,0,.2);border-radius:4px;margin-left:6px}
+.tm-heads-up{background:rgba(205,255,0,.04);border:1px solid rgba(205,255,0,.1);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:11px;line-height:1.6;color:var(--sec)}
+.tm-heads-up strong{color:var(--gold)}
+.p3-cta{padding-top:4px;padding-bottom:8px}
+.p3-cta .btn-gold{margin-bottom:10px}
+.p3-skip{text-align:center;font-size:12px;color:var(--sec);cursor:pointer;padding:8px}
+.p3-skip:hover{color:var(--text)}
+.p-val-input{font-size:12px;font-weight:600;background:var(--bg);border:1px solid var(--gold);border-radius:6px;color:var(--text);padding:4px 8px;width:100px;font-family:inherit;outline:none;display:none}
+.p-val-input.active{display:inline-block}
+.tm-setup-val.editing{display:none}
 .how-step:last-child{margin-bottom:0}
 .how-num{width:22px;height:22px;border-radius:50%;background:var(--dim);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
 .how-text{font-size:12px;color:var(--sec);line-height:1.5}
@@ -311,6 +324,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 
 /* ===== P5: GOAL SELECTION ===== */
 #p5{display:flex;flex-direction:column;padding:var(--safe-top) 20px var(--safe-bottom);overflow-y:auto}
+#p5>*{flex-shrink:0}
 #p5::-webkit-scrollbar{display:none}
 .p5-title{font-size:22px;font-weight:800;margin:16px 0 6px}
 .p5-sub{font-size:13px;color:var(--sec);line-height:1.5;margin-bottom:20px}
@@ -326,6 +340,17 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .g-card.sel .g-radio-dot{opacity:1}
 .risk-sec{margin-top:16px;max-height:0;overflow:hidden;opacity:0;transition:all .5s var(--ease)}
 .risk-sec.show{max-height:200px;opacity:1}
+/* Dynamic strategy recommendation */
+.strat-rec{margin-top:16px;max-height:0;overflow:hidden;opacity:0;transition:all .5s var(--ease)}
+.strat-rec.show{max-height:300px;opacity:1}
+.strat-rec-card{background:var(--card);border:2px solid var(--gold);border-radius:14px;padding:16px}
+.strat-rec-tag{font-size:9px;letter-spacing:1.5px;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:6px}
+.strat-rec-name{font-size:16px;font-weight:800;margin-bottom:4px}
+.strat-rec-desc{font-size:11px;color:var(--sec);line-height:1.5}
+.strat-rec-stats{display:flex;gap:16px;margin-top:10px}
+.strat-rec-stat{text-align:center;flex:1}
+.strat-rec-stat-val{font-size:14px;font-weight:800}
+.strat-rec-stat-lbl{font-size:9px;color:var(--ter);margin-top:2px}
 .risk-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .risk-lbl{font-size:13px;font-weight:600}
 .risk-val{font-size:13px;font-weight:700;color:var(--gold)}
@@ -430,9 +455,37 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .hp-act-btn:hover{border-color:var(--gold);background:rgba(205,255,0,.06)}
 .hp-act-btn:active{transform:scale(.93)}
 /* Agent office (middle) */
-.hp-office{position:relative;overflow:hidden;margin:4px 0;height:125px;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
-.hp-office .pixel-floor{position:absolute;inset:0;background:repeating-conic-gradient(#2A2218 0% 25%,#332A1E 0% 50%) 0 0/20px 20px;opacity:.5}
-.hp-office .pixel-wall{position:absolute;top:0;left:0;right:0;height:35%;background:linear-gradient(180deg,#1A1510,#221C14);border-bottom:2px solid #3D3428}
+.hp-screen{position:relative;overflow:hidden;margin:4px 0;height:220px;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
+.hp-scr{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.hp-scr.active{opacity:1;pointer-events:auto}
+/* Office screen */
+#scrOffice .pixel-floor{position:absolute;inset:0;background:repeating-conic-gradient(#2A2218 0% 25%,#332A1E 0% 50%) 0 0/20px 20px;opacity:.5}
+#scrOffice .pixel-wall{position:absolute;top:0;left:0;right:0;height:35%;background:linear-gradient(180deg,#1A1510,#221C14);border-bottom:2px solid #3D3428}
+/* Transfer screen */
+#scrTransfer,#scrStrategy{padding:10px 16px;background:var(--card);display:flex;flex-direction:column}
+.scr-title{font-size:13px;font-weight:800;margin-bottom:2px}
+.scr-subtitle{font-size:10px;color:var(--sec);margin-bottom:8px}
+.xfer-token{display:flex;align-items:center;gap:10px;background:var(--bg);border-radius:10px;padding:8px 10px;margin-bottom:8px}
+.xfer-token-icon{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#F7931A,#E8840F);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff}
+.xfer-token-info{flex:1}
+.xfer-token-name{font-size:13px;font-weight:700}
+.xfer-token-bal{font-size:10px;color:var(--sec)}
+.xfer-token-check{color:var(--gold);font-weight:700;font-size:14px}
+.xfer-amount{background:var(--bg);border-radius:10px;padding:8px 10px}
+.xfer-amt-label{font-size:9px;color:var(--sec);font-weight:600;margin-bottom:4px}
+.xfer-amt-input{display:flex;align-items:center;gap:4px}
+.xfer-curr{font-size:16px;color:var(--sec)}
+.xfer-val{font-size:20px;font-weight:800;background:none;border:none;color:var(--text);font-family:inherit;outline:none;width:80px}
+.xfer-unit{font-size:11px;color:var(--sec)}
+.xfer-recommend{font-size:9px;color:var(--gold);margin-top:4px}
+.xfer-btn{font-size:12px!important;padding:10px!important}
+/* Guard rows */
+.guard-rows{display:flex;flex-direction:column;gap:0}
+.guard-row{display:flex;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+.guard-row:last-child{border-bottom:none}
+.guard-row-label{flex:1;color:var(--sec)}
+.guard-row-val{font-weight:700}
+.guard-row-edit{font-size:9px;color:var(--gold);cursor:pointer;padding:2px 6px;border:1px solid rgba(205,255,0,.2);border-radius:4px;margin-left:8px}
 /* Quick Actions panel */
 .qa-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);z-index:50;opacity:0;pointer-events:none;transition:opacity .3s}
 .qa-overlay.show{opacity:1;pointer-events:auto}
@@ -532,8 +585,8 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
     </div>
   </div>
   <div class="p1-cta">
-    <button class="btn-gold" onclick="goPage('p2')">Try a Free Simulation</button>
-    <div class="p1-note">Watch them handle a real BTC crash — 2 min, no sign-up</div>
+    <button class="btn-gold" onclick="goPage('p2')">See Your AI Team in Action</button>
+    <div class="p1-note">Watch them handle a real BTC crash — 2 min, free</div>
   </div>
 </div>
 
@@ -545,31 +598,8 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
   </div>
   <div class="carousel-wrap">
     <div class="carousel" id="carousel">
-      <!-- Card 1: Crash Protection -->
+      <!-- Card 1: Delta Neutral (Complex Strategies) -->
       <div class="car-card active-card">
-        <div class="car-anim" style="background:linear-gradient(180deg,rgba(248,113,113,.06),transparent)">
-          <div class="crash-label">BTC -28% IN 72H</div>
-          <div class="anim-crash">
-            <div class="crash-shield">🛡</div>
-            <div class="crash-chart"><svg viewBox="0 0 300 140">
-              <defs><linearGradient id="cg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F87171" stop-opacity=".2"/><stop offset="1" stop-color="#F87171" stop-opacity="0"/></linearGradient></defs>
-              <polygon points="10,30 40,28 70,35 100,50 130,65 160,85 190,95 220,105 250,110 280,108 290,140 10,140" fill="url(#cg1)"/>
-              <polyline points="10,30 40,28 70,35 100,50 130,65 160,85 190,95 220,105 250,110 280,108" fill="none" stroke="#F87171" stroke-width="2.5" stroke-linecap="round"/>
-              <!-- AI team line -->
-              <polyline points="10,30 40,28 70,35 100,40 130,38 160,36 190,38 220,50 250,48 280,42" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 3"/>
-            </svg></div>
-            <div class="crash-save">AI Team: -12% vs Market: -28%</div>
-          </div>
-        </div>
-        <div class="car-info">
-          <div class="car-label">SCENARIO 1</div>
-          <div class="car-name">Crash Protection</div>
-          <div class="car-desc">May 2022 — BTC dropped 28% during the Luna collapse. Watch your AI team detect danger and protect your portfolio.</div>
-          <button class="car-cta" onclick="goPage('p3')">Experience This Scenario</button>
-        </div>
-      </div>
-      <!-- Card 2: Delta Neutral -->
-      <div class="car-card">
         <div class="car-anim" style="background:linear-gradient(180deg,rgba(192,132,252,.06),transparent)">
           <div class="delta-label">ONE-CLICK SETUP</div>
           <div class="anim-delta">
@@ -579,13 +609,13 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
           </div>
         </div>
         <div class="car-info">
-          <div class="car-label">SCENARIO 2</div>
+          <div class="car-label">SCENARIO 1</div>
           <div class="car-name">Complex Strategies, One Click</div>
           <div class="car-desc">Set up delta-neutral funding rate arbitrage in one tap. Your AI team handles the hedging math.</div>
           <button class="car-cta" onclick="showComingSoon()">Experience This Scenario</button>
         </div>
       </div>
-      <!-- Card 3: Yield Rotation -->
+      <!-- Card 2: Yield Rotation (Idle Money) -->
       <div class="car-card">
         <div class="car-anim" style="background:linear-gradient(180deg,rgba(52,211,153,.06),transparent)">
           <div class="yield-label">AUTO-ROTATING</div>
@@ -601,10 +631,32 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
           <div class="yield-apy">Current best: 12.4% APY</div>
         </div>
         <div class="car-info">
-          <div class="car-label">SCENARIO 3</div>
+          <div class="car-label">SCENARIO 2</div>
           <div class="car-name">Maximize Idle Money</div>
           <div class="car-desc">Your AI team auto-rotates idle funds between earn programs to maximize yield. Set it and forget it.</div>
           <button class="car-cta" onclick="showComingSoon()">Experience This Scenario</button>
+        </div>
+      </div>
+      <!-- Card 3: Crash Protection (THE interactive demo) -->
+      <div class="car-card">
+        <div class="car-anim" style="background:linear-gradient(180deg,rgba(248,113,113,.06),transparent)">
+          <div class="crash-label">BTC -28% IN 72H</div>
+          <div class="anim-crash">
+            <div class="crash-shield">🛡</div>
+            <div class="crash-chart"><svg viewBox="0 0 300 140">
+              <defs><linearGradient id="cg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F87171" stop-opacity=".2"/><stop offset="1" stop-color="#F87171" stop-opacity="0"/></linearGradient></defs>
+              <polygon points="10,30 40,28 70,35 100,50 130,65 160,85 190,95 220,105 250,110 280,108 290,140 10,140" fill="url(#cg1)"/>
+              <polyline points="10,30 40,28 70,35 100,50 130,65 160,85 190,95 220,105 250,110 280,108" fill="none" stroke="#F87171" stroke-width="2.5" stroke-linecap="round"/>
+              <polyline points="10,30 40,28 70,35 100,40 130,38 160,36 190,38 220,50 250,48 280,42" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 3"/>
+            </svg></div>
+            <div class="crash-save">AI Team: -12% vs Market: -28%</div>
+          </div>
+        </div>
+        <div class="car-info">
+          <div class="car-label">SCENARIO 3 · INTERACTIVE</div>
+          <div class="car-name">Crash Protection</div>
+          <div class="car-desc">May 2022 — BTC crashed 28% during Luna. Watch your AI team detect it and protect your portfolio in real-time.</div>
+          <button class="car-cta" onclick="goPage('p3')">Enter the Time Machine</button>
         </div>
       </div>
     </div>
@@ -614,34 +666,44 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
     <div class="car-dot" onclick="slideTo(1)"></div>
     <div class="car-dot" onclick="slideTo(2)"></div>
   </div>
-  <div class="cs-toast" id="csToast"><div style="font-size:20px;margin-bottom:6px">🔜</div><div style="font-size:13px;font-weight:700">Coming Soon</div><div style="font-size:11px;color:var(--sec);margin-top:2px">Try Crash Protection first!</div></div>
+  <div class="cs-toast" id="csToast"><div style="font-size:20px;margin-bottom:6px">🔜</div><div style="font-size:13px;font-weight:700">Coming Soon</div><div style="font-size:11px;color:var(--sec);margin-top:2px">Swipe to Crash Protection to try the demo!</div></div>
 </div>
 
-<!-- P3: STRATEGY PARAMS (no agent roles) -->
+<!-- P3: TIME MACHINE BRIEFING -->
 <div class="pg" id="p3">
-  <div class="p3-tag">🚨 BTC CRASH · MAY 2022</div>
-  <div class="p3-title">Smart DCA with<br>Downside Protection</div>
-  <div class="param-card">
-    <h4>Simulation Setup</h4>
-    <div class="p-row"><div class="p-label">Budget</div><div class="p-val" id="paramBudget">$10,000 USDT</div><input class="p-val-input" id="inputBudget" value="10,000" data-suffix=" USDT" data-prefix="$"><div class="p-edit" onclick="toggleParamEdit('Budget')">Edit</div></div>
-    <div class="p-row"><div class="p-label">Period</div><div class="p-val">May 7 – 14, 2022</div></div>
-    <div class="p-row"><div class="p-label">Asset</div><div class="p-val">BTC/USDT</div></div>
+  <div class="tm-badge">⏳ TIME MACHINE</div>
+  <div class="tm-title">Go Back to<br>May 2022</div>
+  <div class="tm-sub">You're about to travel back in time. Your AI team will face a real BTC crash — using actual market data.</div>
+
+  <div class="tm-narrative">
+    <strong>Mission Briefing</strong><br>
+    It's <span class="tm-date">May 7, 2022</span>. BTC is at <strong>$36,000</strong>. Your AI team has just started a DCA strategy. In the next 72 hours, BTC will crash <strong style="color:var(--red)">28%</strong> during the Luna/UST collapse.<br><br>
+    Your 5 AI agents don't know this yet. Watch them <strong>detect the danger</strong>, <strong>protect your funds</strong>, and <strong>buy the dip</strong> — all in real-time.
   </div>
-  <div class="param-card" style="margin-top:8px">
-    <h4>Strategy Parameters</h4>
-    <div class="p-row"><div class="p-label">DCA Frequency</div><div class="p-val">Daily</div></div>
-    <div class="p-row"><div class="p-label">DCA Amount</div><div class="p-val" id="paramDCA">$1,250/day</div><input class="p-val-input" id="inputDCA" value="1,250" data-suffix="/day" data-prefix="$"><div class="p-edit" onclick="toggleParamEdit('DCA')">Edit</div></div>
-    <div class="p-row"><div class="p-label">Stop-Loss</div><div class="p-val" id="paramSL" style="color:var(--green)">-15% max drawdown</div><input class="p-val-input" id="inputSL" value="15" data-suffix="% max drawdown" data-prefix="-"><div class="p-edit" onclick="toggleParamEdit('SL')">Edit</div></div>
-    <div class="p-row"><div class="p-label">Re-Entry Signal</div><div class="p-val">RSI oversold</div></div>
-    <div class="p-row"><div class="p-label">Position Sizing</div><div class="p-val">3 tranches</div></div>
+
+  <div class="tm-timeline">
+    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--green)"></div><div class="tm-tl-day">May 7</div><div class="tm-tl-event">Calm<br>markets</div></div>
+    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--yellow)"></div><div class="tm-tl-day">May 8</div><div class="tm-tl-event">Warning<br>signs</div></div>
+    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--red)"></div><div class="tm-tl-day">May 9</div><div class="tm-tl-event">UST<br>depegs</div></div>
+    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--red);box-shadow:0 0 6px var(--red)"></div><div class="tm-tl-day">May 10-12</div><div class="tm-tl-event">Full<br>crash</div></div>
+    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--green)"></div><div class="tm-tl-day">May 13-14</div><div class="tm-tl-event">Recovery<br>begins</div></div>
   </div>
-  <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin:16px 0 12px">
-    <span style="font-size:20px">📉</span>
-    <span style="font-size:12px;color:var(--red);font-weight:700;letter-spacing:1px">BTC IS ABOUT TO CRASH 28%</span>
+
+  <div class="tm-setup">
+    <div class="tm-setup-title">YOUR SIMULATION SETUP</div>
+    <div class="tm-setup-row"><span class="tm-setup-label">Budget</span><span><span class="tm-setup-val" id="paramBudget">$10,000</span><input class="p-val-input" id="inputBudget" value="10,000" data-suffix="" data-prefix="$"><span class="tm-setup-edit" onclick="toggleParamEdit('Budget')">Edit</span></span></div>
+    <div class="tm-setup-row"><span class="tm-setup-label">Strategy</span><span class="tm-setup-val">Smart DCA + Protection</span></div>
+    <div class="tm-setup-row"><span class="tm-setup-label">Stop-Loss</span><span><span class="tm-setup-val" id="paramSL" style="color:var(--green)">-15%</span><input class="p-val-input" id="inputSL" value="15" data-suffix="%" data-prefix="-"><span class="tm-setup-edit" onclick="toggleParamEdit('SL')">Edit</span></span></div>
+    <div class="tm-setup-row"><span class="tm-setup-label">DCA Amount</span><span><span class="tm-setup-val" id="paramDCA">$1,250/day</span><input class="p-val-input" id="inputDCA" value="1,250" data-suffix="/day" data-prefix="$"><span class="tm-setup-edit" onclick="toggleParamEdit('DCA')">Edit</span></span></div>
   </div>
+
+  <div class="tm-heads-up">
+    <strong>What you'll see:</strong> Your AI agents chatting, a live BTC price chart, and real-time portfolio changes. It's a lot — but that's the point. You're watching <strong>5 agents work together</strong> in a crisis. Takes ~30 seconds.
+  </div>
+
   <div class="p3-cta">
-    <button class="btn-gold" onclick="goPage('p4');startHomeSimulation()">Start Simulation</button>
-    <div class="p3-note">Your 5 AI agents will react in real-time</div>
+    <button class="btn-gold" onclick="goPage('p4');startHomeSimulation()">Go Back to May 2022</button>
+    <div class="p3-skip" onclick="goPage('p5')">Skip simulation — I'm ready to trade</div>
   </div>
 </div>
 
@@ -714,12 +776,12 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
   </div>
 </div>
 
-<!-- P5: GOAL SELECTION -->
+<!-- P5: GOAL + RISK + STRATEGY (single page progressive) -->
 <div class="pg" id="p5">
   <div class="back-btn" onclick="goPage('p4')">←</div>
-  <div class="step-ind" style="margin-top:16px"><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+  <div class="step-ind" style="margin-top:16px"><div class="step-dot active"></div><div class="step-dot"></div></div>
   <div class="p5-title">What's your goal?</div>
-  <div class="p5-sub">This helps your AI team pick the right approach.</div>
+  <div class="p5-sub">Pick a goal, set your risk level, and we'll recommend a strategy.</div>
   <div class="g-card" onclick="selectGoal(this,0)"><div class="g-card-icon">🌱</div><div class="g-card-info"><div class="g-card-name">Grow Steadily</div><div class="g-card-desc">Long-term wealth building. Lower volatility, consistent compounding.</div></div><div class="g-radio"><div class="g-radio-dot"></div></div></div>
   <div class="g-card" onclick="selectGoal(this,1)"><div class="g-card-icon">🚀</div><div class="g-card-info"><div class="g-card-name">Beat the Market</div><div class="g-card-desc">Active alpha. Higher volatility tolerance, momentum hunting.</div></div><div class="g-radio"><div class="g-radio-dot"></div></div></div>
   <div class="g-card" onclick="selectGoal(this,2)"><div class="g-card-icon">🛡</div><div class="g-card-info"><div class="g-card-name">Protect & Earn</div><div class="g-card-desc">Capital preservation + yield. Stablecoin yield, funding rate arb.</div></div><div class="g-radio"><div class="g-radio-dot"></div></div></div>
@@ -728,23 +790,32 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
     <div class="risk-track" id="riskTrack"><div class="risk-fill" id="riskFill"></div><div class="risk-thumb" id="riskThumb"></div></div>
     <div class="risk-labels"><span>Conservative</span><span>Moderate</span><span>Aggressive</span></div>
   </div>
-  <div class="goal-cta"><button class="btn-gold" onclick="goPage('p6')">Next</button></div>
+  <div class="strat-rec" id="stratRec">
+    <div class="strat-rec-card">
+      <div class="strat-rec-tag">AI TEAM RECOMMENDS</div>
+      <div class="strat-rec-name" id="recStratName">Smart DCA + Protection</div>
+      <div class="strat-rec-desc" id="recStratDesc">Daily DCA with AI downside protection. Pauses in crashes, buys dips.</div>
+      <div class="strat-rec-stats">
+        <div class="strat-rec-stat"><div class="strat-rec-stat-val" id="recRisk" style="color:var(--yellow)">Medium</div><div class="strat-rec-stat-lbl">Risk</div></div>
+        <div class="strat-rec-stat"><div class="strat-rec-stat-val" id="recReturn" style="color:var(--green)">15-25%</div><div class="strat-rec-stat-lbl">Est. APY</div></div>
+        <div class="strat-rec-stat"><div class="strat-rec-stat-val" id="recStyle">Daily</div><div class="strat-rec-stat-lbl">Activity</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="goal-cta" id="goalCta" style="opacity:.3;pointer-events:none"><button class="btn-gold" onclick="goPage('p6')">Next</button></div>
 </div>
 
-<!-- P6: STRATEGY PICK (no numbers, budget appears after selection) -->
+<!-- P6: FUND & LAUNCH -->
 <div class="pg" id="p6">
   <div class="back-btn" onclick="goPage('p5')">←</div>
-  <div class="step-ind" style="margin-top:16px"><div class="step-dot done"></div><div class="step-dot active"></div><div class="step-dot"></div></div>
-  <div class="p6-tag">BASED ON YOUR GOAL</div>
-  <div class="p6-title">Pick a strategy</div>
-  <div class="p6-sub">Your AI team recommends these for you.</div>
-  <div class="s-card" onclick="selectStrat(this)"><div class="s-radio"><div class="s-radio-dot"></div></div><div class="s-card-name">💡 Smart DCA + Protection</div><div class="s-card-desc">Regular buying with AI downside protection. Stops in crashes, buys dips. Same strategy from the simulation.</div></div>
-  <div class="s-card" onclick="selectStrat(this)"><div class="s-radio"><div class="s-radio-dot"></div></div><div class="s-card-name">📈 Momentum Riding</div><div class="s-card-desc">Follow trends — buy strength, sell weakness. More active, higher upside.</div></div>
-  <div class="s-card" onclick="selectStrat(this)"><div class="s-radio"><div class="s-radio-dot"></div></div><div class="s-card-name">🌱 Yield Farming</div><div class="s-card-desc">Earn yield through funding rates and arbitrage. Lower returns, much lower risk.</div></div>
-  <div class="budget-sec" id="budgetSec">
+  <div class="step-ind" style="margin-top:16px"><div class="step-dot done"></div><div class="step-dot active"></div></div>
+  <div class="p6-tag">YOUR STRATEGY</div>
+  <div class="p6-title" id="p6StratName">Smart DCA + Protection</div>
+  <div class="p6-sub" id="p6StratDesc">Daily DCA with AI downside protection. Pauses in crashes, buys dips.</div>
+  <div class="budget-sec show" id="budgetSec">
     <div class="budget-inner">
       <h4>Add Funds to AI Account</h4>
-      <div class="budget-input"><div class="curr">$</div><input class="amt" value="5,000" readonly><div class="unit">USDT</div></div>
+      <div class="budget-input"><div class="curr">$</div><input class="amt" id="p6BudgetAmt" value="5,000"><div class="unit">USDT</div></div>
       <div class="budget-note">🔒 Funds stay in your OKX sub-account — you retain full custody. Withdraw anytime.</div>
     </div>
     <div class="sub-sec">
@@ -756,7 +827,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
       <div class="sub-note">AI agents use advanced LLMs for analysis & execution.<br>First 7 days free — cancel anytime.</div>
     </div>
   </div>
-  <div class="strat-cta"><button class="btn-gold" onclick="goPage('p8');startHomePageSetup()">Launch My AI Team</button></div>
+  <div class="strat-cta"><button class="btn-gold" onclick="launchToHome()">Launch My AI Team</button></div>
 </div>
 
 <!-- P7: AGENT OFFICE CONFIG (chat-based) -->
@@ -773,9 +844,9 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
   <!-- Top: Balance + P&L + Controls -->
   <div class="hp-top">
     <div class="hp-bal-wrap">
-      <div class="hp-live"><div class="dot"></div>LIVE</div>
-      <div class="hp-bal" id="hpBal">$5,000.00</div>
-      <div class="hp-pnl" id="hpPnl" style="color:var(--sec)">$0.00 (0.00%)</div>
+      <div class="hp-live"><div class="dot"></div>SETTING UP</div>
+      <div class="hp-bal" id="hpBal">$0.00</div>
+      <div class="hp-pnl" id="hpPnl" style="color:var(--sec)">No funds yet</div>
       <div class="hp-strat">Smart DCA + Protection</div>
     </div>
     <div class="hp-actions">
@@ -789,42 +860,47 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
       </div>
     </div>
   </div>
-  <!-- Middle: Pixel Agent Office -->
-  <div class="hp-office">
-    <div class="pixel-floor"></div>
-    <div class="pixel-wall"></div>
-    <div class="p4-monitor"><span class="pm-btc">BTC $67,240</span><div class="pm-chart"><div class="pm-bar" style="height:3px"></div><div class="pm-bar" style="height:5px"></div><div class="pm-bar" style="height:4px"></div><div class="pm-bar" style="height:7px"></div><div class="pm-bar" style="height:6px"></div><div class="pm-bar" style="height:9px"></div></div></div>
-    <div class="pixel-shelf" style="top:5px;left:5px"><div class="pixel-shelf-board"></div><div class="pixel-shelf-board"></div><div class="pixel-shelf-board"></div><div class="pixel-book" style="left:3px;top:2px;height:10px;background:#E74C3C"></div><div class="pixel-book" style="left:9px;top:2px;height:10px;background:#3498DB"></div><div class="pixel-book" style="left:15px;top:2px;height:10px;background:#F1C40F"></div></div>
-    <!-- Agents at desks -->
-    <div class="p4-station show" style="top:20px;left:55px">
-      <div class="px-char"><div class="px-hair" style="background:#C0392B"></div><div class="px-head"></div><div class="px-body" style="background:#E74C3C"></div></div>
-      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--blue)"></span><span style="background:var(--green)"></span><span style="background:var(--blue)"></span><span style="background:var(--gold)"></span></div></div></div>
-      <div class="px-label">Researcher</div>
-      <div class="px-dot on"></div>
+  <!-- Middle: Dynamic Screen -->
+  <div class="hp-screen" id="hpScreen">
+    <!-- Screen: Agent Office (default) -->
+    <div class="hp-scr active" id="scrOffice">
+      <div class="pixel-floor"></div>
+      <div class="pixel-wall"></div>
+      <div class="p4-monitor"><span class="pm-btc">BTC $67,240</span><div class="pm-chart"><div class="pm-bar" style="height:3px"></div><div class="pm-bar" style="height:5px"></div><div class="pm-bar" style="height:4px"></div><div class="pm-bar" style="height:7px"></div><div class="pm-bar" style="height:6px"></div><div class="pm-bar" style="height:9px"></div></div></div>
+      <div class="pixel-shelf" style="top:5px;left:5px"><div class="pixel-shelf-board"></div><div class="pixel-shelf-board"></div><div class="pixel-shelf-board"></div><div class="pixel-book" style="left:3px;top:2px;height:10px;background:#E74C3C"></div><div class="pixel-book" style="left:9px;top:2px;height:10px;background:#3498DB"></div><div class="pixel-book" style="left:15px;top:2px;height:10px;background:#F1C40F"></div></div>
+      <div class="p4-station show" style="top:20px;left:55px"><div class="px-char"><div class="px-hair" style="background:#C0392B"></div><div class="px-head"></div><div class="px-body" style="background:#E74C3C"></div></div><div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--blue)"></span><span style="background:var(--green)"></span><span style="background:var(--blue)"></span><span style="background:var(--gold)"></span></div></div></div><div class="px-label">Researcher</div><div class="px-dot on"></div></div>
+      <div class="p4-station show" style="top:20px;right:55px"><div class="px-char"><div class="px-hair" style="background:#2980B9"></div><div class="px-head"></div><div class="px-body" style="background:#3498DB"></div></div><div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--purple)"></span><span style="background:var(--gold)"></span><span style="background:var(--green)"></span><span style="background:var(--purple)"></span></div></div></div><div class="px-label">Strategist</div><div class="px-dot on"></div></div>
+      <div class="p4-station show" style="top:48px;left:50%;transform:translateX(-50%)"><div class="px-char"><div class="px-hair" style="background:#2C3E50"></div><div class="px-head"></div><div class="px-body" style="background:#34495E"></div></div><div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--gold)"></span><span style="background:var(--gold)"></span><span style="background:var(--green)"></span><span style="background:var(--gold)"></span></div></div></div><div class="px-label" style="color:var(--gold)">Fund Mgr</div><div class="px-dot working"></div></div>
+      <div class="p4-station show" style="top:76px;left:55px"><div class="px-char"><div class="px-hair" style="background:#27AE60"></div><div class="px-head"></div><div class="px-body" style="background:#2ECC71"></div></div><div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--red)"></span><span style="background:var(--green)"></span><span style="background:var(--red)"></span><span style="background:var(--yellow)"></span></div></div></div><div class="px-label">Sentinel</div><div class="px-dot on"></div></div>
+      <div class="p4-station show" style="top:76px;right:55px"><div class="px-char"><div class="px-hair" style="background:#D4A03C"></div><div class="px-head"></div><div class="px-body" style="background:#F39C12"></div></div><div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--green)"></span><span style="background:var(--gold)"></span><span style="background:var(--green)"></span><span style="background:var(--blue)"></span></div></div></div><div class="px-label">Trader</div><div class="px-dot on"></div></div>
     </div>
-    <div class="p4-station show" style="top:20px;right:55px">
-      <div class="px-char"><div class="px-hair" style="background:#2980B9"></div><div class="px-head"></div><div class="px-body" style="background:#3498DB"></div></div>
-      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--purple)"></span><span style="background:var(--gold)"></span><span style="background:var(--green)"></span><span style="background:var(--purple)"></span></div></div></div>
-      <div class="px-label">Strategist</div>
-      <div class="px-dot on"></div>
+    <!-- Screen: Transfer Funds -->
+    <div class="hp-scr" id="scrTransfer">
+      <div class="scr-title">Transfer Funds</div>
+      <div class="scr-subtitle">From Exchange Account → AI Account</div>
+      <div class="xfer-token">
+        <div class="xfer-token-icon">₿</div>
+        <div class="xfer-token-info"><div class="xfer-token-name">BTC</div><div class="xfer-token-bal">Available: 0.24 BTC</div></div>
+        <div class="xfer-token-check">✓</div>
+      </div>
+      <div class="xfer-amount">
+        <div class="xfer-amt-label">Amount (USDT equivalent)</div>
+        <div class="xfer-amt-input"><span class="xfer-curr">$</span><input class="xfer-val" id="xferAmt" value="5,000"><span class="xfer-unit">USDT</span></div>
+        <div class="xfer-recommend">Recommended for your strategy</div>
+      </div>
+      <button class="btn-gold xfer-btn" onclick="confirmTransfer()" style="margin-top:12px;padding:12px;font-size:13px">Confirm Transfer</button>
     </div>
-    <div class="p4-station show" style="top:48px;left:50%;transform:translateX(-50%)">
-      <div class="px-char"><div class="px-hair" style="background:#2C3E50"></div><div class="px-head"></div><div class="px-body" style="background:#34495E"></div></div>
-      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--gold)"></span><span style="background:var(--gold)"></span><span style="background:var(--green)"></span><span style="background:var(--gold)"></span></div></div></div>
-      <div class="px-label" style="color:var(--gold)">Fund Mgr</div>
-      <div class="px-dot working"></div>
-    </div>
-    <div class="p4-station show" style="top:76px;left:55px">
-      <div class="px-char"><div class="px-hair" style="background:#27AE60"></div><div class="px-head"></div><div class="px-body" style="background:#2ECC71"></div></div>
-      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--red)"></span><span style="background:var(--green)"></span><span style="background:var(--red)"></span><span style="background:var(--yellow)"></span></div></div></div>
-      <div class="px-label">Sentinel</div>
-      <div class="px-dot on"></div>
-    </div>
-    <div class="p4-station show" style="top:76px;right:55px">
-      <div class="px-char"><div class="px-hair" style="background:#D4A03C"></div><div class="px-head"></div><div class="px-body" style="background:#F39C12"></div></div>
-      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--green)"></span><span style="background:var(--gold)"></span><span style="background:var(--green)"></span><span style="background:var(--blue)"></span></div></div></div>
-      <div class="px-label">Trader</div>
-      <div class="px-dot on"></div>
+    <!-- Screen: Strategy + Guardrails -->
+    <div class="hp-scr" id="scrStrategy">
+      <div class="scr-title">Strategy Guardrails</div>
+      <div class="scr-subtitle" id="scrStratName">Smart DCA + Protection</div>
+      <div class="guard-rows" id="guardRows">
+        <div class="guard-row"><span class="guard-row-label">Max per trade</span><span class="guard-row-val" id="grMaxTrade">25%</span><span class="guard-row-edit" onclick="editGuard('grMaxTrade','25')">Edit</span></div>
+        <div class="guard-row"><span class="guard-row-label">Stop-loss</span><span class="guard-row-val" id="grStopLoss" style="color:var(--red)">-15%</span><span class="guard-row-edit" onclick="editGuard('grStopLoss','-15')">Edit</span></div>
+        <div class="guard-row"><span class="guard-row-label">Alert threshold</span><span class="guard-row-val" id="grAlert">$500</span><span class="guard-row-edit" onclick="editGuard('grAlert','$500')">Edit</span></div>
+        <div class="guard-row"><span class="guard-row-label">Daily report</span><span class="guard-row-val" style="color:var(--green)">9 AM UTC</span></div>
+      </div>
+      <button class="btn-gold" onclick="confirmGuardrails()" style="margin-top:12px;padding:12px;font-size:13px">Confirm Guardrails</button>
     </div>
   </div>
   <!-- Bottom: AI Chat -->
@@ -838,9 +914,9 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
   <div class="qa-panel" id="qaPanel">
     <div class="qa-panel-title">Quick Actions</div>
     <div class="qa-grid">
-      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(205,255,0,.1)">💸</div><div class="qa-item-name">Transfer</div></div>
-      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(96,165,250,.1)">🤖</div><div class="qa-item-name">Agents</div></div>
-      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(192,132,252,.1)">📋</div><div class="qa-item-name">Strategy</div></div>
+      <div class="qa-item" onclick="switchScreen('scrTransfer')"><div class="qa-item-icon" style="background:rgba(205,255,0,.1)">💸</div><div class="qa-item-name">Transfer</div></div>
+      <div class="qa-item" onclick="switchScreen('scrOffice')"><div class="qa-item-icon" style="background:rgba(96,165,250,.1)">🤖</div><div class="qa-item-name">Agents</div></div>
+      <div class="qa-item" onclick="switchScreen('scrStrategy')"><div class="qa-item-icon" style="background:rgba(192,132,252,.1)">📋</div><div class="qa-item-name">Strategy</div></div>
       <div class="qa-item"><div class="qa-item-icon" style="background:rgba(52,211,153,.1)">📊</div><div class="qa-item-name">Charts</div></div>
       <div class="qa-item"><div class="qa-item-icon" style="background:rgba(251,191,36,.1)">📝</div><div class="qa-item-name">History</div></div>
       <div class="qa-item"><div class="qa-item-icon" style="background:rgba(248,113,113,.1)">🎓</div><div class="qa-item-name">Guide</div></div>
@@ -864,6 +940,8 @@ function goPage(id){
   if(id===curPage) return;
   document.getElementById(curPage).classList.remove('active');
   document.getElementById(id).classList.add('active');
+  document.getElementById(id).scrollTop=0;
+  document.querySelector('.pages').scrollTop=0;
   curPage=id;
 }
 
@@ -899,16 +977,56 @@ var carAutoTimer=setInterval(function(){
 document.querySelector('.carousel-wrap').addEventListener('touchstart',function(){clearInterval(carAutoTimer)},{passive:true});
 
 // ====== GOAL ======
+// 9 dynamic strategies: [goal][risk] => strategy
+var strategyMap={
+  '0_0':{name:'Steady Stack DCA',desc:'Weekly BTC/ETH buys with tight stop-loss, no leverage. The safest path to long-term growth.',risk:'Low',riskColor:'var(--green)',ret:'8-12%',activity:'Weekly'},
+  '0_1':{name:'Smart DCA + Protection',desc:'Daily DCA with AI downside protection. Pauses in crashes, buys dips. Same strategy from the simulation.',risk:'Medium',riskColor:'var(--yellow)',ret:'15-25%',activity:'Daily'},
+  '0_2':{name:'Accelerated Accumulation',desc:'DCA with momentum overlay. Doubles position in dips, reduces in euphoria. Higher upside, more active.',risk:'High',riskColor:'var(--red)',ret:'25-40%',activity:'Daily'},
+  '1_0':{name:'Trend Following',desc:'Follow major trends with strict risk management. Only buys confirmed uptrends, sits out downtrends.',risk:'Low',riskColor:'var(--green)',ret:'12-20%',activity:'Weekly'},
+  '1_1':{name:'Momentum Alpha',desc:'Multi-timeframe momentum with dynamic position sizing. Active rebalancing to capture market moves.',risk:'Medium',riskColor:'var(--yellow)',ret:'20-35%',activity:'Daily'},
+  '1_2':{name:'Breakout Hunter',desc:'Catches major breakouts with up to 3x leverage. High reward potential, requires higher risk tolerance.',risk:'High',riskColor:'var(--red)',ret:'30-60%',activity:'Active'},
+  '2_0':{name:'Stablecoin Yield',desc:'Park funds in USDT/USDC earn products. Lowest risk, steady returns with zero market exposure.',risk:'Low',riskColor:'var(--green)',ret:'5-8%',activity:'Passive'},
+  '2_1':{name:'Delta Neutral Yield',desc:'Funding rate arbitrage — long spot, short perp. Market-neutral returns regardless of price direction.',risk:'Medium',riskColor:'var(--yellow)',ret:'12-18%',activity:'Weekly'},
+  '2_2':{name:'Yield Maximizer',desc:'Multi-protocol yield farming with auto-rotation between best opportunities. Higher APY, smart contract risk.',risk:'High',riskColor:'var(--red)',ret:'18-30%',activity:'Daily'}
+};
+var selectedGoal=-1,selectedRisk=1; // 0=conservative,1=moderate,2=aggressive
+var chosenStrategy=null;
+
 function selectGoal(el,idx){
   document.querySelectorAll('.g-card').forEach(function(c){c.classList.remove('sel')});
   el.classList.add('sel');
+  selectedGoal=idx;
   document.getElementById('riskSec').classList.add('show');
+  updateStrategyRec();
+}
+function updateStrategyRec(){
+  if(selectedGoal<0) return;
+  var key=selectedGoal+'_'+selectedRisk;
+  var s=strategyMap[key];
+  if(!s) return;
+  chosenStrategy=s;
+  document.getElementById('recStratName').textContent=s.name;
+  document.getElementById('recStratDesc').textContent=s.desc;
+  document.getElementById('recRisk').textContent=s.risk;
+  document.getElementById('recRisk').style.color=s.riskColor;
+  document.getElementById('recReturn').textContent=s.ret;
+  document.getElementById('recStyle').textContent=s.activity;
+  document.getElementById('stratRec').classList.add('show');
+  // Enable Next CTA
+  var cta=document.getElementById('goalCta');
+  cta.style.opacity='1';cta.style.pointerEvents='auto';
 }
 // Risk slider
 (function(){
   var track=document.getElementById('riskTrack'),fill=document.getElementById('riskFill'),thumb=document.getElementById('riskThumb'),val=document.getElementById('riskVal');
   var labels=['Conservative','Moderate','Aggressive'],dragging=false;
-  function upd(p){p=Math.max(0,Math.min(100,p));fill.style.width=p+'%';thumb.style.left=p+'%';val.textContent=labels[p<33?0:p<67?1:2];}
+  function upd(p){
+    p=Math.max(0,Math.min(100,p));fill.style.width=p+'%';thumb.style.left=p+'%';
+    var rIdx=p<33?0:p<67?1:2;
+    val.textContent=labels[rIdx];
+    selectedRisk=rIdx;
+    updateStrategyRec();
+  }
   track.addEventListener('mousedown',function(e){dragging=true;upd(((e.clientX-track.getBoundingClientRect().left)/track.offsetWidth)*100)});
   document.addEventListener('mousemove',function(e){if(dragging)upd(((e.clientX-track.getBoundingClientRect().left)/track.offsetWidth)*100)});
   document.addEventListener('mouseup',function(){dragging=false});
@@ -921,9 +1039,8 @@ function selectGoal(el,idx){
 function toggleParamEdit(key){
   var val=document.getElementById('param'+key);
   var inp=document.getElementById('input'+key);
-  var btn=val.parentElement.querySelector('.p-edit');
+  var btn=val.closest('.tm-setup-row')?val.closest('.tm-setup-row').querySelector('.tm-setup-edit'):val.parentElement.querySelector('.tm-setup-edit');
   if(inp.classList.contains('active')){
-    // Save
     var v=inp.value.trim();
     val.textContent=inp.dataset.prefix+v+inp.dataset.suffix;
     inp.classList.remove('active');
@@ -932,7 +1049,6 @@ function toggleParamEdit(key){
     btn.style.borderColor='rgba(205,255,0,.2)';
     btn.style.color='var(--gold)';
   } else {
-    // Edit
     inp.classList.add('active');
     val.classList.add('editing');
     btn.textContent='Save';
@@ -942,11 +1058,6 @@ function toggleParamEdit(key){
     inp.select();
   }
 }
-function selectStrat(el){
-  document.querySelectorAll('.s-card').forEach(function(c){c.classList.remove('sel')});
-  el.classList.add('sel');
-  document.getElementById('budgetSec').classList.add('show');
-}
 function selectSubTier(el){
   document.querySelectorAll('.sub-tier').forEach(function(c){c.classList.remove('sel')});
   el.classList.add('sel');
@@ -955,6 +1066,21 @@ function showComingSoon(){
   var t=document.getElementById('csToast');
   t.classList.add('show');
   setTimeout(function(){t.classList.remove('show')},1800);
+}
+// Populate P6 with chosen strategy before navigating
+var origGoPage=goPage;
+goPage=function(id){
+  if(id==='p6'&&chosenStrategy){
+    document.getElementById('p6StratName').textContent=chosenStrategy.name;
+    document.getElementById('p6StratDesc').textContent=chosenStrategy.desc;
+    // Update HP strategy label too
+    document.querySelectorAll('.hp-strat').forEach(function(el){el.textContent=chosenStrategy.name});
+  }
+  origGoPage(id);
+};
+function launchToHome(){
+  goPage('p8');
+  startHomePageSetup();
 }
 
 // ====== HELPERS ======
@@ -1227,37 +1353,32 @@ function startHomeSimulation(){
 // ====== Q&A PHASE ======
 var homePhase='sim',qaCount=0,qaStartTime=0;
 var qaAnswers={
-  'Why did you sell at $30.6K and not earlier?':{icon:'🛡',name:'Sentinel',bg:'rgba(248,113,113,.1)',text:'Our stop-loss was set at -15% drawdown from entry. BTC entered at $36K, so the trigger was ~$30,600. Selling earlier means more false alarms in normal dips. This level balances protection with staying in the trade.'},
-  'What if the stop-loss didn\'t trigger in time?':{icon:'🛡',name:'Sentinel',bg:'rgba(248,113,113,.1)',text:'We monitor 24/7 with sub-second execution on OKX orderbook. Slippage was only 0.4%. In an extreme flash crash, we use limit orders at multiple levels as backup. The $30,600 fill was clean.'},
-  'Why buy back at $27K? Could\'ve gone lower.':{icon:'🧠',name:'Strategist',bg:'rgba(192,132,252,.1)',text:'Nobody catches the exact bottom. We use RSI (hit 12, extreme oversold) + volume capitulation signals. 3-tranche re-entry at $27.1K, $26.8K, $29.2K averages out risk. Waiting for "the bottom" means missing the bounce.'},
-  'How did you detect the UST risk so fast?':{icon:'🔍',name:'Researcher',bg:'rgba(96,165,250,.1)',text:'I monitor 200+ on-chain metrics in real-time via TradeKit. Anchor Protocol TVL dropped 18% in 6 hours — that\'s a screaming red flag. Cross-referencing UST peg deviation + BTC correlation gave us a ~2 hour head start on most traders.'},
-  'What\'s my actual worst case with this strategy?':{icon:'🛡',name:'Sentinel',bg:'rgba(248,113,113,.1)',text:'Hard floor = your stop-loss. On $10K with -15% limit, max loss is $1,500. Even in our worst backtest (March 2020 COVID crash), the team limited loss to -11.3%. Your cash reserve is never at risk.'},
-  'Would you have done anything different in hindsight?':{icon:'🧠',name:'Strategist',bg:'rgba(192,132,252,.1)',text:'Honestly? We could\'ve sold 20% more at $32.5K when UST first wobbled. But the signal wasn\'t strong enough yet — acting too early on every rumor would hurt returns long-term. The tradeoff was right.'},
-  'How is this different from a trading bot?':{icon:'👔',name:'Fund Manager',bg:'rgba(205,255,0,.06)',text:'A bot follows ONE rule blindly. Our team adapts in real-time. When Researcher spotted UST depeg, Sentinel overrode DCA, Strategist paused buying, and Trader managed the exit. No single bot does cross-signal reasoning like that.'}
+  'How did you know when to sell?':{icon:'🛡',name:'Sentinel',bg:'rgba(248,113,113,.1)',text:'We set a safety limit at -15% from your entry price. When BTC hit $30,600, that limit triggered automatically. It\'s like a seatbelt — you barely notice it until it saves you in a crash.'},
+  'Is my money safe if this happens again?':{icon:'🛡',name:'Sentinel',bg:'rgba(248,113,113,.1)',text:'Your safety limits are always active, 24/7. We monitor the market every second and act instantly. In this simulation, we sold within milliseconds of the trigger. Your remaining cash is always protected.'},
+  'How do you decide when to buy back?':{icon:'🧠',name:'Strategist',bg:'rgba(192,132,252,.1)',text:'We wait for clear signs the worst is over — panic selling stops, prices stabilize, buyers return. Then we buy back gradually in 3 small steps instead of all at once, so if it dips more, we get an even better price.'},
+  'How do you spot danger so fast?':{icon:'🔍',name:'Researcher',bg:'rgba(96,165,250,.1)',text:'I watch hundreds of market signals around the clock — unusual selling, money leaving protocols, price patterns. In this case, I spotted trouble about 2 hours before most traders even noticed. Early detection = more time to act.'},
+  'What\'s the most I could lose?':{icon:'🛡',name:'Sentinel',bg:'rgba(248,113,113,.1)',text:'Your safety limit caps it. With $10,000 and a -15% limit, the absolute most you\'d lose is $1,500. In practice, we usually do better — this simulation lost only 12%. Your uninvested cash is never at risk.'},
+  'Could you have saved even more?':{icon:'🧠',name:'Strategist',bg:'rgba(192,132,252,.1)',text:'Maybe a little — we could have sold earlier when the first warning signs appeared. But acting on every small signal would mean selling too often in normal conditions. We balance protection with letting your investment grow.'},
+  'How is this different from auto-trading?':{icon:'👔',name:'Fund Manager',bg:'rgba(205,255,0,.06)',text:'Auto-trading bots follow one simple rule. Our 5 agents think together — Researcher spots danger, Sentinel decides to sell, Strategist plans the re-entry, Trader executes. It\'s a team, not a script.'},
+  'Help me build my first strategy':{icon:'👔',name:'Fund Manager',bg:'rgba(205,255,0,.06)',text:'Let\'s do it! I\'ll walk you through picking a goal, setting your risk comfort level, and choosing a strategy that fits you. It takes about 1 minute.',isConvert:true}
 };
-var defaultChips=['Why sell at $30.6K not earlier?','How did you detect UST risk?','Why buy back at $27K?','What\'s my worst case?'];
-
-var chipToKey={
-  'Why sell at $30.6K not earlier?':'Why did you sell at $30.6K and not earlier?',
-  'How did you detect UST risk?':'How did you detect the UST risk so fast?',
-  'Why buy back at $27K?':'Why buy back at $27K? Could\'ve gone lower.',
-  'What\'s my worst case?':'What\'s my actual worst case with this strategy?',
-  'What if stop-loss didn\'t trigger?':'What if the stop-loss didn\'t trigger in time?',
-  'Anything different in hindsight?':'Would you have done anything different in hindsight?',
-  'How is this vs a bot?':'How is this different from a trading bot?'
-};
-var allChips=['Why sell at $30.6K not earlier?','How did you detect UST risk?','Why buy back at $27K?','What\'s my worst case?','What if stop-loss didn\'t trigger?','Anything different in hindsight?','How is this vs a bot?'];
+var allChips=['How did you know when to sell?','How do you spot danger so fast?','What\'s the most I could lose?','How is this different from auto-trading?','How do you decide when to buy back?','Could you have saved even more?','Is my money safe if this happens again?','Help me build my first strategy'];
 var usedChips=[];
 function addChips(container){
   var el=document.getElementById(container);
   var d=document.createElement('div');d.className='hc-chips';
   var available=allChips.filter(function(c){return usedChips.indexOf(c)===-1});
-  var show=available.slice(0,4);
+  // Always show "Help me build" last if available
+  var buildChip='Help me build my first strategy';
+  var regular=available.filter(function(c){return c!==buildChip});
+  var show=regular.slice(0,3);
+  if(available.indexOf(buildChip)!==-1) show.push(buildChip);
   show.forEach(function(t,i){
     var c=document.createElement('button');
-    c.className='hc-chip'+(i===0?' gold':'');
+    var isBuild=t===buildChip;
+    c.className='hc-chip'+(isBuild?' gold':'');
     c.textContent=t;
-    c.onclick=function(){usedChips.push(t);handleQ(container,chipToKey[t]||t);d.remove()};
+    c.onclick=function(){usedChips.push(t);handleQ(container,t);d.remove()};
     d.appendChild(c);
   });
   el.appendChild(d);el.scrollTop=el.scrollHeight;
@@ -1265,12 +1386,16 @@ function addChips(container){
 function handleQ(container,q){
   addMsg(container,'','','',null,true).querySelector('.hc-text').textContent=q;
   qaCount++;
-  var a=qaAnswers[q]||{icon:'👔',name:'Fund Manager',bg:'rgba(205,255,0,.06)',text:'The key insight: your AI team adapts to any condition. We monitor 24/7, enforce your limits, and act on opportunities you\'d miss.'};
+  var a=qaAnswers[q]||{icon:'👔',name:'Fund Manager',bg:'rgba(205,255,0,.06)',text:'Great question! Your AI team adapts to any market condition — 24/7 monitoring, automatic risk limits, and smart re-entry when opportunities appear.'};
   var typ=addTyping(container,a.icon,a.bg);
   setTimeout(function(){
     typ.remove();
     addMsg(container,a.icon,a.name,a.text,a.bg);
-    checkConvert(container);
+    if(a.isConvert){
+      setTimeout(function(){goPage('p5')},1500);
+    } else {
+      checkConvert(container);
+    }
   },1000);
 }
 function handleHomeChat(){
@@ -1292,7 +1417,7 @@ function showConvert(container){
   addMsg(container,'👔','Fund Manager','Your AI team saved $1,600 in the simulation. The process is real — 24/7 monitoring, risk limits, adaptive response. Ready to put us to work on <strong>your</strong> portfolio?','rgba(205,255,0,.06)');
   setTimeout(function(){
     addHTML(container,'<div class="hc-conv"><h4>Put Your AI Team to Work</h4><p>Set your goals, risk limits, and budget.<br>Your AI team handles the rest.</p>'
-      +'<button class="btn-gold" style="margin-bottom:8px" onclick="goPage(\'p5\')">Start With Real Money</button>'
+      +'<button class="btn-gold" style="margin-bottom:8px" onclick="goPage(\'p5\')">Build My Strategy</button>'
       +'<button class="btn-outline" onclick="qaCount=0;qaStartTime=Date.now();addChips(\'homeChat\')">I have more questions</button></div>');
   },800);
 }
@@ -1346,47 +1471,86 @@ function p7ConfirmAuto(){
 }
 
 // ====== LAUNCH ======
+// Dynamic screen switching
+function switchScreen(id){
+  document.querySelectorAll('.hp-scr').forEach(function(s){s.classList.remove('active')});
+  document.getElementById(id).classList.add('active');
+  // Close quick actions if open
+  var pn=document.getElementById('qaPanel');
+  if(pn.classList.contains('show')) toggleQuickActions();
+}
+
 function startHomePageSetup(){
   var chat=document.getElementById('hpChat');
   chat.innerHTML='';
+  var stratName=(chosenStrategy&&chosenStrategy.name)||'Smart DCA + Protection';
+  document.getElementById('scrStratName').textContent=stratName;
   // Show typing immediately
   var typ=document.createElement('div');typ.className='hc-msg show';
   typ.innerHTML='<div class="hc-av" style="background:rgba(205,255,0,.06)">👔</div><div class="hc-body"><div class="hc-typing"><span></span><span></span><span></span></div></div>';
   chat.appendChild(typ);
   setTimeout(function(){
     typ.remove();
-    addMsg('hpChat','👔','Fund Manager','Welcome! <strong>$5,000 deployed</strong> with Smart DCA + Protection. Before we start, let me confirm your safety guardrails.','rgba(205,255,0,.06)');
+    addMsg('hpChat','👔','Fund Manager','Welcome, Sherry! I\'m setting up your <strong>'+stratName+'</strong> strategy. First, let\'s transfer some funds to your AI Account.','rgba(205,255,0,.06)');
     setTimeout(function(){
-      addHTML('hpChat','<div class="guard-card"><h5>🛡 Safety Guardrails</h5>'
-        +'<div class="guard-item"><span class="guard-check">✓</span> Max 25% of budget per trade</div>'
-        +'<div class="guard-item"><span class="guard-check">✓</span> Stop-loss at -15% drawdown</div>'
-        +'<div class="guard-item"><span class="guard-check">✓</span> Alert before trades > $500</div>'
-        +'<div class="guard-item"><span class="guard-check">✓</span> Daily summary at 9 AM</div></div>'
-        +'<div style="display:flex;gap:8px;margin-top:8px">'
-        +'<button class="btn-gold" style="padding:10px;font-size:13px" onclick="hpConfirmGuardrails()">Looks Good ✓</button>'
-        +'<button class="btn-outline" style="padding:10px;font-size:13px;width:auto;flex-shrink:0">Customize</button></div>');
-    },600);
+      // Switch screen to Transfer
+      switchScreen('scrTransfer');
+      addMsg('hpChat','👔','Fund Manager','Choose how much to transfer. I recommend <strong>$5,000 USDT</strong> for this strategy — you can adjust the amount.','rgba(205,255,0,.06)');
+    },1200);
   },1200);
 }
-function hpConfirmGuardrails(){
-  addMsg('hpChat','','','',null,true).querySelector('.hc-text').textContent='Looks good!';
+
+function confirmTransfer(){
+  var amt=document.getElementById('xferAmt').value||'5,000';
+  addMsg('hpChat','','','',null,true).querySelector('.hc-text').textContent='Transfer $'+amt+' USDT';
+  // Update balance
+  document.getElementById('hpBal').textContent='$'+amt+'.00';
+  document.getElementById('hpPnl').innerHTML='$0.00 (0.00%)';
+  document.querySelector('.hp-live').innerHTML='<div class="dot"></div>SETTING UP';
   setTimeout(function(){
-    addMsg('hpChat','👔','Fund Manager','One more thing — how hands-on do you want to be?','rgba(205,255,0,.06)');
+    addMsg('hpChat','👔','Fund Manager','We\'re creating your <strong>AI Account</strong> — a dedicated sub-account managed by your AI team. Your funds are transferred from your exchange account to this AI account. <strong>You keep full custody</strong> and can withdraw anytime.','rgba(205,255,0,.06)');
     setTimeout(function(){
-      addHTML('hpChat','<div class="auto-cards">'
-        +'<div class="auto-card" onclick="selAuto(this)"><div class="auto-card-icon">🚀</div><div class="auto-card-info"><div class="auto-card-name">Full Auto</div><div class="auto-card-desc">AI trades within guardrails. Notified after.</div></div></div>'
-        +'<div class="auto-card sel" onclick="selAuto(this)"><div class="auto-card-icon">✋</div><div class="auto-card-info"><div class="auto-card-name">Confirm Big Trades</div><div class="auto-card-desc">You approve trades over threshold.</div></div></div>'
-        +'<div class="auto-card" onclick="selAuto(this)"><div class="auto-card-icon">👀</div><div class="auto-card-info"><div class="auto-card-name">Approve Everything</div><div class="auto-card-desc">You approve every trade.</div></div></div></div>'
-        +'<button class="btn-gold" style="margin-top:8px;padding:10px;font-size:13px" onclick="hpConfirmAuto()">Confirm</button>');
-    },600);
-  },600);
+      addHTML('hpChat','<div style="background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 12px;font-size:11px;line-height:1.6;color:var(--sec)">'
+        +'<div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:4px">AI ACCOUNT</div>'
+        +'<div>✓ Sub-account under your OKX account</div>'
+        +'<div>✓ AI team trades within this account only</div>'
+        +'<div>✓ Full custody — withdraw to main account anytime</div>'
+        +'<div>✓ No access to your other OKX funds</div></div>');
+      setTimeout(function(){
+        addMsg('hpChat','👔','Fund Manager','Now let\'s set up your safety guardrails. Review these — tap Edit on any you want to change.','rgba(205,255,0,.06)');
+        switchScreen('scrStrategy');
+      },1500);
+    },1000);
+  },800);
 }
-function hpConfirmAuto(){
-  addMsg('hpChat','','','',null,true).querySelector('.hc-text').textContent='Confirm Big Trades — let\'s go!';
+
+function editGuard(id,currentVal){
+  var el=document.getElementById(id);
+  var editBtn=el.parentElement.querySelector('.guard-row-edit');
+  if(editBtn.textContent==='Save'){
+    // Save
+    var inp=el.parentElement.querySelector('.guard-inp');
+    if(inp){el.textContent=inp.value;inp.remove()}
+    editBtn.textContent='Edit';
+    return;
+  }
+  var inp=document.createElement('input');
+  inp.className='guard-inp';
+  inp.value=currentVal;
+  inp.style.cssText='font-size:12px;font-weight:700;background:var(--bg);border:1px solid var(--gold);border-radius:4px;color:var(--text);padding:2px 6px;width:60px;font-family:inherit;outline:none';
+  el.textContent='';
+  el.parentElement.insertBefore(inp,editBtn);
+  inp.focus();inp.select();
+  editBtn.textContent='Save';
+}
+
+function confirmGuardrails(){
+  addMsg('hpChat','','','',null,true).querySelector('.hc-text').textContent='Guardrails confirmed!';
   setTimeout(function(){
-    // Clear setup chat and start the live agent flow
-    document.getElementById('hpChat').innerHTML='';
-    startLaunch();
+    switchScreen('scrOffice');
+    document.querySelector('.hp-live').innerHTML='<div class="dot"></div>LIVE';
+    addMsg('hpChat','👔','Fund Manager','<strong>You\'re all set!</strong> Your AI team is now live. We\'ll send daily reports at 9 AM and alert you for trades over $500. Let\'s go!','rgba(205,255,0,.06)');
+    setTimeout(function(){startLaunch()},1500);
   },800);
 }
 
@@ -1401,8 +1565,7 @@ function toggleQuickActions(){
 function startLaunch(){
   var chat=document.getElementById('hpChat');
   var toast=document.getElementById('launchToast');
-  chat.innerHTML='';
-  // Show typing indicator immediately
+  // Show typing indicator
   var ph=document.createElement('div');ph.className='hc-msg show';ph.id='hpPlaceholder';
   ph.innerHTML='<div class="hc-av" style="background:rgba(205,255,0,.06)">👔</div><div class="hc-body"><div class="hc-typing"><span></span><span></span><span></span></div></div>';
   chat.appendChild(ph);
