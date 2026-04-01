@@ -455,8 +455,12 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 /* Top bar: balance + controls */
 .hp-top{padding:12px 20px 8px;display:flex;justify-content:space-between;align-items:flex-start}
 .hp-bal-wrap{flex:1}
-.hp-live{font-size:10px;color:var(--green);font-weight:700;display:flex;align-items:center;gap:5px;margin-bottom:6px;letter-spacing:1.5px}
-.hp-live .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.2s infinite;box-shadow:0 0 8px var(--green)}
+.hp-live{font-size:10px;color:var(--green);font-weight:700;display:flex;align-items:center;gap:5px;margin-bottom:6px;letter-spacing:1.5px;transition:color .4s}
+.hp-live .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.2s infinite;box-shadow:0 0 8px var(--green);transition:background .4s,box-shadow .4s}
+.hp-live.pending{color:var(--yellow)}
+.hp-live.pending .dot{background:var(--yellow);box-shadow:0 0 8px var(--yellow)}
+.live-banner{position:absolute;bottom:0;left:0;right:0;background:var(--gold);color:#000;font-size:14px;font-weight:900;text-align:center;padding:14px 20px;transform:translateY(100%);transition:transform .6s cubic-bezier(.34,1.56,.64,1);z-index:200;letter-spacing:.5px}
+.live-banner.show{transform:translateY(0)}
 .hp-bal{font-size:28px;font-weight:900;letter-spacing:-.8px;line-height:1;font-variant-numeric:tabular-nums}
 .hp-pnl{font-size:13px;font-weight:700;margin-top:4px}
 .hp-strat{font-size:11px;color:var(--sec);margin-top:4px;letter-spacing:.2px}
@@ -465,9 +469,14 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .hp-act-btn:hover{border-color:var(--gold);background:rgba(205,255,0,.06)}
 .hp-act-btn:active{transform:scale(.93)}
 /* Agent office (middle) */
-.hp-screen{position:relative;overflow:hidden;margin:4px 0;height:220px;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
-.hp-scr{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .3s ease}
-.hp-scr.active{opacity:1;pointer-events:auto}
+.hp-screen{position:relative;overflow:hidden;margin:4px 0;height:250px;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04);transition:height .35s ease}
+.hp-screen.zoomed{height:calc(100% - 130px);z-index:50}
+.hp-scr{position:absolute;inset:0;opacity:0;pointer-events:none;z-index:0}
+.hp-scr.active{opacity:1;pointer-events:auto;z-index:2}
+.zoom-btn{position:absolute;bottom:8px;right:8px;width:28px;height:28px;border-radius:8px;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:all .2s;backdrop-filter:blur(4px)}
+.zoom-btn:hover{background:rgba(205,255,0,.15);color:var(--gold);border-color:rgba(205,255,0,.3)}
+.mid-back{font-size:16px;color:rgba(255,255,255,.5);cursor:pointer;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:all .15s;margin-right:2px}
+.mid-back:hover{color:#fff;background:rgba(255,255,255,.08)}
 /* Office screen */
 #scrOffice .pixel-floor{position:absolute;inset:0;background:repeating-conic-gradient(#2A2218 0% 25%,#332A1E 0% 50%) 0 0/20px 20px;opacity:.5}
 #scrOffice .pixel-wall{position:absolute;top:0;left:0;right:0;height:35%;background:linear-gradient(180deg,#1A1510,#221C14);border-bottom:2px solid #3D3428}
@@ -983,6 +992,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
   </div>
   <!-- Middle: Dynamic Screen -->
   <div class="hp-screen" id="hpScreen">
+    <div class="zoom-btn" id="zoomBtn" onclick="toggleZoom()" title="Expand">⤢</div>
     <!-- Screen: Agent Office (default) -->
     <div class="hp-scr active" id="scrOffice">
       <div class="pixel-floor"></div>
@@ -997,7 +1007,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
     </div>
     <!-- Screen: Transfer Funds -->
     <div class="hp-scr mid-scr" id="scrTransfer">
-      <div class="mid-header"><span class="mid-icon">💸</span><span class="mid-title">Transfer Funds</span><span class="mid-close" onclick="switchScreen('scrOffice')">✕</span></div>
+      <div class="mid-header"><span class="mid-back" onclick="switchScreen('scrOffice')">←</span><span class="mid-icon">💸</span><span class="mid-title">Transfer Funds</span></div>
       <div class="mid-body">
         <div style="font-size:9px;color:var(--ter);margin-bottom:6px">From Exchange Account → AI Account</div>
         <div class="xfer-token">
@@ -1015,7 +1025,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
     </div>
     <!-- Screen: Strategy List -->
     <div class="hp-scr mid-scr" id="scrStratList">
-      <div class="mid-header"><span class="mid-icon">📈</span><span class="mid-title">My Strategies</span><span class="mid-close" onclick="switchScreen('scrOffice')">✕</span></div>
+      <div class="mid-header"><span class="mid-back" onclick="switchScreen('scrOffice')">←</span><span class="mid-icon">📈</span><span class="mid-title">My Strategies</span></div>
       <div class="mid-body" style="padding:6px 10px"><div class="strat-list" id="stratListItems">
         <div class="strat-list-card" onclick="openStratDetail(0)">
           <div class="slc-top"><span class="slc-name">Smart DCA + Protection</span><span class="slc-status live">LIVE</span></div>
@@ -1033,23 +1043,45 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
       <button class="btn-gold" onclick="goPage('p5')" style="margin-top:auto;padding:10px;font-size:12px;margin:6px 10px">+ Create New Strategy</button>
       </div>
     </div>
-    <!-- Screen: Strategy Detail + Guardrails -->
-    <div class="hp-scr mid-scr" id="scrStrategy">
-      <div class="mid-header"><span class="mid-icon">⚙️</span><span class="mid-title">Strategy Guardrails</span><span class="mid-close" onclick="switchScreen('scrStratList')">✕</span></div>
-      <div class="mid-body">
-      <div style="font-size:11px;font-weight:700;color:var(--sec);margin-bottom:4px" id="scrStratName">Smart DCA + Protection</div>
-      <div class="guard-rows" id="guardRows">
-        <div class="guard-row"><span class="guard-row-label">Max per trade</span><span class="guard-row-val" id="grMaxTrade">25%</span><span class="guard-row-edit" onclick="editGuard('grMaxTrade','25')">Edit</span></div>
-        <div class="guard-row"><span class="guard-row-label">Stop-loss</span><span class="guard-row-val" id="grStopLoss" style="color:var(--red)">-15%</span><span class="guard-row-edit" onclick="editGuard('grStopLoss','-15')">Edit</span></div>
-        <div class="guard-row"><span class="guard-row-label">Alert threshold</span><span class="guard-row-val" id="grAlert">$500</span><span class="guard-row-edit" onclick="editGuard('grAlert','$500')">Edit</span></div>
-        <div class="guard-row"><span class="guard-row-label">Daily report</span><span class="guard-row-val" style="color:var(--green)">9 AM UTC</span></div>
+    <!-- Screen: Strategy Review (built by AI) -->
+    <div class="hp-scr mid-scr" id="scrStratReview">
+      <div class="mid-header"><span class="mid-back" onclick="switchScreen('scrOffice')">←</span><span class="mid-icon">📋</span><span class="mid-title">Your Strategy</span></div>
+      <div class="mid-body" style="padding:4px 14px">
+        <div style="font-size:12px;font-weight:800;color:#fff;margin-bottom:1px" id="revStratName">Smart DCA + Protection</div>
+        <div style="font-size:9px;color:var(--ter);margin-bottom:6px" id="revStratDesc">Daily DCA with AI downside protection</div>
+        <div class="guard-rows" id="revParams">
+          <div class="guard-row" style="padding:4px 0"><span class="guard-row-label">Asset</span><span class="guard-row-val">BTC/USDC</span></div>
+          <div class="guard-row" style="padding:4px 0"><span class="guard-row-label">DCA Amount</span><span class="guard-row-val">Buy BTC w/ 1,250 USDC/day</span></div>
+          <div class="guard-row" style="padding:4px 0"><span class="guard-row-label">Stop-Loss</span><span class="guard-row-val" style="color:var(--red)">-15%</span></div>
+          <div class="guard-row" style="padding:4px 0"><span class="guard-row-label">Risk Mode</span><span class="guard-row-val">Defensive</span></div>
+          <div class="guard-row" style="padding:4px 0;border:none"><span class="guard-row-label">Agents Active</span><span class="guard-row-val" style="color:var(--gold)">5 / 5</span></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:6px">
+          <button class="btn-gold" onclick="approveStrategy()" style="flex:1;padding:8px;font-size:12px">Looks Good</button>
+          <button style="flex:0 0 auto;padding:8px 16px;font-size:12px;font-weight:700;background:transparent;border:1px solid rgba(255,255,255,.15);border-radius:12px;color:var(--sec);cursor:pointer;font-family:inherit" onclick="goPage('p5')">Edit</button>
+        </div>
       </div>
-      <button class="btn-gold" id="guardSaveBtn" onclick="confirmGuardrails()" style="margin-top:8px;padding:10px;font-size:12px">Confirm Guardrails</button>
+    </div>
+    <!-- Screen: Strategy Guardrails -->
+    <div class="hp-scr mid-scr" id="scrStrategy">
+      <div class="mid-header"><span class="mid-back" onclick="switchScreen('scrStratReview')">←</span><span class="mid-icon">🛡</span><span class="mid-title">Safety Guardrails</span></div>
+      <div class="mid-body" style="padding:4px 14px">
+      <div style="font-size:10px;font-weight:700;color:var(--ter);margin-bottom:4px" id="scrStratName">Smart DCA + Protection</div>
+      <div class="guard-rows" id="guardRows">
+        <div class="guard-row" style="padding:5px 0"><span class="guard-row-label">Max per trade</span><span class="guard-row-val" id="grMaxTrade">25%</span><span class="guard-row-edit" onclick="editGuard('grMaxTrade','25')">Edit</span></div>
+        <div class="guard-row" style="padding:5px 0"><span class="guard-row-label">Stop-loss</span><span class="guard-row-val" id="grStopLoss" style="color:var(--red)">-15%</span><span class="guard-row-edit" onclick="editGuard('grStopLoss','-15')">Edit</span></div>
+        <div class="guard-row" style="padding:5px 0"><span class="guard-row-label">Alert threshold</span><span class="guard-row-val" id="grAlert">$500</span><span class="guard-row-edit" onclick="editGuard('grAlert','$500')">Edit</span></div>
+        <div class="guard-row" style="padding:5px 0;border:none"><span class="guard-row-label">Daily report</span><span class="guard-row-val" style="color:var(--green)">9 AM UTC</span></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:6px">
+        <button class="btn-gold" id="guardSaveBtn" onclick="confirmGuardrails()" style="flex:1;padding:8px;font-size:12px">Confirm</button>
+        <button style="flex:0 0 auto;padding:8px 16px;font-size:12px;font-weight:700;background:transparent;border:1px solid rgba(255,255,255,.15);border-radius:12px;color:var(--sec);cursor:pointer;font-family:inherit" onclick="switchScreen('scrStratReview')">Edit</button>
+      </div>
       </div>
     </div>
     <!-- Screen: Portfolio -->
     <div class="hp-scr mid-scr" id="scrPortfolio">
-      <div class="mid-header"><span class="mid-icon">📊</span><span class="mid-title">Portfolio</span><span class="mid-close" onclick="switchScreen('scrOffice')">✕</span></div>
+      <div class="mid-header"><span class="mid-back" onclick="switchScreen('scrOffice')">←</span><span class="mid-icon">📊</span><span class="mid-title">Portfolio</span></div>
       <div class="mid-body pf-body">
         <!-- Total Value + P&L -->
         <div class="pf-hero">
@@ -1123,7 +1155,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
     </div>
     <!-- Screen: Trade History -->
     <div class="hp-scr mid-scr" id="scrHistory">
-      <div class="mid-header"><span class="mid-icon">📝</span><span class="mid-title">Trade History</span><span class="mid-close" onclick="switchScreen('scrOffice')">✕</span></div>
+      <div class="mid-header"><span class="mid-back" onclick="switchScreen('scrOffice')">←</span><span class="mid-icon">📝</span><span class="mid-title">Trade History</span></div>
       <div class="mid-body" style="padding:0">
         <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.05)">
           <div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="color:var(--green);font-size:10px;font-weight:700">BUY</span><span style="color:var(--ter);font-size:9px">just now</span></div>
@@ -1139,7 +1171,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
     </div>
     <!-- Screen: Alerts -->
     <div class="hp-scr mid-scr" id="scrAlerts">
-      <div class="mid-header"><span class="mid-icon">🔔</span><span class="mid-title">Alert Rules</span><span class="mid-close" onclick="switchScreen('scrOffice')">✕</span></div>
+      <div class="mid-header"><span class="mid-back" onclick="switchScreen('scrOffice')">←</span><span class="mid-icon">🔔</span><span class="mid-title">Alert Rules</span></div>
       <div class="mid-body" style="padding:0">
         <div class="mid-toggle-row"><div><div class="mid-toggle-name">Trade alerts</div><div class="mid-toggle-desc">Notify on trades > $500</div></div><div class="mid-toggle on"></div></div>
         <div class="mid-toggle-row"><div><div class="mid-toggle-name">Daily report</div><div class="mid-toggle-desc">Summary at 9 AM UTC</div></div><div class="mid-toggle on"></div></div>
@@ -1149,7 +1181,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
     </div>
     <!-- Screen: Settings -->
     <div class="hp-scr mid-scr" id="scrSettings">
-      <div class="mid-header"><span class="mid-icon">⚙️</span><span class="mid-title">Settings</span><span class="mid-close" onclick="switchScreen('scrOffice')">✕</span></div>
+      <div class="mid-header"><span class="mid-back" onclick="switchScreen('scrOffice')">←</span><span class="mid-icon">⚙️</span><span class="mid-title">Settings</span></div>
       <div class="mid-body" style="padding:0">
         <div class="mid-nav-row"><div><div class="mid-toggle-name">AI Subscription</div><div class="mid-toggle-desc">Pro Plan · $29/month</div></div><span class="mid-chevron">›</span></div>
         <div class="mid-nav-row"><div><div class="mid-toggle-name">Notifications</div><div class="mid-toggle-desc">Push, Email, In-app</div></div><span class="mid-chevron">›</span></div>
@@ -1182,6 +1214,8 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
     <div style="font-size:18px">✓</div>
     <div><span class="lt-title">Strategy is Live</span><span class="lt-sub">· $5,000 deployed</span></div>
   </div>
+  <!-- Live banner (slides up from bottom) -->
+  <div class="live-banner" id="liveBanner">🟢 Your Strategy is Live</div>
 </div>
 
   </div>
@@ -1389,9 +1423,10 @@ function skipToResults(){
   setTimeout(function(){
     addHTML(chat,'<div class="chat-results"><div class="cr-title">Simulation Results · May 7-14, 2022</div>'
       +'<div class="cr-row best"><span style="font-weight:700;color:var(--gold)">★ Your AI Team</span><span style="color:var(--green);font-weight:700">-$1,200 (-12%)</span></div>'
+      +'<div class="cr-row"><span style="color:var(--ter)">If you panic sold at bottom</span><span style="color:var(--red);font-weight:700">-$2,700 (-27%)</span></div>'
       +'<div class="cr-row"><span style="color:var(--ter)">If you just held</span><span style="color:var(--red);font-weight:700">-$2,800 (-28%)</span></div>'
-      +'<div class="cr-row"><span style="color:var(--ter)">If using basic DCA</span><span style="color:var(--red);font-weight:700">-$1,900 (-19%)</span></div>'
-      +'<div class="cr-saved"><div class="cr-saved-label">Your AI Team Saved You</div><div class="cr-saved-num">$1,600</div><div class="cr-saved-sub">vs. just holding through the crash</div></div>'
+      +'<div class="cr-row"><span style="color:var(--ter)">If using basic DCA (no stop-loss)</span><span style="color:var(--red);font-weight:700">-$2,500 (-25%)</span></div>'
+      +'<div class="cr-saved"><div class="cr-saved-label">Your AI Team Saved You</div><div class="cr-saved-num">$1,500</div><div class="cr-saved-sub">vs. panic selling — what most people actually do</div></div>'
       +'<div style="font-size:10px;color:var(--ter);margin-top:6px;text-align:center">Results vary by parameters · Range: -8% to -16%</div>'
       +'<button class="share-btn" onclick="this.textContent=\'Copied! 🎉\'">📤 Share Result</button></div>');
     setTimeout(function(){
@@ -1569,9 +1604,9 @@ function startHomeSimulation(){
       // P&L comparison
       addHTML(chat,'<div class="chat-results"><div class="cr-title">P&L Comparison · May 7-14, 2022</div>'
         +'<div class="cr-row best"><span style="font-weight:700;color:var(--gold)">★ Your AI Team</span><span style="color:var(--green);font-weight:700">-$1,200 (-12%)</span></div>'
+        +'<div class="cr-row"><span style="color:var(--ter)">😱 If you panic sold at bottom</span><span style="color:var(--red);font-weight:700">-$2,700 (-27%)</span></div>'
         +'<div class="cr-row"><span style="color:var(--ter)">If you bought $10K BTC on May 7</span><span style="color:var(--red);font-weight:700">-$2,800 (-28%)</span></div>'
-        +'<div class="cr-row"><span style="color:var(--ter)">If using basic DCA (no stop-loss)</span><span style="color:var(--red);font-weight:700">-$2,200 (-22%)</span></div>'
-        +'<div class="cr-row"><span style="color:var(--ter)">If you panic sold near bottom</span><span style="color:var(--red);font-weight:700">-$2,700 (-27%)</span></div>'
+        +'<div class="cr-row"><span style="color:var(--ter)">If using basic DCA (no stop-loss)</span><span style="color:var(--red);font-weight:700">-$2,500 (-25%)</span></div>'
         +'<div style="border-top:1px solid rgba(255,255,255,.06);margin:6px 0;padding-top:6px">'
         +'<div style="font-size:9px;font-weight:700;color:var(--ter);letter-spacing:.5px;margin-bottom:4px">YOUR FINAL POSITION</div>'
         +'<div style="display:flex;gap:6px;margin-bottom:2px">'
@@ -1580,7 +1615,7 @@ function startHomeSimulation(){
         +'</div>'
         +'<div style="font-size:8px;color:var(--ter);text-align:center;margin-top:3px">Started: 10,000 USDC → Now: 0.141 BTC + 4,540 USDC = <strong style="color:var(--sec)">$8,800</strong></div>'
         +'</div>'
-        +'<div class="cr-saved"><div class="cr-saved-label">Your AI Team Saved You</div><div class="cr-saved-num">$1,600</div><div class="cr-saved-sub">vs. buying $10K BTC on day 1 and holding</div></div>'
+        +'<div class="cr-saved"><div class="cr-saved-label">Your AI Team Saved You</div><div class="cr-saved-num">$1,500</div><div class="cr-saved-sub">vs. panic selling — what most people actually do</div></div>'
         +'<div style="font-size:10px;color:var(--ter);margin-top:6px;text-align:center">Results vary by parameters · Range: -8% to -16%</div>'
         +'<button class="share-btn" onclick="this.textContent=\'Copied! 🎉\'">📤 Share Result</button></div>');
       updateSimBal(8800,-1200,'-12.0%','green');
@@ -1612,7 +1647,7 @@ var qaAnswers={
   'What if I panic sold instead?':{icon:'👔',name:'Fund Manager',bg:'rgba(205,255,0,.06)',text:'That\'s what most people do. In this crash, the average retail trader panic sold around $26K on May 12 — locking in a 27% loss. Then they\'re too scared to buy back, so they miss the recovery to $30K. Our AI sold earlier at $30.6K (only -15%), stayed calm while BTC dropped further, then re-entered at $27.7K. The difference: <strong>discipline vs. emotion</strong>.'},
   'Help me build my first strategy':{icon:'👔',name:'Fund Manager',bg:'rgba(205,255,0,.06)',text:'Let\'s do it! I\'ll walk you through picking a goal, setting your risk comfort level, and choosing a strategy that fits you. It takes about 1 minute.',isConvert:true}
 };
-var allChips=['How did you know when to sell?','What if I panic sold instead?','How do you spot danger so fast?','What\'s the most I could lose?','How is this different from auto-trading?','How do you decide when to buy back?','Could you have saved even more?','Is my money safe if this happens again?','Help me build my first strategy'];
+var allChips=['What if I panic sold instead?','How did you know when to sell?','How do you spot danger so fast?','What\'s the most I could lose?','How is this different from auto-trading?','How do you decide when to buy back?','Could you have saved even more?','Is my money safe if this happens again?','Help me build my first strategy'];
 var usedChips=[];
 function addChips(container){
   var el=document.getElementById(container);
@@ -1728,30 +1763,51 @@ function switchScreen(id){
   // Close quick actions if open
   var pn=document.getElementById('qaPanel');
   if(pn.classList.contains('show')) toggleQuickActions();
+  // Collapse zoom when going back to office
+  if(id==='scrOffice'){
+    var scr=document.getElementById('hpScreen');
+    var btn=document.getElementById('zoomBtn');
+    scr.classList.remove('zoomed');
+    btn.textContent='⤢';btn.title='Expand';
+  }
 }
 
 function startHomePageSetup(){
   var chat=document.getElementById('hpChat');
   chat.innerHTML='';
   var stratName=(chosenStrategy&&chosenStrategy.name)||'Smart DCA + Protection';
+  var stratDesc=(chosenStrategy&&chosenStrategy.desc)||'Daily DCA with AI downside protection. Pauses in crashes, buys dips.';
   var budget=document.getElementById('p6BudgetAmt')?document.getElementById('p6BudgetAmt').value:'5,000';
   document.getElementById('scrStratName').textContent=stratName;
+  document.getElementById('revStratName').textContent=stratName;
+  document.getElementById('revStratDesc').textContent=stratDesc;
   // Update balance from P6
   document.getElementById('hpBal').textContent='$'+budget+'.00';
-  document.getElementById('hpPnl').innerHTML='$0.00 (0.00%)';
-  document.querySelector('.hp-live').innerHTML='<div class="dot"></div>SETTING UP';
+  document.getElementById('hpPnl').innerHTML='<span style="color:var(--sec)">$0.00 (0.00%)</span>';
+  // Set PENDING status (yellow)
+  var live=document.querySelector('.hp-live');
+  live.innerHTML='<div class="dot"></div>PENDING';
+  live.classList.add('pending');
   // Show typing immediately
   var typ=document.createElement('div');typ.className='hc-msg show';
   typ.innerHTML='<div class="hc-av" style="background:rgba(205,255,0,.06)">👔</div><div class="hc-body"><div class="hc-typing"><span></span><span></span><span></span></div></div>';
   chat.appendChild(typ);
   setTimeout(function(){
     typ.remove();
-    addMsg('hpChat','👔','Fund Manager','Welcome, Sherry! Your <strong>'+stratName+'</strong> strategy is funded with <strong>$'+budget+' USDT</strong>. Before we go live, let\'s review your safety guardrails.','rgba(205,255,0,.06)');
+    addMsg('hpChat','👔','Fund Manager','Welcome! The team is building a customized strategy for you based on your <strong>'+( (selectedGoal>=0?['growth','alpha','protection'][selectedGoal]:'growth') )+' goal</strong>, <strong>risk preferences</strong>, and <strong>$'+budget+' USDC</strong> budget.','rgba(205,255,0,.06)');
     setTimeout(function(){
-      addMsg('hpChat','👔','Fund Manager','These are your default guardrails — tap <strong>Edit</strong> on any you want to change, then hit <strong>Confirm</strong> when ready.','rgba(205,255,0,.06)');
-      switchScreen('scrStrategy');
-    },1200);
-  },1200);
+      addMsg('hpChat','👔','Fund Manager','Here\'s what we\'ve put together. Review and let us know if it looks right.','rgba(205,255,0,.06)');
+      switchScreen('scrStratReview');
+    },1500);
+  },1500);
+}
+
+function approveStrategy(){
+  addMsg('hpChat','','','',null,true).querySelector('.hc-text').textContent='Looks good!';
+  setTimeout(function(){
+    addMsg('hpChat','🛡','Sentinel','Now let\'s set your safety guardrails — these are the rules your AI team must follow. Review and confirm.','rgba(248,113,113,.1)');
+    switchScreen('scrStrategy');
+  },800);
 }
 
 function confirmTransfer(){
@@ -1799,26 +1855,27 @@ function editGuard(id,currentVal){
 }
 
 function confirmGuardrails(){
-  // Reset button for future use
-  var btn=document.getElementById('guardSaveBtn');btn.textContent='Confirm Guardrails';btn.onclick=function(){confirmGuardrails()};
+  var btn=document.getElementById('guardSaveBtn');btn.textContent='Confirm';btn.onclick=function(){confirmGuardrails()};
   addMsg('hpChat','','','',null,true).querySelector('.hc-text').textContent='Guardrails confirmed!';
   setTimeout(function(){
-    // Show AI Account disclaimer
-    addMsg('hpChat','👔','Fund Manager','Your <strong>AI Account</strong> is a dedicated sub-account managed by your AI team. <strong>You keep full custody</strong> — withdraw to your main account anytime.','rgba(205,255,0,.06)');
+    // Switch back to agent office
+    switchScreen('scrOffice');
+    addMsg('hpChat','👔','Fund Manager','Deploying your strategy now…','rgba(205,255,0,.06)');
     setTimeout(function(){
-      addHTML('hpChat','<div style="background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 12px;font-size:11px;line-height:1.6;color:var(--sec)">'
-        +'<div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:4px">AI ACCOUNT</div>'
-        +'<div>✓ Sub-account under your OKX account</div>'
-        +'<div>✓ AI team trades within this account only</div>'
-        +'<div>✓ Full custody — withdraw to main account anytime</div>'
-        +'<div>✓ No access to your other OKX funds</div></div>');
+      // Banner slides up from bottom
+      var banner=document.getElementById('liveBanner');
+      banner.classList.add('show');
+      // Status goes LIVE green
+      var live=document.querySelector('.hp-live');
+      live.classList.remove('pending');
+      live.innerHTML='<div class="dot"></div>LIVE';
       setTimeout(function(){
-        switchScreen('scrOffice');
-        document.querySelector('.hp-live').innerHTML='<div class="dot"></div>LIVE';
-        addMsg('hpChat','👔','Fund Manager','<strong>You\'re all set!</strong> Your AI team is now live. Daily reports at 9 AM, alerts for trades over $500. Let\'s go!','rgba(205,255,0,.06)');
+        // Banner slides back down
+        banner.classList.remove('show');
+        addMsg('hpChat','👔','Fund Manager','<strong>Your strategy is live!</strong> Daily reports at 9 AM, alerts for trades over $500. We\'re on it 24/7.','rgba(205,255,0,.06)');
         setTimeout(function(){startLaunch()},1500);
-      },1500);
-    },800);
+      },2500);
+    },1200);
   },800);
 }
 
@@ -1828,6 +1885,13 @@ function toggleQuickActions(){
   var showing=pn.classList.contains('show');
   if(showing){pn.classList.remove('show');ov.classList.remove('show')}
   else{ov.classList.add('show');pn.classList.add('show')}
+}
+function toggleZoom(){
+  var scr=document.getElementById('hpScreen');
+  var btn=document.getElementById('zoomBtn');
+  var zoomed=scr.classList.toggle('zoomed');
+  btn.textContent=zoomed?'⤡':'⤢';
+  btn.title=zoomed?'Collapse':'Expand';
 }
 
 var launchTimers=[];
@@ -1981,6 +2045,70 @@ function saveStratChanges(){
   switchScreen('scrStratList');
 }
 
+// Intent detection engine — weighted keyword scoring with synonyms & phrase matching
+var intentDefs={
+  transfer:{
+    screen:'scrTransfer',
+    reply:'Opening transfer screen for you. Choose an amount and confirm when ready.',
+    // Primary keywords (weight 3), secondary (weight 2), contextual (weight 1)
+    primary:['transfer','deposit','withdraw','withdrawal','send money','move funds','top up','topup','add funds','fund account','wire','add more money'],
+    secondary:['send','move','fund','cash in','cash out','load','pull out','take out','put in','add money','get money out','want to add','put money','money in','money out'],
+    contextual:['how to fund','need more','add more','put more','take some','remove funds','bank','fiat','more capital','increase budget']
+  },
+  strategies:{
+    screen:'scrStratList',
+    reply:'Here are your strategies. Tap any to view details or create a new one.',
+    primary:['strategy','strategies','my strategies','edit strategy','new strategy','create strategy','change strategy','dca','hedge','hedging','change risk','risk level'],
+    secondary:['strat','auto buy','auto trade','recurring buy','dollar cost','rebalance','bot','trading bot','algo','automation','change plan','switch plan','current plan','my plan','aggressive','conservative','defensive','switch to'],
+    contextual:['what am i running','approach','method','tactic','setup','configure','adjust','tweak','modify','optimize','mode','more risk','less risk','safer']
+  },
+  portfolio:{
+    screen:'scrPortfolio',
+    reply:'Here\'s your current portfolio breakdown.',
+    primary:['portfolio','my portfolio','balance','holdings','net worth','my assets','total value','positions','how much do i have'],
+    secondary:['what do i own','show me my','my coins','my tokens','my crypto','asset breakdown','allocation','how am i doing','my money'],
+    contextual:['value','worth','have','own','rich','poor','profit','loss','pnl','p&l','performance','returns','gains','roi','apy']
+  },
+  history:{
+    screen:'scrHistory',
+    reply:'Here\'s your recent trade activity.',
+    primary:['history','trade history','orders','recent trades','transactions','activity log','past trades','order history','what did you buy','what did you sell'],
+    secondary:['recent','what happened','what did you do','last trade','latest','trades today','activity','log','record','what did you trade','any buys'],
+    contextual:['bought','sold','executed','filled','when did','show trades','what trades','any trades','actions taken','today','yesterday']
+  },
+  alerts:{
+    screen:'scrAlerts',
+    reply:'Your alert rules. Toggle any to enable or disable.',
+    primary:['alerts','alert','notifications','notify me','my alerts','alert rules','warning','alarms','price alert'],
+    secondary:['notify','ping me','tell me when','let me know','heads up','watch','monitor','trigger','threshold'],
+    contextual:['when price','if btc','drops below','goes above','reaches','hits','price target','set alert','remind']
+  },
+  settings:{
+    screen:'scrSettings',
+    reply:'Here are your settings. Tap any to adjust.',
+    primary:['settings','preferences','subscription','my plan','configuration','account settings','my account'],
+    secondary:['config','setup','options','customize','change plan','upgrade','downgrade','billing','payment method'],
+    contextual:['theme','dark mode','language','timezone','email','password','security','2fa','two factor','profile','name','risk level']
+  }
+};
+function detectIntent(text){
+  var lc=text.toLowerCase().replace(/['']/g,"'").replace(/[?!.,]/g,' ').replace(/\s+/g,' ').trim();
+  var scores={};
+  var keys=Object.keys(intentDefs);
+  for(var i=0;i<keys.length;i++){
+    var k=keys[i],def=intentDefs[k],score=0;
+    for(var j=0;j<def.primary.length;j++){if(lc.indexOf(def.primary[j])!==-1)score+=3}
+    for(var j=0;j<def.secondary.length;j++){if(lc.indexOf(def.secondary[j])!==-1)score+=2}
+    for(var j=0;j<def.contextual.length;j++){if(lc.indexOf(def.contextual[j])!==-1)score+=1}
+    if(score>0)scores[k]=score;
+  }
+  // Find highest scoring intent (minimum threshold of 2)
+  var best=null,bestScore=1;
+  var sk=Object.keys(scores);
+  for(var i=0;i<sk.length;i++){if(scores[sk[i]]>bestScore){bestScore=scores[sk[i]];best=sk[i]}}
+  return best;
+}
+
 function handleHpChat(){
   var inp=document.getElementById('hpInp');
   var chat=document.getElementById('hpChat');
@@ -1990,22 +2118,9 @@ function handleHpChat(){
   d.innerHTML='<div class="hc-body"><div class="hc-text user-bub">'+text+'</div></div>';
   chat.appendChild(d);setTimeout(function(){d.classList.add('show')},30);
   inp.value='';chat.scrollTop=chat.scrollHeight;
-  // Intent detection
-  var lc=text.toLowerCase();
-  var intent=null,screen=null,reply=null;
-  if(/transfer|deposit|withdraw|add fund|send money|move fund|top.?up/.test(lc)){
-    intent='transfer';screen='scrTransfer';reply='Opening transfer screen for you. Choose an amount and confirm when ready.';
-  } else if(/strateg|new strat|edit strat|my strat|change strat|create strat|dca|hedge/.test(lc)){
-    intent='strategies';screen='scrStratList';reply='Here are your strategies. Tap any to view details or create a new one.';
-  } else if(/portfolio|balance|holding|how much|net worth|my asset|position/.test(lc)){
-    intent='portfolio';screen='scrPortfolio';reply='Here\'s your current portfolio breakdown.';
-  } else if(/histor|trade|order|recent|activit|transaction/.test(lc)){
-    intent='history';screen='scrHistory';reply='Here\'s your recent trade activity.';
-  } else if(/alert|notification|notify|warning|alarm/.test(lc)){
-    intent='alerts';screen='scrAlerts';reply='Your alert rules. Toggle any to enable or disable.';
-  } else if(/setting|preference|subscription|plan|config|account/.test(lc)){
-    intent='settings';screen='scrSettings';reply='Here are your settings. Tap any to adjust.';
-  }
+  // Detect intent using scoring engine
+  var intent=detectIntent(text);
+  var def=intent?intentDefs[intent]:null;
   // Show typing indicator
   var typing=document.createElement('div');typing.className='hc-msg';
   typing.innerHTML='<div class="hc-av" style="background:rgba(205,255,0,.06)">👔</div><div class="hc-body"><div class="hc-typing"><span></span><span></span><span></span></div></div>';
@@ -2014,9 +2129,9 @@ function handleHpChat(){
   // Simulate response
   setTimeout(function(){
     chat.removeChild(typing);
-    if(intent){
-      switchScreen(screen);
-      addMsg('hpChat','👔','Fund Manager',reply,'rgba(205,255,0,.06)');
+    if(def){
+      switchScreen(def.screen);
+      addMsg('hpChat','👔','Fund Manager',def.reply,'rgba(205,255,0,.06)');
     } else {
       var replies=[
         'Your portfolio is currently 100% allocated. BTC position: 0.00929 BTC ($625). Next DCA buy scheduled tomorrow 9 AM UTC.',
