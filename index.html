@@ -174,7 +174,20 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .tm-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700;text-transform:uppercase;margin-top:16px;margin-bottom:10px;background:var(--dim);padding:6px 12px;border-radius:20px;border:1px solid rgba(205,255,0,.15)}
 .tm-title{font-size:24px;font-weight:900;line-height:1.2;margin-bottom:6px}
 .tm-sub{font-size:13px;color:var(--sec);line-height:1.6;margin-bottom:16px}
-.tm-strat-preview{background:var(--card);border-radius:12px;padding:10px 14px;margin-bottom:18px}
+.tm-crash-stat{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding:12px 14px;background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.15);border-radius:12px}
+.tm-crash-num{font-size:32px;font-weight:900;color:var(--red);line-height:1;white-space:nowrap}
+.tm-crash-detail{font-size:11px;color:var(--sec);line-height:1.5}
+.tm-crash-detail strong{color:var(--text)}
+.tm-tl-price{font-size:9px;font-weight:700;color:var(--sec);margin-top:1px}
+.tm-hook{font-size:12px;color:var(--sec);line-height:1.6;margin-bottom:14px;padding:0 2px}
+.tm-hook strong{color:var(--gold)}
+.tm-outcome-tease{background:var(--card);border-radius:12px;padding:12px 14px;margin-bottom:20px}
+.tm-ot-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.tm-ot-row:last-child{margin-bottom:0}
+.tm-ot-label{font-size:10px;color:var(--sec);width:60px;flex-shrink:0}
+.tm-ot-bar{height:6px;border-radius:3px;transition:width .6s}
+.tm-ot-val{font-size:11px;font-weight:700;flex-shrink:0;width:36px;text-align:right}
+.tm-strat-preview{background:var(--card);border-radius:12px;padding:10px 14px;margin-bottom:14px}
 .tm-strat-header{font-size:12px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
 .tm-strat-params{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}
 .tm-sp{display:flex;justify-content:space-between;font-size:11px;padding:2px 0}
@@ -670,15 +683,22 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 <div class="pg" id="p3">
   <div class="tm-badge">⏳ TIME MACHINE</div>
   <div class="tm-title">Go Back to<br>May 2022</div>
-  <div class="tm-sub">It's May 7. BTC is $36,000. In 72 hours it crashes <strong style="color:var(--red)">28%</strong>.<br>Watch your AI team handle it — with real data.</div>
+  <div class="tm-sub">It's May 7, 2022. BTC is trading at <strong>$36,000</strong>. Markets feel shaky, but nobody sees what's coming.</div>
+
+  <div class="tm-crash-stat">
+    <div class="tm-crash-num">-30%</div>
+    <div class="tm-crash-detail">In 5 days, the Luna/UST collapse drags BTC from <strong>$36,000</strong> down to <strong style="color:var(--red)">$25,400</strong> — billions wiped out.</div>
+  </div>
 
   <div class="tm-timeline">
-    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--green)"></div><div class="tm-tl-day">May 7</div><div class="tm-tl-event">Calm<br>markets</div></div>
-    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--yellow)"></div><div class="tm-tl-day">May 8</div><div class="tm-tl-event">Warning<br>signs</div></div>
-    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--red)"></div><div class="tm-tl-day">May 9</div><div class="tm-tl-event">UST<br>depegs</div></div>
-    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--red);box-shadow:0 0 6px var(--red)"></div><div class="tm-tl-day">May 10-12</div><div class="tm-tl-event">Full<br>crash</div></div>
-    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--green)"></div><div class="tm-tl-day">May 13-14</div><div class="tm-tl-event">Recovery<br>begins</div></div>
+    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--green)"></div><div class="tm-tl-day">May 7</div><div class="tm-tl-price">$36,000</div><div class="tm-tl-event">Calm</div></div>
+    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--yellow)"></div><div class="tm-tl-day">May 8</div><div class="tm-tl-price">$34,000</div><div class="tm-tl-event">UST wobbles</div></div>
+    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--red)"></div><div class="tm-tl-day">May 9</div><div class="tm-tl-price">$31,000</div><div class="tm-tl-event">UST depegs</div></div>
+    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--red);box-shadow:0 0 6px var(--red)"></div><div class="tm-tl-day">May 12</div><div class="tm-tl-price" style="color:var(--red)">$25,400</div><div class="tm-tl-event">Bottom</div></div>
+    <div class="tm-tl-item"><div class="tm-tl-dot" style="background:var(--green)"></div><div class="tm-tl-day">May 14</div><div class="tm-tl-price">$30,000</div><div class="tm-tl-event">Recovery</div></div>
   </div>
+
+  <div class="tm-hook">What if you had an AI team back then? Watch 5 agents <strong>detect the crash</strong>, <strong>protect your portfolio</strong>, and <strong>buy the dip</strong> — all automatically.</div>
 
   <div class="tm-strat-preview">
     <div class="tm-strat-header"><span style="color:var(--gold)">🧠</span> Smart DCA + Protection</div>
@@ -686,13 +706,17 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
       <div class="tm-sp"><span class="tm-sp-l">Budget</span><span class="tm-sp-v">$10,000</span></div>
       <div class="tm-sp"><span class="tm-sp-l">DCA</span><span class="tm-sp-v">$1,250/day</span></div>
       <div class="tm-sp"><span class="tm-sp-l">Stop-Loss</span><span class="tm-sp-v" style="color:var(--red)">-15%</span></div>
-      <div class="tm-sp"><span class="tm-sp-l">Duration</span><span class="tm-sp-v">~30 sec</span></div>
     </div>
   </div>
 
+  <div class="tm-outcome-tease">
+    <div class="tm-ot-row"><span class="tm-ot-label">Without AI</span><div class="tm-ot-bar" style="background:var(--red);width:80%"></div><span class="tm-ot-val" style="color:var(--red)">-30%</span></div>
+    <div class="tm-ot-row"><span class="tm-ot-label">With AI PAL</span><div class="tm-ot-bar" style="background:var(--green);width:32%"></div><span class="tm-ot-val" style="color:var(--green)">-12%</span></div>
+  </div>
+
   <div class="p3-cta">
-    <button class="btn-gold" onclick="goPage('p4');startHomeSimulation()">Start Simulation →</button>
-    <button class="p3-skip" onclick="goPage('p5')">Skip to strategy setup →</button>
+    <button class="btn-gold" onclick="goPage('p4');startHomeSimulation()">Launch Time Machine</button>
+    <button class="p3-skip" onclick="goPage('p5')">I already know AI PAL — set up my strategy →</button>
   </div>
 </div>
 
