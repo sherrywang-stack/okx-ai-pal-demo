@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>OKX AI PAL — Onboarding v9</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#000;--card:#161616;--card2:#1E1E1E;
+--gold:#CDFF00;--dim:rgba(205,255,0,.12);--glow:rgba(205,255,0,.25);
+--text:#FFF;--sec:rgba(255,255,255,.55);--ter:rgba(255,255,255,.3);
+--blue:#60A5FA;--purple:#C084FC;--green:#34D399;--yellow:#FBBF24;--red:#F87171;
+--ease:cubic-bezier(.16,1,.3,1);--safe-top:54px;--safe-bottom:34px;
+}
+body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;overflow:hidden;color:var(--text)}
+.phone{width:393px;height:852px;border-radius:44px;background:var(--bg);position:relative;overflow:hidden;box-shadow:0 0 0 2px #333,0 30px 80px rgba(0,0,0,.6)}
+.status-bar{position:absolute;top:0;left:0;right:0;height:var(--safe-top);z-index:200;display:flex;align-items:flex-end;justify-content:space-between;padding:0 28px 8px;font-size:12px;font-weight:600;color:#fff;pointer-events:none}
+.status-bar .time{font-size:15px;font-weight:700}
+.pages{position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden}
+.pg{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;pointer-events:none;z-index:1}
+.pg.active{opacity:1;pointer-events:auto;z-index:10;transition:opacity .4s ease}
+.btn-gold{width:100%;padding:16px;background:var(--gold);color:#000;font-weight:700;font-size:15px;border:none;border-radius:14px;cursor:pointer;font-family:inherit;transition:transform .15s}
+.btn-gold:active{transform:scale(.97)}
+.btn-outline{width:100%;padding:14px;background:transparent;color:var(--text);font-weight:600;font-size:14px;border:1px solid rgba(255,255,255,.15);border-radius:14px;cursor:pointer;font-family:inherit}
+
+/* ===== P1: MEET THE TEAM — pixel agents + rotating value props ===== */
+#p1{display:flex;flex-direction:column;align-items:center;padding:var(--safe-top) 24px var(--safe-bottom);text-align:center}
+.p1-badge{font-size:10px;letter-spacing:3px;color:var(--gold);font-weight:700;text-transform:uppercase;margin-top:16px;margin-bottom:12px}
+.p1-title{font-size:26px;font-weight:800;line-height:1.15;margin-bottom:6px}
+.p1-sub{font-size:13px;color:var(--sec);line-height:1.5;margin-bottom:16px;max-width:300px}
+/* P1 & P4 Pixel Office Scene */
+.pixel-office-wrap{width:calc(100% + 48px);margin-left:-24px;margin-right:-24px;position:relative;overflow:hidden;margin-bottom:12px}
+.pixel-floor{position:absolute;inset:0;background:repeating-conic-gradient(#2A2218 0% 25%,#332A1E 0% 50%) 0 0/24px 24px;opacity:.6}
+.pixel-wall{position:absolute;top:0;left:0;right:0;height:40%;background:linear-gradient(180deg,#1A1510,#221C14);border-bottom:2px solid #3D3428}
+/* BTC Monitor */
+.pixel-monitor{position:absolute;top:6px;left:50%;transform:translateX(-50%);background:#0A0D08;border:2px solid #3D3428;border-radius:3px;padding:2px 10px;z-index:5;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.pixel-monitor .pm-btc{font-size:8px;font-weight:800;color:var(--gold);font-family:monospace}
+.pixel-monitor .pm-chart{display:flex;align-items:flex-end;gap:1px;height:10px}
+.pixel-monitor .pm-bar{width:2px;background:var(--green);border-radius:1px}
+/* Bookshelf */
+.pixel-shelf{position:absolute;top:8px;left:8px;width:32px;height:28px;z-index:3}
+.pixel-shelf-board{position:absolute;left:0;right:0;height:2px;background:#5C4A32}
+.pixel-shelf-board:nth-child(1){top:0}
+.pixel-shelf-board:nth-child(2){top:13px}
+.pixel-shelf-board:nth-child(3){bottom:0}
+.pixel-book{position:absolute;width:4px;border-radius:1px 1px 0 0}
+/* Plant */
+.pixel-plant{position:absolute;bottom:6px;left:10px;z-index:4}
+.pixel-pot{width:12px;height:8px;background:#8B6B4A;border-radius:0 0 2px 2px}
+.pixel-leaf{position:absolute;width:6px;height:6px;border-radius:50%;background:#4CAF50}
+/* Agent at desk - pixel character */
+.px-station{position:absolute;display:flex;flex-direction:column;align-items:center;z-index:5;opacity:0;animation:agentReveal .5s var(--ease) forwards}
+@keyframes agentReveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.px-char{position:relative;width:20px;height:28px}
+.px-head{width:12px;height:12px;border-radius:3px;background:#F5D6B8;position:absolute;top:0;left:50%;transform:translateX(-50%);border:1px solid rgba(0,0,0,.15)}
+.px-hair{position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:14px;height:5px;border-radius:3px 3px 0 0}
+.px-body{width:16px;height:12px;border-radius:2px;position:absolute;bottom:0;left:50%;transform:translateX(-50%)}
+.px-desk{width:44px;height:12px;background:linear-gradient(180deg,#8B7355,#6B5740);border-radius:2px;border:1px solid #5C4A32;position:relative;margin-top:-2px}
+.px-screen{position:absolute;top:-10px;left:50%;transform:translateX(-50%);width:20px;height:12px;background:#111;border:1px solid #333;border-radius:1px;overflow:hidden}
+.px-screen-glow{width:100%;height:100%;display:flex;flex-wrap:wrap;gap:1px;padding:1px}
+.px-screen-glow span{width:3px;height:2px;border-radius:1px}
+.px-coffee{position:absolute;top:-4px;right:2px;width:5px;height:5px;background:#FFF;border-radius:0 0 2px 2px;border:1px solid #DDD;font-size:0}
+.px-label{font-size:6px;letter-spacing:.5px;font-weight:700;text-transform:uppercase;color:var(--sec);margin-top:3px;white-space:nowrap}
+.px-dot{width:4px;height:4px;border-radius:50%;margin-top:1px;transition:all .3s}
+.px-dot.on{background:var(--green);box-shadow:0 0 6px var(--green)}
+.px-dot.working{background:var(--yellow);box-shadow:0 0 6px var(--yellow);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+/* P1 specific sizing */
+.p1-office{height:240px}
+/* P1 social proof bar */
+.p1-proof{display:flex;justify-content:center;align-items:center;width:100%;margin-bottom:12px}
+.p1-proof-item{text-align:center;flex:1}
+.p1-proof-num{font-size:18px;font-weight:900;color:var(--gold)}
+.p1-proof-label{font-size:10px;color:var(--sec);margin-top:2px}
+.p1-proof-divider{width:1px;height:28px;background:rgba(255,255,255,.1)}
+/* P1 activity indicator */
+.p1-activity{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:10px}
+.p1-act-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 1.2s infinite}
+.p1-act-text{font-size:10px;color:var(--sec);font-style:italic}
+.p1-office .px-station:nth-child(5){animation-delay:.1s}
+.p1-office .px-station:nth-child(6){animation-delay:.2s}
+.p1-office .px-station:nth-child(7){animation-delay:.3s}
+.p1-office .px-station:nth-child(8){animation-delay:.4s}
+.p1-office .px-station:nth-child(9){animation-delay:.5s}
+/* Rotating value props */
+.vp-container{height:56px;overflow:hidden;position:relative;margin-bottom:auto;width:100%}
+.vp-track{display:flex;flex-direction:column;position:absolute;left:0;right:0;animation:vpScroll 15s linear infinite}
+@keyframes vpScroll{
+  0%{transform:translateY(0)}
+  8.33%{transform:translateY(0)}
+  16.66%{transform:translateY(-56px)}
+  25%{transform:translateY(-56px)}
+  33.33%{transform:translateY(-112px)}
+  41.66%{transform:translateY(-112px)}
+  50%{transform:translateY(-168px)}
+  58.33%{transform:translateY(-168px)}
+  66.66%{transform:translateY(-224px)}
+  75%{transform:translateY(-224px)}
+  83.33%{transform:translateY(-280px)}
+  91.66%{transform:translateY(-280px)}
+  100%{transform:translateY(-336px)}
+}
+.vp-item{height:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.vp-text{font-size:14px;font-weight:600;color:var(--gold);opacity:.85;letter-spacing:.3px}
+.vp-text span{color:var(--sec);font-weight:400;font-size:11px;display:block;margin-top:2px}
+.p1-cta{margin-top:auto;width:100%}
+.p1-note{font-size:11px;color:var(--ter);margin-top:10px}
+
+/* ===== P2: SCENARIO CAROUSEL ===== */
+#p2{display:flex;flex-direction:column;padding:var(--safe-top) 0 var(--safe-bottom)}
+.p2-top{padding:16px 24px 0}
+.p2-title{font-size:22px;font-weight:800;line-height:1.2}
+.p2-sub{font-size:13px;color:var(--sec);margin-top:6px;line-height:1.5}
+.carousel-wrap{flex:1;overflow:hidden;position:relative;margin-top:20px}
+.carousel{display:flex;transition:transform .5s var(--ease);height:100%;padding:0 24px;gap:16px}
+.car-card{min-width:calc(100% - 48px);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;background:var(--card);border:1px solid rgba(255,255,255,.08)}
+.car-card.active-card{border-color:var(--gold);box-shadow:0 0 20px rgba(205,255,0,.06)}
+.car-anim{flex:1;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:260px}
+.car-info{padding:16px 20px 20px}
+.car-label{font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:6px}
+.car-name{font-size:18px;font-weight:800;margin-bottom:6px}
+.car-desc{font-size:12px;color:var(--sec);line-height:1.5;margin-bottom:14px}
+.car-cta{padding:12px;background:var(--gold);color:#000;font-weight:700;font-size:13px;border:none;border-radius:12px;cursor:pointer;font-family:inherit;width:100%;text-align:center;transition:transform .15s}
+.car-cta:active{transform:scale(.97)}
+.car-cta.disabled{background:var(--card2);color:var(--ter);cursor:default;border:1px solid rgba(255,255,255,.08)}
+.car-dots{display:flex;justify-content:center;gap:6px;padding:14px 0 0}
+.car-dot{width:6px;height:6px;border-radius:50%;background:var(--ter);transition:all .3s;cursor:pointer}
+.car-dot.on{background:var(--gold);box-shadow:0 0 8px var(--glow)}
+
+/* Card 1 animation: crash protection */
+.anim-crash{width:100%;height:100%;position:relative}
+.crash-chart{position:absolute;bottom:40px;left:20px;right:20px}
+.crash-chart svg{width:100%;height:140px}
+.crash-shield{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:48px;opacity:0;animation:shieldIn 3s ease-in-out infinite}
+@keyframes shieldIn{0%,30%{opacity:0;transform:translate(-50%,-50%) scale(.5)}40%,70%{opacity:1;transform:translate(-50%,-50%) scale(1)}80%,100%{opacity:0;transform:translate(-50%,-50%) scale(.5)}}
+.crash-label{position:absolute;top:16px;left:16px;font-size:10px;font-weight:700;color:var(--red);letter-spacing:1px}
+.crash-save{position:absolute;bottom:12px;right:16px;font-size:12px;font-weight:800;color:var(--green);opacity:0;animation:saveIn 3s ease-in-out infinite}
+@keyframes saveIn{0%,50%{opacity:0}60%,85%{opacity:1}100%{opacity:0}}
+
+/* Card 2 animation: delta neutral */
+.anim-delta{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px}
+.delta-pair{display:flex;align-items:center;gap:12px;opacity:0;animation:deltaIn 4s ease-in-out infinite}
+.delta-pair:nth-child(2){animation-delay:.5s}
+.delta-pair:nth-child(3){animation-delay:1s}
+@keyframes deltaIn{0%,10%{opacity:0;transform:translateX(-10px)}20%,80%{opacity:1;transform:none}90%,100%{opacity:0}}
+.delta-box{padding:8px 14px;border-radius:10px;font-size:11px;font-weight:700}
+.delta-long{background:rgba(52,211,153,.12);color:var(--green);border:1px solid rgba(52,211,153,.2)}
+.delta-short{background:rgba(248,113,113,.12);color:var(--red);border:1px solid rgba(248,113,113,.2)}
+.delta-arrow{font-size:16px;color:var(--sec)}
+.delta-result{font-size:13px;font-weight:800;color:var(--gold);opacity:0;animation:deltaRes 4s ease-in-out infinite}
+@keyframes deltaRes{0%,40%{opacity:0}55%,85%{opacity:1}100%{opacity:0}}
+.delta-label{position:absolute;top:16px;left:16px;font-size:10px;font-weight:700;color:var(--purple);letter-spacing:1px}
+
+/* Card 3 animation: yield rotation */
+.anim-yield{width:100%;height:100%;position:relative;display:flex;align-items:center;justify-content:center}
+.yield-orbit{width:160px;height:160px;position:relative;animation:yieldSpin 8s linear infinite}
+@keyframes yieldSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.yield-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50px;height:50px;border-radius:50%;background:var(--dim);border:2px solid rgba(205,255,0,.3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--gold);animation:yieldSpinRev 8s linear infinite}
+@keyframes yieldSpinRev{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(-360deg)}}
+.yield-node{position:absolute;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;border:1px solid rgba(255,255,255,.1);animation:yieldSpinRev 8s linear infinite}
+.yield-node:nth-child(2){top:-18px;left:50%;transform:translateX(-50%);background:rgba(96,165,250,.15)}
+.yield-node:nth-child(3){bottom:-18px;left:50%;transform:translateX(-50%);background:rgba(52,211,153,.15)}
+.yield-node:nth-child(4){left:-18px;top:50%;transform:translateY(-50%);background:rgba(248,113,113,.15)}
+.yield-node:nth-child(5){right:-18px;top:50%;transform:translateY(-50%);background:rgba(192,132,252,.15)}
+.yield-label{position:absolute;top:16px;left:16px;font-size:10px;font-weight:700;color:var(--green);letter-spacing:1px}
+.yield-apy{position:absolute;bottom:12px;right:16px;font-size:12px;font-weight:800;color:var(--green);opacity:0;animation:saveIn 4s ease-in-out infinite}
+
+/* ===== P3: STRATEGY PARAMS ===== */
+#p3{display:flex;flex-direction:column;padding:var(--safe-top) 20px var(--safe-bottom);overflow-y:auto}
+#p3::-webkit-scrollbar{display:none}
+.p3-tag{font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700;text-transform:uppercase;margin-top:16px;margin-bottom:8px}
+.p3-title{font-size:22px;font-weight:800;line-height:1.2;margin-bottom:16px}
+.param-card{background:var(--card);border-radius:14px;padding:16px;margin-bottom:12px}
+.param-card h4{font-size:13px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.p-row{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);gap:8px}
+.p-row:last-child{border-bottom:none}
+.p-label{font-size:12px;color:var(--sec);flex:1}
+.p-val{font-size:13px;font-weight:600}
+.p-edit{font-size:10px;color:var(--gold);font-weight:600;cursor:pointer;padding:3px 8px;border:1px solid rgba(205,255,0,.2);border-radius:6px;flex-shrink:0}
+.p3-how{background:var(--card);border-radius:14px;padding:16px;margin-bottom:20px}
+.p3-how h4{font-size:13px;font-weight:700;margin-bottom:10px}
+.how-step{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
+.how-step:last-child{margin-bottom:0}
+.how-num{width:22px;height:22px;border-radius:50%;background:var(--dim);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
+.how-text{font-size:12px;color:var(--sec);line-height:1.5}
+.p3-cta{margin-top:auto;padding-top:12px}
+.p3-note{font-size:11px;color:var(--ter);text-align:center;margin-top:8px}
+
+/* ===== P4: AGENT OFFICE / HOME ===== */
+#p4{display:flex;flex-direction:column;padding:var(--safe-top) 0 0;background:var(--bg);transition:background .8s}
+.office-top{padding:8px 20px 0;display:flex;justify-content:space-between;align-items:center}
+.office-logo{font-size:12px;font-weight:800;color:var(--gold);letter-spacing:1px}
+.office-status{font-size:10px;color:var(--sec)}
+/* Sim balance header */
+.sim-bal-bar{padding:4px 20px 6px;display:flex;justify-content:space-between;align-items:flex-start}
+.sim-bal-left{flex:1}
+.sim-bal-label{font-size:9px;color:var(--sec);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
+.sim-bal-val{font-size:22px;font-weight:900;letter-spacing:-.5px;transition:all .4s}
+.sim-bal-pnl{font-size:12px;font-weight:700;margin-top:1px;transition:all .4s}
+.sim-bal-tag{font-size:9px;color:var(--ter);margin-top:2px;display:flex;align-items:center;gap:4px}
+.sim-bal-tag .sim-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);animation:pulse 1.2s infinite}
+/* BTC chart overlay inside agent office (top-right corner) */
+.sim-stage{display:flex;margin:4px 0;height:160px;overflow:hidden}
+.btc-panel{position:absolute;top:4px;right:4px;z-index:15;background:rgba(10,13,8,.92);border:1px solid #3D3428;border-radius:6px;padding:6px 8px;opacity:0;transform:scale(.9);transition:all .4s var(--ease);text-align:center;width:105px}
+.btc-panel.show{opacity:1;transform:scale(1)}
+.btc-panel-price{font-size:14px;font-weight:900;letter-spacing:-.3px;transition:color .4s}
+.btc-panel-change{font-size:9px;font-weight:700;margin-top:1px;transition:color .4s}
+.btc-panel-chart{width:100%;height:35px;margin-top:3px}
+.btc-panel-chart svg{width:100%;height:100%}
+.btc-panel-time{font-size:8px;color:var(--ter);margin-top:2px;font-weight:600}
+.btc-panel-label{font-size:6px;color:var(--ter);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
+/* Agent walking animation */
+@keyframes agentWalkLR{0%,100%{transform:translateX(0)}25%{transform:translateX(10px)}75%{transform:translateX(-10px)}}
+@keyframes agentHuddle{0%,100%{transform:translateX(0)}50%{transform:translateX(var(--huddle-x,8px)) translateY(var(--huddle-y,-4px))}}
+.px-walking .px-char{animation:agentWalkLR 1.2s ease-in-out infinite}
+.px-huddle .px-char{animation:agentHuddle 1.5s ease-in-out infinite}
+/* BTC panel crisis mode */
+.btc-panel.crisis{border-color:var(--red);box-shadow:0 0 12px rgba(248,113,113,.2)}
+.btc-panel.crisis .btc-panel-price{color:var(--red)}
+/* Fast-forward blur effect */
+@keyframes fastForward{0%{filter:blur(0);opacity:1}15%{filter:blur(2px);opacity:.7}50%{filter:blur(3px);opacity:.5}85%{filter:blur(2px);opacity:.7}100%{filter:blur(0);opacity:1}}
+.ff-active{animation:fastForward 2.5s ease-in-out}
+/* P4 Agent Office Scene */
+.agent-scene{height:160px;position:relative;overflow:hidden;margin:4px 0}
+.agent-scene .pixel-floor{position:absolute;inset:0;background:repeating-conic-gradient(#2A2218 0% 25%,#332A1E 0% 50%) 0 0/20px 20px;opacity:.5}
+.agent-scene .pixel-wall{position:absolute;top:0;left:0;right:0;height:35%;background:linear-gradient(180deg,#1A1510,#221C14);border-bottom:2px solid #3D3428}
+.p4-monitor{position:absolute;top:4px;left:50%;transform:translateX(-50%);background:#0A0D08;border:2px solid #3D3428;border-radius:3px;padding:2px 8px;z-index:5;display:flex;align-items:center;gap:5px}
+.p4-monitor .pm-btc{font-size:7px;font-weight:800;color:var(--gold);font-family:monospace}
+.p4-monitor .pm-chart{display:flex;align-items:flex-end;gap:1px;height:8px}
+.p4-monitor .pm-bar{width:2px;background:var(--green);border-radius:1px}
+/* P4 agent stations */
+.p4-station{position:absolute;display:flex;flex-direction:column;align-items:center;z-index:5;transition:all .4s var(--ease);opacity:0;transform:translateY(8px)}
+.p4-station.show{opacity:1;transform:none}
+.p4-station.show[style*="translateX"]{transform:translateX(-50%)}
+.p4-station .px-screen-glow span{transition:background .3s}
+.p4-station.active .px-screen-glow span{background:var(--gold)!important}
+/* Price ticker */
+.price-ticker{margin:0 20px 6px;background:var(--card);border-radius:10px;padding:8px 14px;display:flex;justify-content:space-between;align-items:center;opacity:0;transition:all .4s;transform:translateY(6px)}
+.price-ticker.show{opacity:1;transform:none}
+.pt-left{display:flex;align-items:center;gap:8px}
+.pt-coin{font-size:14px}
+.pt-price{font-size:14px;font-weight:800}
+.pt-change{font-size:12px;font-weight:700}
+.pt-mini{width:60px;height:20px}
+/* Chat */
+.home-chat{flex:1;overflow-y:auto;padding:8px 20px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.home-chat::-webkit-scrollbar{width:2px}
+.home-chat::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
+.hc-msg{display:flex;gap:8px;align-items:flex-start;opacity:0;transform:translateY(6px);transition:all .35s var(--ease)}
+.hc-msg.show{opacity:1;transform:none}
+.hc-msg.user-msg{flex-direction:row-reverse}
+.hc-av{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.hc-body{flex:1;max-width:85%}
+.hc-name{font-size:9px;font-weight:700;color:var(--sec);margin-bottom:2px}
+.hc-text{font-size:12px;line-height:1.6;color:rgba(255,255,255,.85);background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:10px 12px}
+.hc-text strong{color:var(--text)}
+.hc-text.user-bub{background:var(--dim);border-color:rgba(205,255,0,.2);color:var(--gold)}
+.hc-typing{display:flex;gap:3px;padding:10px 12px;background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;width:50px}
+.hc-typing span{width:5px;height:5px;border-radius:50%;background:var(--sec);animation:typB .6s ease infinite}
+.hc-typing span:nth-child(2){animation-delay:.15s}
+.hc-typing span:nth-child(3){animation-delay:.3s}
+@keyframes typB{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+/* Chart in chat */
+.chat-chart{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:12px;margin-top:4px}
+.cc-header{display:flex;justify-content:space-between;margin-bottom:6px}
+.cc-price{font-size:16px;font-weight:800}
+.cc-change{font-size:12px;font-weight:700}
+.chat-chart svg{width:100%;height:60px;display:block}
+/* Results in chat */
+.chat-results{background:var(--card);border:1px solid rgba(205,255,0,.15);border-radius:14px;padding:14px;margin-top:4px}
+.cr-title{font-size:12px;font-weight:700;margin-bottom:8px}
+.cr-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px}
+.cr-row:last-child{border-bottom:none}
+.cr-row.best{background:rgba(205,255,0,.06);border-radius:6px;padding:6px 8px;margin:2px -8px}
+.cr-saved{text-align:center;margin-top:10px;padding-top:10px;border-top:1px solid rgba(205,255,0,.1)}
+.cr-saved-num{font-size:28px;font-weight:900;color:var(--gold)}
+.cr-saved-label{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.cr-saved-sub{font-size:10px;color:var(--sec);margin-top:2px}
+/* Share button */
+.share-btn{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;padding:10px;background:var(--card2);border:1px solid rgba(255,255,255,.1);border-radius:10px;font-size:12px;font-weight:600;color:var(--text);cursor:pointer;font-family:inherit}
+/* Chips */
+.hc-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.hc-chip{padding:8px 14px;background:var(--card2);border:1px solid rgba(255,255,255,.1);border-radius:12px;font-size:11px;color:var(--text);cursor:pointer;font-family:inherit;transition:all .2s}
+.hc-chip:hover{border-color:var(--gold)}
+.hc-chip.gold{border-color:var(--gold);color:var(--gold)}
+/* Conversion card */
+.hc-conv{background:var(--card);border:1px solid rgba(205,255,0,.2);border-radius:16px;padding:18px;text-align:center;margin-top:4px}
+.hc-conv h4{font-size:15px;font-weight:800;margin-bottom:4px}
+.hc-conv p{font-size:11px;color:var(--sec);margin-bottom:14px;line-height:1.5}
+/* Back button */
+.back-btn{position:absolute;top:var(--safe-top);left:16px;z-index:20;width:36px;height:36px;border-radius:10px;background:var(--card);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:var(--sec);transition:all .2s}
+.back-btn:hover{border-color:var(--gold);color:var(--text)}
+/* Step indicator */
+.step-ind{display:flex;gap:6px;align-items:center;justify-content:center;margin-bottom:12px}
+.step-dot{width:8px;height:8px;border-radius:50%;background:var(--card2);border:1px solid rgba(255,255,255,.1)}
+.step-dot.active{background:var(--gold);border-color:var(--gold)}
+.step-dot.done{background:rgba(205,255,0,.3);border-color:rgba(205,255,0,.3)}
+/* Skip link */
+.skip-link{position:absolute;bottom:calc(var(--safe-bottom) + 8px);right:20px;z-index:15;font-size:11px;color:var(--ter);cursor:pointer;font-family:inherit;background:none;border:none;transition:color .2s}
+.skip-link:hover{color:var(--gold)}
+.home-input{display:flex;gap:8px;padding:10px 16px calc(var(--safe-bottom) + 4px);border-top:1px solid rgba(255,255,255,.06);background:var(--bg);flex-shrink:0}
+.home-inp{flex:1;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:11px;font-size:12px;color:var(--text);outline:none;font-family:inherit}
+.home-inp::placeholder{color:var(--ter)}
+.home-send{width:36px;height:36px;border-radius:10px;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* ===== P5: GOAL SELECTION ===== */
+#p5{display:flex;flex-direction:column;padding:var(--safe-top) 20px var(--safe-bottom);overflow-y:auto}
+#p5::-webkit-scrollbar{display:none}
+.p5-title{font-size:22px;font-weight:800;margin:16px 0 6px}
+.p5-sub{font-size:13px;color:var(--sec);line-height:1.5;margin-bottom:20px}
+.g-card{display:flex;align-items:center;gap:14px;padding:16px;background:var(--card);border:2px solid transparent;border-radius:14px;margin-bottom:10px;cursor:pointer;transition:all .25s}
+.g-card.sel{border-color:var(--gold);background:var(--dim)}
+.g-card-icon{font-size:26px}
+.g-card-info{flex:1}
+.g-card-name{font-size:14px;font-weight:700}
+.g-card-desc{font-size:11px;color:var(--sec);line-height:1.4;margin-top:2px}
+.g-radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--ter);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.g-card.sel .g-radio{border-color:var(--gold);background:var(--gold)}
+.g-radio-dot{width:8px;height:8px;border-radius:50%;background:#000;opacity:0;transition:opacity .2s}
+.g-card.sel .g-radio-dot{opacity:1}
+.risk-sec{margin-top:16px;max-height:0;overflow:hidden;opacity:0;transition:all .5s var(--ease)}
+.risk-sec.show{max-height:200px;opacity:1}
+.risk-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.risk-lbl{font-size:13px;font-weight:600}
+.risk-val{font-size:13px;font-weight:700;color:var(--gold)}
+.risk-track{position:relative;height:6px;background:var(--card2);border-radius:3px;cursor:pointer}
+.risk-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--green),var(--yellow),var(--red));width:50%}
+.risk-thumb{position:absolute;top:50%;width:22px;height:22px;border-radius:50%;background:var(--gold);transform:translate(-50%,-50%);cursor:grab;box-shadow:0 0 12px var(--glow);left:50%}
+.risk-labels{display:flex;justify-content:space-between;margin-top:6px}
+.risk-labels span{font-size:10px;color:var(--ter)}
+.goal-cta{margin-top:auto;padding-top:20px}
+
+/* ===== P6: STRATEGY PICK ===== */
+#p6{display:flex;flex-direction:column;padding:var(--safe-top) 20px var(--safe-bottom);overflow-y:auto}
+#p6>*{flex-shrink:0}
+#p6::-webkit-scrollbar{display:none}
+.p6-tag{font-size:10px;letter-spacing:1.5px;color:var(--gold);font-weight:700;text-transform:uppercase;margin-top:16px;margin-bottom:6px}
+.p6-title{font-size:20px;font-weight:800;margin-bottom:4px}
+.p6-sub{font-size:12px;color:var(--sec);margin-bottom:16px}
+.s-card{background:var(--card);border-radius:14px;padding:16px;margin-bottom:10px;border:2px solid transparent;cursor:pointer;transition:all .25s}
+.s-card.sel{border-color:var(--gold);background:var(--dim)}
+.s-card-name{font-size:14px;font-weight:700;margin-bottom:4px}
+.s-card-desc{font-size:11px;color:var(--sec);line-height:1.5}
+.s-radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--ter);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;float:right;margin-top:2px}
+.s-card.sel .s-radio{border-color:var(--gold);background:var(--gold)}
+.s-radio-dot{width:7px;height:7px;border-radius:50%;background:#000;opacity:0}
+.s-card.sel .s-radio-dot{opacity:1}
+/* Budget section */
+.budget-sec{max-height:0;overflow:hidden;opacity:0;transition:all .5s var(--ease);margin-top:8px;flex-shrink:0}
+.budget-sec.show{max-height:600px;opacity:1;overflow:visible}
+.budget-inner{background:var(--card);border-radius:14px;padding:16px}
+.budget-inner h4{font-size:13px;font-weight:700;margin-bottom:10px}
+.budget-input{display:flex;align-items:center;gap:8px;background:var(--bg);border-radius:10px;padding:12px}
+.budget-input .curr{font-size:18px;color:var(--sec)}
+.budget-input .amt{font-size:24px;font-weight:800;flex:1;background:none;border:none;color:var(--text);font-family:inherit;outline:none;width:60px}
+.budget-input .unit{font-size:13px;color:var(--sec)}
+.budget-note{font-size:11px;color:var(--sec);margin-top:8px;line-height:1.5}
+/* Subscription fee */
+.sub-sec{margin-top:12px;background:var(--card);border-radius:14px;padding:16px;border:1px solid rgba(205,255,0,.1)}
+.sub-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.sub-header h4{font-size:13px;font-weight:700}
+.sub-tag{font-size:9px;font-weight:700;color:var(--gold);background:var(--dim);padding:2px 8px;border-radius:6px;letter-spacing:.5px}
+.sub-tiers{display:flex;flex-direction:column;gap:8px}
+.sub-tier{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:10px;background:var(--bg);cursor:pointer;border:2px solid transparent;transition:all .2s}
+.sub-tier.sel{border-color:var(--gold);background:var(--dim)}
+.sub-tier-left{display:flex;flex-direction:column;gap:2px}
+.sub-tier-name{font-size:12px;font-weight:700}
+.sub-tier-desc{font-size:10px;color:var(--sec)}
+.sub-tier-price{font-size:14px;font-weight:800;color:var(--gold)}
+.sub-tier-period{font-size:9px;color:var(--sec)}
+.sub-note{font-size:10px;color:var(--sec);margin-top:8px;line-height:1.4;text-align:center}
+/* Coming soon toast */
+.cs-toast{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.9);background:var(--card2);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px 20px;text-align:center;opacity:0;pointer-events:none;z-index:100;transition:all .3s var(--ease)}
+.cs-toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.strat-cta{margin-top:16px;padding-top:14px;padding-bottom:8px}
+
+/* ===== P7: AGENT OFFICE CONFIG ===== */
+#p7{display:flex;flex-direction:column;padding:var(--safe-top) 0 0}
+.p7-header{padding:8px 20px;display:flex;justify-content:space-between;align-items:center}
+.p7-badge{font-size:10px;font-weight:700;color:var(--green);letter-spacing:1px;text-transform:uppercase}
+.p7-title{font-size:14px;font-weight:700}
+.p7-port{margin:4px 20px 6px;background:linear-gradient(135deg,#111,#0a0a0a);border-radius:12px;padding:10px 14px;border:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center}
+.p7-port-left .p7-bal{font-size:18px;font-weight:800}
+.p7-port-left .p7-strat{font-size:10px;color:var(--gold)}
+.p7-port-right{text-align:right;font-size:10px;color:var(--sec)}
+.p7-chat{flex:1;overflow-y:auto;padding:8px 20px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.p7-chat::-webkit-scrollbar{width:2px}
+.p7-chat::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
+/* Reuse hc-msg styles */
+.guard-card{background:var(--card);border:1px solid rgba(205,255,0,.15);border-radius:12px;padding:14px;margin-top:4px}
+.guard-card h5{font-size:12px;font-weight:700;margin-bottom:8px}
+.guard-item{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:11px;color:rgba(255,255,255,.85)}
+.guard-check{color:var(--green);font-weight:700}
+.auto-cards{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.auto-card{background:var(--card);border:2px solid transparent;border-radius:12px;padding:12px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px}
+.auto-card.sel{border-color:var(--gold);background:var(--dim)}
+.auto-card-icon{font-size:16px}
+.auto-card-info{flex:1}
+.auto-card-name{font-size:12px;font-weight:700}
+.auto-card-desc{font-size:10px;color:var(--sec)}
+.summary-card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px;margin-top:4px}
+.summary-card h5{font-size:12px;font-weight:700;margin-bottom:8px}
+.sum-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:11px}
+.sum-row:last-child{border-bottom:none}
+.sum-label{color:var(--sec)}
+.sum-val{font-weight:600}
+.disclaimer-box{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.15);border-radius:12px;padding:12px;margin-top:4px;font-size:11px;color:rgba(255,255,255,.75);line-height:1.6}
+.launch-btn{width:100%;padding:16px;background:var(--gold);color:#000;font-weight:800;font-size:16px;border:none;border-radius:14px;cursor:pointer;margin-top:10px;font-family:inherit;box-shadow:0 0 30px var(--glow);transition:transform .15s}
+.launch-btn:active{transform:scale(.97)}
+.p7-input{display:flex;gap:8px;padding:10px 16px calc(var(--safe-bottom) + 4px);border-top:1px solid rgba(255,255,255,.06);background:var(--bg);flex-shrink:0}
+
+/* ===== P8: HOME PAGE (post-launch) ===== */
+#p8{display:flex;flex-direction:column;padding:var(--safe-top) 0 0;background:var(--bg)}
+/* Top bar: balance + controls */
+.hp-top{padding:12px 20px 8px;display:flex;justify-content:space-between;align-items:flex-start}
+.hp-bal-wrap{flex:1}
+.hp-live{font-size:10px;color:var(--green);font-weight:700;display:flex;align-items:center;gap:5px;margin-bottom:6px;letter-spacing:1.5px}
+.hp-live .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.2s infinite;box-shadow:0 0 8px var(--green)}
+.hp-bal{font-size:32px;font-weight:900;letter-spacing:-.8px;line-height:1}
+.hp-pnl{font-size:13px;font-weight:700;margin-top:4px}
+.hp-strat{font-size:11px;color:var(--sec);margin-top:4px;letter-spacing:.2px}
+.hp-actions{display:flex;gap:8px;padding-top:4px}
+.hp-act-btn{width:44px;height:44px;border-radius:12px;background:var(--card);border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;gap:1px}
+.hp-act-btn:hover{border-color:var(--gold);background:rgba(205,255,0,.06)}
+.hp-act-btn:active{transform:scale(.93)}
+/* Agent office (middle) */
+.hp-office{position:relative;overflow:hidden;margin:4px 0;height:125px;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
+.hp-office .pixel-floor{position:absolute;inset:0;background:repeating-conic-gradient(#2A2218 0% 25%,#332A1E 0% 50%) 0 0/20px 20px;opacity:.5}
+.hp-office .pixel-wall{position:absolute;top:0;left:0;right:0;height:35%;background:linear-gradient(180deg,#1A1510,#221C14);border-bottom:2px solid #3D3428}
+/* Quick Actions panel */
+.qa-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);z-index:50;opacity:0;pointer-events:none;transition:opacity .3s}
+.qa-overlay.show{opacity:1;pointer-events:auto}
+.qa-panel{position:absolute;bottom:0;left:0;right:0;background:var(--card);border-radius:20px 20px 0 0;padding:20px 20px calc(var(--safe-bottom) + 12px);z-index:51;transform:translateY(100%);transition:transform .35s var(--ease)}
+.qa-panel.show{transform:translateY(0)}
+.qa-panel-title{font-size:15px;font-weight:800;text-align:center;margin-bottom:16px}
+.qa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.qa-item{background:var(--card2);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:all .2s}
+.qa-item:active{transform:scale(.95)}
+.qa-item-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.qa-item-name{font-size:11px;font-weight:600;color:var(--sec)}
+/* Agent bounce when speaking */
+.p4-station.active .px-char{animation:agentBounce .4s var(--ease)}
+.p4-station.active .px-dot{background:var(--gold)!important;box-shadow:0 0 10px var(--gold)!important}
+@keyframes agentBounce{0%{transform:translateY(0)}40%{transform:translateY(-3px)}100%{transform:translateY(0)}}
+/* Chat area */
+.hp-chat{flex:1;overflow-y:auto;padding:6px 20px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.hp-chat::-webkit-scrollbar{width:2px}
+.hp-chat::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
+/* Toast popup — compact pill */
+.launch-toast{position:absolute;bottom:70px;left:50%;transform:translateX(-50%) translateY(120%);width:auto;max-width:280px;background:var(--card);border:1px solid rgba(205,255,0,.3);border-radius:12px;padding:12px 20px;text-align:center;z-index:100;opacity:0;transition:all .45s var(--ease);display:flex;align-items:center;gap:10px;white-space:nowrap}
+.launch-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.launch-toast.hide{transform:translateX(-50%) translateY(-20px);opacity:0;transition:all .3s ease-in}
+.lt-title{font-size:13px;font-weight:800}
+.lt-sub{font-size:11px;color:var(--sec);margin-left:6px}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="status-bar"><span class="time">9:41</span><span>5G&nbsp;&nbsp;</span></div>
+  <div class="pages">
+
+<!-- P1: MEET THE TEAM — pixel agents + rotating value props -->
+<div class="pg active" id="p1">
+  <div class="p1-badge">OKX AI PAL</div>
+  <div class="p1-title">Meet Your AI<br>Trading Team</div>
+  <div class="p1-sub">5 AI specialists working 24/7, managing your crypto like a personal hedge fund.</div>
+  <!-- Pixel Office Scene -->
+  <div class="pixel-office-wrap p1-office">
+    <div class="pixel-floor"></div>
+    <div class="pixel-wall"></div>
+    <!-- BTC Monitor -->
+    <div class="pixel-monitor"><span class="pm-btc">BTC $67,240</span><div class="pm-chart"><div class="pm-bar" style="height:4px"></div><div class="pm-bar" style="height:6px"></div><div class="pm-bar" style="height:5px"></div><div class="pm-bar" style="height:8px"></div><div class="pm-bar" style="height:7px"></div><div class="pm-bar" style="height:10px"></div></div></div>
+    <!-- Bookshelf -->
+    <div class="pixel-shelf"><div class="pixel-shelf-board"></div><div class="pixel-shelf-board"></div><div class="pixel-shelf-board"></div><div class="pixel-book" style="left:3px;top:2px;height:10px;background:#E74C3C"></div><div class="pixel-book" style="left:9px;top:2px;height:10px;background:#3498DB"></div><div class="pixel-book" style="left:15px;top:2px;height:10px;background:#F1C40F"></div><div class="pixel-book" style="left:21px;top:2px;height:10px;background:#2ECC71"></div><div class="pixel-book" style="left:5px;top:15px;height:10px;background:#9B59B6"></div><div class="pixel-book" style="left:12px;top:15px;height:10px;background:#E67E22"></div></div>
+    <!-- Plant -->
+    <div class="pixel-plant" style="bottom:50px;left:12px"><div class="pixel-leaf" style="top:-8px;left:-2px"></div><div class="pixel-leaf" style="top:-10px;left:4px"></div><div class="pixel-leaf" style="top:-6px;left:8px"></div><div class="pixel-pot"></div></div>
+    <!-- Row 1: Researcher + Strategist -->
+    <div class="px-station" style="top:42px;left:80px">
+      <div class="px-char"><div class="px-hair" style="background:#C0392B"></div><div class="px-head"></div><div class="px-body" style="background:#E74C3C"></div></div>
+      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--blue)"></span><span style="background:var(--green)"></span><span style="background:var(--blue)"></span><span style="background:var(--gold)"></span></div></div><div class="px-coffee"></div></div>
+      <div class="px-label">Researcher</div>
+      <div class="px-dot on"></div>
+    </div>
+    <div class="px-station" style="top:42px;right:80px">
+      <div class="px-char"><div class="px-hair" style="background:#2980B9"></div><div class="px-head"></div><div class="px-body" style="background:#3498DB"></div></div>
+      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--purple)"></span><span style="background:var(--gold)"></span><span style="background:var(--green)"></span><span style="background:var(--purple)"></span></div></div></div>
+      <div class="px-label">Strategist</div>
+      <div class="px-dot on"></div>
+    </div>
+    <!-- Row 2: Sentinel + Trader -->
+    <div class="px-station" style="top:110px;left:80px">
+      <div class="px-char"><div class="px-hair" style="background:#27AE60"></div><div class="px-head"></div><div class="px-body" style="background:#2ECC71"></div></div>
+      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--red)"></span><span style="background:var(--green)"></span><span style="background:var(--red)"></span><span style="background:var(--yellow)"></span></div></div></div>
+      <div class="px-label">Sentinel</div>
+      <div class="px-dot on"></div>
+    </div>
+    <div class="px-station" style="top:110px;right:80px">
+      <div class="px-char"><div class="px-hair" style="background:#D4A03C"></div><div class="px-head"></div><div class="px-body" style="background:#F39C12"></div></div>
+      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--green)"></span><span style="background:var(--gold)"></span><span style="background:var(--green)"></span><span style="background:var(--blue)"></span></div></div></div>
+      <div class="px-label">Trader</div>
+      <div class="px-dot on"></div>
+    </div>
+    <!-- Fund Manager - center bottom -->
+    <div class="px-station" style="top:78px;left:50%;transform:translateX(-50%)">
+      <div class="px-char"><div class="px-hair" style="background:#2C3E50"></div><div class="px-head"></div><div class="px-body" style="background:#34495E"></div></div>
+      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--gold)"></span><span style="background:var(--gold)"></span><span style="background:var(--green)"></span><span style="background:var(--gold)"></span></div></div></div>
+      <div class="px-label" style="color:var(--gold)">Fund Mgr</div>
+      <div class="px-dot on"></div>
+    </div>
+    <!-- Bulletin board bottom-left -->
+    <div style="position:absolute;bottom:8px;left:8px;width:20px;height:16px;background:#3D3428;border:1px solid #5C4A32;border-radius:1px;z-index:3;display:flex;flex-wrap:wrap;gap:1px;padding:2px"><span style="width:4px;height:3px;background:var(--red);border-radius:1px"></span><span style="width:4px;height:3px;background:var(--blue);border-radius:1px"></span><span style="width:4px;height:3px;background:var(--gold);border-radius:1px"></span></div>
+  </div>
+  <div class="p1-activity">
+    <span class="p1-act-dot"></span>
+    <span class="p1-act-text" id="p1ActText">Researcher scanning BTC markets...</span>
+  </div>
+  <div class="vp-container">
+    <div class="vp-track">
+      <div class="vp-item"><div class="vp-text">Detect crashes before they hit<span>Researcher scans markets & on-chain data 24/7</span></div></div>
+      <div class="vp-item"><div class="vp-text">Auto-protect in market panics<span>Sentinel enforces stop-losses & guardrails</span></div></div>
+      <div class="vp-item"><div class="vp-text">Buy the dip at the right time<span>Strategist allocates with quant reasoning</span></div></div>
+      <div class="vp-item"><div class="vp-text">Execute trades with zero emotion<span>Trader handles slippage & order timing</span></div></div>
+      <div class="vp-item"><div class="vp-text">Complex strategies in one tap<span>Delta neutral, yield farming, DCA & more</span></div></div>
+      <div class="vp-item"><div class="vp-text">Sleep while your team works<span>Fund Manager coordinates everything 24/7</span></div></div>
+      <div class="vp-item"><div class="vp-text">Detect crashes before they hit<span>Researcher scans markets & on-chain data 24/7</span></div></div>
+    </div>
+  </div>
+  <div class="p1-proof">
+    <div class="p1-proof-item"><div class="p1-proof-num">$1,600</div><div class="p1-proof-label">saved in crash sim</div></div>
+    <div class="p1-proof-divider"></div>
+    <div class="p1-proof-item"><div class="p1-proof-num">24/7</div><div class="p1-proof-label">monitoring</div></div>
+    <div class="p1-proof-divider"></div>
+    <div class="p1-proof-item"><div class="p1-proof-num">5</div><div class="p1-proof-label">AI agents</div></div>
+  </div>
+  <div class="p1-cta">
+    <button class="btn-gold" onclick="goPage('p2')">Try a Free Simulation</button>
+    <div class="p1-note">Watch them handle a real BTC crash — 2 min, no sign-up</div>
+  </div>
+</div>
+
+<!-- P2: SCENARIO CAROUSEL -->
+<div class="pg" id="p2">
+  <div class="p2-top">
+    <div class="p2-title">Real scenarios.<br>Real protection.</div>
+    <div class="p2-sub">Pick a market event. Watch your AI team handle it.</div>
+  </div>
+  <div class="carousel-wrap">
+    <div class="carousel" id="carousel">
+      <!-- Card 1: Crash Protection -->
+      <div class="car-card active-card">
+        <div class="car-anim" style="background:linear-gradient(180deg,rgba(248,113,113,.06),transparent)">
+          <div class="crash-label">BTC -28% IN 72H</div>
+          <div class="anim-crash">
+            <div class="crash-shield">🛡</div>
+            <div class="crash-chart"><svg viewBox="0 0 300 140">
+              <defs><linearGradient id="cg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F87171" stop-opacity=".2"/><stop offset="1" stop-color="#F87171" stop-opacity="0"/></linearGradient></defs>
+              <polygon points="10,30 40,28 70,35 100,50 130,65 160,85 190,95 220,105 250,110 280,108 290,140 10,140" fill="url(#cg1)"/>
+              <polyline points="10,30 40,28 70,35 100,50 130,65 160,85 190,95 220,105 250,110 280,108" fill="none" stroke="#F87171" stroke-width="2.5" stroke-linecap="round"/>
+              <!-- AI team line -->
+              <polyline points="10,30 40,28 70,35 100,40 130,38 160,36 190,38 220,50 250,48 280,42" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 3"/>
+            </svg></div>
+            <div class="crash-save">AI Team: -12% vs Market: -28%</div>
+          </div>
+        </div>
+        <div class="car-info">
+          <div class="car-label">SCENARIO 1</div>
+          <div class="car-name">Crash Protection</div>
+          <div class="car-desc">May 2022 — BTC dropped 28% during the Luna collapse. Watch your AI team detect danger and protect your portfolio.</div>
+          <button class="car-cta" onclick="goPage('p3')">Experience This Scenario</button>
+        </div>
+      </div>
+      <!-- Card 2: Delta Neutral -->
+      <div class="car-card">
+        <div class="car-anim" style="background:linear-gradient(180deg,rgba(192,132,252,.06),transparent)">
+          <div class="delta-label">ONE-CLICK SETUP</div>
+          <div class="anim-delta">
+            <div class="delta-pair"><div class="delta-box delta-long">LONG BTC Spot</div><div class="delta-arrow">⟷</div><div class="delta-box delta-short">SHORT BTC Perp</div></div>
+            <div class="delta-pair"><div class="delta-box" style="background:rgba(205,255,0,.08);color:var(--gold);border:1px solid rgba(205,255,0,.15)">Collect Funding Rate</div></div>
+            <div class="delta-result">Market-neutral yield: ~15% APY</div>
+          </div>
+        </div>
+        <div class="car-info">
+          <div class="car-label">SCENARIO 2</div>
+          <div class="car-name">Complex Strategies, One Click</div>
+          <div class="car-desc">Set up delta-neutral funding rate arbitrage in one tap. Your AI team handles the hedging math.</div>
+          <button class="car-cta" onclick="showComingSoon()">Experience This Scenario</button>
+        </div>
+      </div>
+      <!-- Card 3: Yield Rotation -->
+      <div class="car-card">
+        <div class="car-anim" style="background:linear-gradient(180deg,rgba(52,211,153,.06),transparent)">
+          <div class="yield-label">AUTO-ROTATING</div>
+          <div class="anim-yield">
+            <div class="yield-orbit">
+              <div class="yield-center">MAX<br>APY</div>
+              <div class="yield-node">🏦</div>
+              <div class="yield-node">⛏</div>
+              <div class="yield-node">💰</div>
+              <div class="yield-node">🔄</div>
+            </div>
+          </div>
+          <div class="yield-apy">Current best: 12.4% APY</div>
+        </div>
+        <div class="car-info">
+          <div class="car-label">SCENARIO 3</div>
+          <div class="car-name">Maximize Idle Money</div>
+          <div class="car-desc">Your AI team auto-rotates idle funds between earn programs to maximize yield. Set it and forget it.</div>
+          <button class="car-cta" onclick="showComingSoon()">Experience This Scenario</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="car-dots" id="carDots">
+    <div class="car-dot on" onclick="slideTo(0)"></div>
+    <div class="car-dot" onclick="slideTo(1)"></div>
+    <div class="car-dot" onclick="slideTo(2)"></div>
+  </div>
+  <div class="cs-toast" id="csToast"><div style="font-size:20px;margin-bottom:6px">🔜</div><div style="font-size:13px;font-weight:700">Coming Soon</div><div style="font-size:11px;color:var(--sec);margin-top:2px">Try Crash Protection first!</div></div>
+</div>
+
+<!-- P3: STRATEGY PARAMS (no agent roles) -->
+<div class="pg" id="p3">
+  <div class="p3-tag">🚨 BTC CRASH · MAY 2022</div>
+  <div class="p3-title">Smart DCA with<br>Downside Protection</div>
+  <div class="param-card">
+    <h4>Simulation Setup</h4>
+    <div class="p-row"><div class="p-label">Budget</div><div class="p-val">$10,000 USDT</div><div class="p-edit" onclick="this.textContent='✓'">Edit</div></div>
+    <div class="p-row"><div class="p-label">Period</div><div class="p-val">May 7 – 14, 2022</div></div>
+    <div class="p-row"><div class="p-label">Asset</div><div class="p-val">BTC/USDT</div></div>
+  </div>
+  <div class="param-card" style="margin-top:8px">
+    <h4>Strategy Parameters</h4>
+    <div class="p-row"><div class="p-label">DCA Frequency</div><div class="p-val">Daily</div><div class="p-edit" onclick="this.textContent='✓'">Edit</div></div>
+    <div class="p-row"><div class="p-label">DCA Amount</div><div class="p-val">$1,250/day</div><div class="p-edit" onclick="this.textContent='✓'">Edit</div></div>
+    <div class="p-row"><div class="p-label">Stop-Loss</div><div class="p-val" style="color:var(--green)">-15% max drawdown</div><div class="p-edit" onclick="this.textContent='✓'">Edit</div></div>
+    <div class="p-row"><div class="p-label">Re-Entry Signal</div><div class="p-val">RSI oversold</div></div>
+    <div class="p-row"><div class="p-label">Position Sizing</div><div class="p-val">3 tranches</div></div>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin:16px 0 12px">
+    <span style="font-size:20px">📉</span>
+    <span style="font-size:12px;color:var(--red);font-weight:700;letter-spacing:1px">BTC IS ABOUT TO CRASH 28%</span>
+  </div>
+  <div class="p3-cta">
+    <button class="btn-gold" onclick="goPage('p4');startHomeSimulation()">Start Simulation</button>
+    <div class="p3-note">Your 5 AI agents will react in real-time</div>
+  </div>
+</div>
+
+<!-- P4: AGENT OFFICE / HOME — SIMULATION HAPPENS HERE -->
+<div class="pg" id="p4">
+  <div class="office-top"><div class="office-logo">AI PAL</div><div class="office-status" id="officeStatus">Setting up...</div></div>
+  <div class="sim-bal-bar" id="simBalBar" style="display:none">
+    <div class="sim-bal-left">
+      <div class="sim-bal-label">Simulated Portfolio</div>
+      <div class="sim-bal-val" id="simBal">$10,000.00</div>
+      <div class="sim-bal-pnl" id="simPnl" style="color:var(--sec)">$0.00 (0.00%)</div>
+      <div class="sim-bal-tag"><div class="sim-dot"></div>May 2022 Simulation</div>
+    </div>
+  </div>
+  <div class="sim-stage">
+    <div class="agent-scene" style="position:relative;flex:1">
+    <!-- BTC chart overlay inside office -->
+    <div class="btc-panel" id="btcPanel">
+      <div class="btc-panel-label">BTC/USD</div>
+      <div class="btc-panel-price" id="btcPrice">$36,000</div>
+      <div class="btc-panel-change" id="btcChange" style="color:var(--sec)">0.0%</div>
+      <div class="btc-panel-chart" id="btcChartWrap"></div>
+      <div class="btc-panel-time" id="btcTime">May 7</div>
+    </div>
+    <div class="pixel-floor"></div>
+    <div class="pixel-wall"></div>
+    <div class="p4-monitor"><span class="pm-btc" id="p4MonBtc">BTC $36,000</span><div class="pm-chart"><div class="pm-bar" style="height:3px"></div><div class="pm-bar" style="height:5px"></div><div class="pm-bar" style="height:4px"></div><div class="pm-bar" style="height:6px"></div><div class="pm-bar" style="height:5px"></div><div class="pm-bar" style="height:8px"></div></div></div>
+    <!-- Bookshelf -->
+    <div class="pixel-shelf" style="top:6px;left:6px"><div class="pixel-shelf-board"></div><div class="pixel-shelf-board"></div><div class="pixel-shelf-board"></div><div class="pixel-book" style="left:3px;top:2px;height:10px;background:#E74C3C"></div><div class="pixel-book" style="left:9px;top:2px;height:10px;background:#3498DB"></div><div class="pixel-book" style="left:15px;top:2px;height:10px;background:#F1C40F"></div></div>
+    <!-- Row 1: Researcher + Strategist -->
+    <div class="p4-station" id="ag0" style="top:36px;left:60px">
+      <div class="px-char"><div class="px-hair" style="background:#C0392B"></div><div class="px-head"></div><div class="px-body" style="background:#E74C3C"></div></div>
+      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--blue)"></span><span style="background:var(--green)"></span><span style="background:var(--blue)"></span><span style="background:var(--gold)"></span></div></div></div>
+      <div class="px-label">Researcher</div>
+      <div class="px-dot"></div>
+    </div>
+    <div class="p4-station" id="ag1" style="top:36px;right:60px">
+      <div class="px-char"><div class="px-hair" style="background:#2980B9"></div><div class="px-head"></div><div class="px-body" style="background:#3498DB"></div></div>
+      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--purple)"></span><span style="background:var(--gold)"></span><span style="background:var(--green)"></span><span style="background:var(--purple)"></span></div></div></div>
+      <div class="px-label">Strategist</div>
+      <div class="px-dot"></div>
+    </div>
+    <!-- Fund Manager - center -->
+    <div class="p4-station" id="ag2" style="top:72px;left:50%;transform:translateX(-50%)">
+      <div class="px-char"><div class="px-hair" style="background:#2C3E50"></div><div class="px-head"></div><div class="px-body" style="background:#34495E"></div></div>
+      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--gold)"></span><span style="background:var(--gold)"></span><span style="background:var(--green)"></span><span style="background:var(--gold)"></span></div></div></div>
+      <div class="px-label" style="color:var(--gold)">Fund Mgr</div>
+      <div class="px-dot"></div>
+    </div>
+    <!-- Row 2: Sentinel + Trader -->
+    <div class="p4-station" id="ag3" style="top:105px;left:60px">
+      <div class="px-char"><div class="px-hair" style="background:#27AE60"></div><div class="px-head"></div><div class="px-body" style="background:#2ECC71"></div></div>
+      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--red)"></span><span style="background:var(--green)"></span><span style="background:var(--red)"></span><span style="background:var(--yellow)"></span></div></div></div>
+      <div class="px-label">Sentinel</div>
+      <div class="px-dot"></div>
+    </div>
+    <div class="p4-station" id="ag4" style="top:105px;right:60px">
+      <div class="px-char"><div class="px-hair" style="background:#D4A03C"></div><div class="px-head"></div><div class="px-body" style="background:#F39C12"></div></div>
+      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--green)"></span><span style="background:var(--gold)"></span><span style="background:var(--green)"></span><span style="background:var(--blue)"></span></div></div></div>
+      <div class="px-label">Trader</div>
+      <div class="px-dot"></div>
+    </div>
+  </div>
+  </div>
+  <div class="home-chat" id="homeChat"></div>
+  <button class="skip-link" id="skipBtn" onclick="skipToResults()" style="display:none">Skip to results →</button>
+  <div class="home-input" id="homeInputBar" style="display:none">
+    <input class="home-inp" id="homeInp" placeholder="Ask your AI team anything...">
+    <button class="home-send" onclick="handleHomeChat()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg></button>
+  </div>
+</div>
+
+<!-- P5: GOAL SELECTION -->
+<div class="pg" id="p5">
+  <div class="back-btn" onclick="goPage('p4')">←</div>
+  <div class="step-ind" style="margin-top:16px"><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+  <div class="p5-title">What's your goal?</div>
+  <div class="p5-sub">This helps your AI team pick the right approach.</div>
+  <div class="g-card" onclick="selectGoal(this,0)"><div class="g-card-icon">🌱</div><div class="g-card-info"><div class="g-card-name">Grow Steadily</div><div class="g-card-desc">Long-term wealth building. Lower volatility, consistent compounding.</div></div><div class="g-radio"><div class="g-radio-dot"></div></div></div>
+  <div class="g-card" onclick="selectGoal(this,1)"><div class="g-card-icon">🚀</div><div class="g-card-info"><div class="g-card-name">Beat the Market</div><div class="g-card-desc">Active alpha. Higher volatility tolerance, momentum hunting.</div></div><div class="g-radio"><div class="g-radio-dot"></div></div></div>
+  <div class="g-card" onclick="selectGoal(this,2)"><div class="g-card-icon">🛡</div><div class="g-card-info"><div class="g-card-name">Protect & Earn</div><div class="g-card-desc">Capital preservation + yield. Stablecoin yield, funding rate arb.</div></div><div class="g-radio"><div class="g-radio-dot"></div></div></div>
+  <div class="risk-sec" id="riskSec">
+    <div class="risk-top"><div class="risk-lbl">Risk Appetite</div><div class="risk-val" id="riskVal">Moderate</div></div>
+    <div class="risk-track" id="riskTrack"><div class="risk-fill" id="riskFill"></div><div class="risk-thumb" id="riskThumb"></div></div>
+    <div class="risk-labels"><span>Conservative</span><span>Moderate</span><span>Aggressive</span></div>
+  </div>
+  <div class="goal-cta"><button class="btn-gold" onclick="goPage('p6')">Next</button></div>
+</div>
+
+<!-- P6: STRATEGY PICK (no numbers, budget appears after selection) -->
+<div class="pg" id="p6">
+  <div class="back-btn" onclick="goPage('p5')">←</div>
+  <div class="step-ind" style="margin-top:16px"><div class="step-dot done"></div><div class="step-dot active"></div><div class="step-dot"></div></div>
+  <div class="p6-tag">BASED ON YOUR GOAL</div>
+  <div class="p6-title">Pick a strategy</div>
+  <div class="p6-sub">Your AI team recommends these for you.</div>
+  <div class="s-card" onclick="selectStrat(this)"><div class="s-radio"><div class="s-radio-dot"></div></div><div class="s-card-name">💡 Smart DCA + Protection</div><div class="s-card-desc">Regular buying with AI downside protection. Stops in crashes, buys dips. Same strategy from the simulation.</div></div>
+  <div class="s-card" onclick="selectStrat(this)"><div class="s-radio"><div class="s-radio-dot"></div></div><div class="s-card-name">📈 Momentum Riding</div><div class="s-card-desc">Follow trends — buy strength, sell weakness. More active, higher upside.</div></div>
+  <div class="s-card" onclick="selectStrat(this)"><div class="s-radio"><div class="s-radio-dot"></div></div><div class="s-card-name">🌱 Yield Farming</div><div class="s-card-desc">Earn yield through funding rates and arbitrage. Lower returns, much lower risk.</div></div>
+  <div class="budget-sec" id="budgetSec">
+    <div class="budget-inner">
+      <h4>Add Funds to AI Account</h4>
+      <div class="budget-input"><div class="curr">$</div><input class="amt" value="5,000" readonly><div class="unit">USDT</div></div>
+      <div class="budget-note">🔒 Funds stay in your OKX sub-account — you retain full custody. Withdraw anytime.</div>
+    </div>
+    <div class="sub-sec">
+      <div class="sub-header"><h4>AI Subscription</h4><div class="sub-tag">REQUIRED</div></div>
+      <div class="sub-tiers">
+        <div class="sub-tier sel" onclick="selectSubTier(this)"><div class="sub-tier-left"><div class="sub-tier-name">🚀 Pro</div><div class="sub-tier-desc">5 agents • Real-time monitoring • Unlimited trades</div></div><div style="text-align:right"><div class="sub-tier-price">$29</div><div class="sub-tier-period">/month</div></div></div>
+        <div class="sub-tier" onclick="selectSubTier(this)"><div class="sub-tier-left"><div class="sub-tier-name">⚡ Elite</div><div class="sub-tier-desc">Priority execution • Advanced strategies • API access</div></div><div style="text-align:right"><div class="sub-tier-price">$99</div><div class="sub-tier-period">/month</div></div></div>
+      </div>
+      <div class="sub-note">AI agents use advanced LLMs for analysis & execution.<br>First 7 days free — cancel anytime.</div>
+    </div>
+  </div>
+  <div class="strat-cta"><button class="btn-gold" onclick="goPage('p8');startHomePageSetup()">Launch My AI Team</button></div>
+</div>
+
+<!-- P7: AGENT OFFICE CONFIG (chat-based) -->
+<div class="pg" id="p7">
+  <div class="step-ind" style="margin-top:var(--safe-top);padding-top:8px"><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot active"></div></div>
+  <div class="p7-header"><div class="p7-badge">● AI ACCOUNT ACTIVE</div><div class="p7-title">Agent Office</div></div>
+  <div class="p7-port"><div class="p7-port-left"><div class="p7-bal">$5,000.00</div><div class="p7-strat">Smart DCA + Protection</div></div><div class="p7-port-right">Setting up<br>guardrails...</div></div>
+  <div class="p7-chat" id="p7Chat"></div>
+  <div class="p7-input"><input class="home-inp" placeholder="Talk to your AI team..." readonly><button class="home-send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg></button></div>
+</div>
+
+<!-- P8: HOME PAGE (post-launch) -->
+<div class="pg" id="p8">
+  <!-- Top: Balance + P&L + Controls -->
+  <div class="hp-top">
+    <div class="hp-bal-wrap">
+      <div class="hp-live"><div class="dot"></div>LIVE</div>
+      <div class="hp-bal" id="hpBal">$5,000.00</div>
+      <div class="hp-pnl" id="hpPnl" style="color:var(--sec)">$0.00 (0.00%)</div>
+      <div class="hp-strat">Smart DCA + Protection</div>
+    </div>
+    <div class="hp-actions">
+      <div class="hp-act-btn" title="Pause Strategy">
+        <span style="font-size:11px">⏸</span>
+        <span style="font-size:8px;color:var(--sec)">Pause</span>
+      </div>
+      <div class="hp-act-btn" title="Quick Actions" onclick="toggleQuickActions()">
+        <span style="font-size:13px;color:var(--gold)">⋯</span>
+        <span style="font-size:8px;color:var(--gold)">More</span>
+      </div>
+    </div>
+  </div>
+  <!-- Middle: Pixel Agent Office -->
+  <div class="hp-office">
+    <div class="pixel-floor"></div>
+    <div class="pixel-wall"></div>
+    <div class="p4-monitor"><span class="pm-btc">BTC $67,240</span><div class="pm-chart"><div class="pm-bar" style="height:3px"></div><div class="pm-bar" style="height:5px"></div><div class="pm-bar" style="height:4px"></div><div class="pm-bar" style="height:7px"></div><div class="pm-bar" style="height:6px"></div><div class="pm-bar" style="height:9px"></div></div></div>
+    <div class="pixel-shelf" style="top:5px;left:5px"><div class="pixel-shelf-board"></div><div class="pixel-shelf-board"></div><div class="pixel-shelf-board"></div><div class="pixel-book" style="left:3px;top:2px;height:10px;background:#E74C3C"></div><div class="pixel-book" style="left:9px;top:2px;height:10px;background:#3498DB"></div><div class="pixel-book" style="left:15px;top:2px;height:10px;background:#F1C40F"></div></div>
+    <!-- Agents at desks -->
+    <div class="p4-station show" style="top:20px;left:55px">
+      <div class="px-char"><div class="px-hair" style="background:#C0392B"></div><div class="px-head"></div><div class="px-body" style="background:#E74C3C"></div></div>
+      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--blue)"></span><span style="background:var(--green)"></span><span style="background:var(--blue)"></span><span style="background:var(--gold)"></span></div></div></div>
+      <div class="px-label">Researcher</div>
+      <div class="px-dot on"></div>
+    </div>
+    <div class="p4-station show" style="top:20px;right:55px">
+      <div class="px-char"><div class="px-hair" style="background:#2980B9"></div><div class="px-head"></div><div class="px-body" style="background:#3498DB"></div></div>
+      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--purple)"></span><span style="background:var(--gold)"></span><span style="background:var(--green)"></span><span style="background:var(--purple)"></span></div></div></div>
+      <div class="px-label">Strategist</div>
+      <div class="px-dot on"></div>
+    </div>
+    <div class="p4-station show" style="top:48px;left:50%;transform:translateX(-50%)">
+      <div class="px-char"><div class="px-hair" style="background:#2C3E50"></div><div class="px-head"></div><div class="px-body" style="background:#34495E"></div></div>
+      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--gold)"></span><span style="background:var(--gold)"></span><span style="background:var(--green)"></span><span style="background:var(--gold)"></span></div></div></div>
+      <div class="px-label" style="color:var(--gold)">Fund Mgr</div>
+      <div class="px-dot working"></div>
+    </div>
+    <div class="p4-station show" style="top:76px;left:55px">
+      <div class="px-char"><div class="px-hair" style="background:#27AE60"></div><div class="px-head"></div><div class="px-body" style="background:#2ECC71"></div></div>
+      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--red)"></span><span style="background:var(--green)"></span><span style="background:var(--red)"></span><span style="background:var(--yellow)"></span></div></div></div>
+      <div class="px-label">Sentinel</div>
+      <div class="px-dot on"></div>
+    </div>
+    <div class="p4-station show" style="top:76px;right:55px">
+      <div class="px-char"><div class="px-hair" style="background:#D4A03C"></div><div class="px-head"></div><div class="px-body" style="background:#F39C12"></div></div>
+      <div class="px-desk"><div class="px-screen"><div class="px-screen-glow"><span style="background:var(--green)"></span><span style="background:var(--gold)"></span><span style="background:var(--green)"></span><span style="background:var(--blue)"></span></div></div></div>
+      <div class="px-label">Trader</div>
+      <div class="px-dot on"></div>
+    </div>
+  </div>
+  <!-- Bottom: AI Chat -->
+  <div class="hp-chat" id="hpChat"></div>
+  <div class="home-input">
+    <input class="home-inp" id="hpInp" placeholder="Talk to your AI team...">
+    <button class="home-send" onclick="handleHpChat()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg></button>
+  </div>
+  <!-- Quick Actions overlay -->
+  <div class="qa-overlay" id="qaOverlay" onclick="toggleQuickActions()"></div>
+  <div class="qa-panel" id="qaPanel">
+    <div class="qa-panel-title">Quick Actions</div>
+    <div class="qa-grid">
+      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(205,255,0,.1)">💸</div><div class="qa-item-name">Transfer</div></div>
+      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(96,165,250,.1)">🤖</div><div class="qa-item-name">Agents</div></div>
+      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(192,132,252,.1)">📋</div><div class="qa-item-name">Strategy</div></div>
+      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(52,211,153,.1)">📊</div><div class="qa-item-name">Charts</div></div>
+      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(251,191,36,.1)">📝</div><div class="qa-item-name">History</div></div>
+      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(248,113,113,.1)">🎓</div><div class="qa-item-name">Guide</div></div>
+      <div class="qa-item"><div class="qa-item-icon" style="background:rgba(255,255,255,.06)">⚙️</div><div class="qa-item-name">Settings</div></div>
+    </div>
+  </div>
+  <!-- Toast popup -->
+  <div class="launch-toast" id="launchToast">
+    <div style="font-size:18px">✓</div>
+    <div><span class="lt-title">Strategy is Live</span><span class="lt-sub">· $5,000 deployed</span></div>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<script>
+// ====== NAV ======
+var curPage='p1';
+function goPage(id){
+  if(id===curPage) return;
+  document.getElementById(curPage).classList.remove('active');
+  document.getElementById(id).classList.add('active');
+  curPage=id;
+}
+
+// ====== CAROUSEL ======
+var carIdx=0;
+var carousel=document.getElementById('carousel');
+function slideTo(i){
+  carIdx=i;
+  var cardW=carousel.children[0].offsetWidth+16;
+  carousel.style.transform='translateX(-'+(i*cardW)+'px)';
+  document.querySelectorAll('.car-dot').forEach(function(d,j){d.classList.toggle('on',j===i);});
+  document.querySelectorAll('.car-card').forEach(function(c,j){c.classList.toggle('active-card',j===i);});
+}
+// Swipe
+(function(){
+  var sx,sy,moving=false;
+  var el=document.querySelector('.carousel-wrap');
+  el.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;moving=true},{passive:true});
+  el.addEventListener('touchend',function(e){
+    if(!moving)return;moving=false;
+    var dx=e.changedTouches[0].clientX-sx;
+    if(Math.abs(dx)>40){if(dx<0&&carIdx<2)slideTo(carIdx+1);if(dx>0&&carIdx>0)slideTo(carIdx-1);}
+  });
+})();
+
+// Auto-rotate carousel every 4s
+var carAutoTimer=setInterval(function(){
+  if(document.getElementById('p2').classList.contains('active')){
+    slideTo((carIdx+1)%3);
+  }
+},4000);
+// Stop auto-rotate on manual swipe
+document.querySelector('.carousel-wrap').addEventListener('touchstart',function(){clearInterval(carAutoTimer)},{passive:true});
+
+// ====== GOAL ======
+function selectGoal(el,idx){
+  document.querySelectorAll('.g-card').forEach(function(c){c.classList.remove('sel')});
+  el.classList.add('sel');
+  document.getElementById('riskSec').classList.add('show');
+}
+// Risk slider
+(function(){
+  var track=document.getElementById('riskTrack'),fill=document.getElementById('riskFill'),thumb=document.getElementById('riskThumb'),val=document.getElementById('riskVal');
+  var labels=['Conservative','Moderate','Aggressive'],dragging=false;
+  function upd(p){p=Math.max(0,Math.min(100,p));fill.style.width=p+'%';thumb.style.left=p+'%';val.textContent=labels[p<33?0:p<67?1:2];}
+  track.addEventListener('mousedown',function(e){dragging=true;upd(((e.clientX-track.getBoundingClientRect().left)/track.offsetWidth)*100)});
+  document.addEventListener('mousemove',function(e){if(dragging)upd(((e.clientX-track.getBoundingClientRect().left)/track.offsetWidth)*100)});
+  document.addEventListener('mouseup',function(){dragging=false});
+  track.addEventListener('touchstart',function(e){dragging=true;upd(((e.touches[0].clientX-track.getBoundingClientRect().left)/track.offsetWidth)*100)},{passive:true});
+  document.addEventListener('touchmove',function(e){if(dragging)upd(((e.touches[0].clientX-track.getBoundingClientRect().left)/track.offsetWidth)*100)},{passive:true});
+  document.addEventListener('touchend',function(){dragging=false});
+})();
+
+// ====== STRATEGY ======
+function selectStrat(el){
+  document.querySelectorAll('.s-card').forEach(function(c){c.classList.remove('sel')});
+  el.classList.add('sel');
+  document.getElementById('budgetSec').classList.add('show');
+}
+function selectSubTier(el){
+  document.querySelectorAll('.sub-tier').forEach(function(c){c.classList.remove('sel')});
+  el.classList.add('sel');
+}
+function showComingSoon(){
+  var t=document.getElementById('csToast');
+  t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show')},1800);
+}
+
+// ====== HELPERS ======
+function addMsg(container,icon,name,text,bg,isUser){
+  var el=document.getElementById(container);
+  var d=document.createElement('div');
+  d.className='hc-msg'+(isUser?' user-msg':'');
+  if(isUser){d.innerHTML='<div class="hc-body"><div class="hc-text user-bub">'+text+'</div></div>';}
+  else{d.innerHTML='<div class="hc-av" style="background:'+(bg||'var(--card)')+'">'+icon+'</div><div class="hc-body"><div class="hc-name">'+name+'</div><div class="hc-text">'+text+'</div></div>';}
+  el.appendChild(d);
+  setTimeout(function(){d.classList.add('show')},30);
+  el.scrollTop=el.scrollHeight;
+  return d;
+}
+function addTyping(container,icon,bg){
+  var el=document.getElementById(container);
+  var d=document.createElement('div');
+  d.className='hc-msg show';
+  d.innerHTML='<div class="hc-av" style="background:'+(bg||'var(--card)')+'">'+icon+'</div><div class="hc-body"><div class="hc-typing"><span></span><span></span><span></span></div></div>';
+  el.appendChild(d);
+  el.scrollTop=el.scrollHeight;
+  return d;
+}
+function addHTML(container,html){
+  var el=document.getElementById(container);
+  var d=document.createElement('div');
+  d.style.cssText='margin-left:34px;opacity:0;transform:translateY(6px);transition:all .35s';
+  d.innerHTML=html;
+  el.appendChild(d);
+  setTimeout(function(){d.style.opacity='1';d.style.transform='none'},30);
+  el.scrollTop=el.scrollHeight;
+  return d;
+}
+function lightAgent(id,state){
+  var a=document.getElementById(id);
+  if(!a)return;
+  a.classList.add('show');
+  var dot=a.querySelector('.px-dot');
+  if(dot) dot.className='px-dot'+(state==='working'?' working':state==='on'?' on':'');
+  if(state==='working') a.classList.add('active'); else a.classList.remove('active');
+}
+function drawSVG(pts,color,w,h){
+  w=w||280;h=h||60;var pad=5;
+  var min=Math.min.apply(null,pts),max=Math.max.apply(null,pts),range=max-min||1;
+  var coords=pts.map(function(v,i){return((i/(pts.length-1))*(w-pad*2)+pad)+','+(h-pad-((v-min)/range)*(h-pad*2))});
+  var gid='sg'+Math.random().toString(36).substr(2,5);
+  return '<svg viewBox="0 0 '+w+' '+h+'" style="width:100%;height:'+h+'px"><defs><linearGradient id="'+gid+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+color+'" stop-opacity=".15"/><stop offset="1" stop-color="'+color+'" stop-opacity="0"/></linearGradient></defs><polygon points="'+pad+','+h+' '+coords.join(' ')+' '+(w-pad)+','+h+'" fill="url(#'+gid+')"/><polyline points="'+coords.join(' ')+'" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+}
+
+// ====== P1 ACTIVITY ROTATION ======
+var p1Acts=['Researcher scanning BTC markets...','Sentinel checking risk levels...','Strategist analyzing funding rates...','Trader monitoring order books...'];
+var p1ActIdx=0;
+setInterval(function(){
+  var el=document.getElementById('p1ActText');
+  if(el){p1ActIdx=(p1ActIdx+1)%p1Acts.length;el.textContent=p1Acts[p1ActIdx]}
+},3000);
+
+// ====== HOME SIMULATION ======
+var simTimers=[];
+function skipToResults(){
+  simTimers.forEach(function(t){clearTimeout(t)});simTimers=[];
+  document.getElementById('skipBtn').style.display='none';
+  document.getElementById('btcPanel').classList.remove('show');
+  document.getElementById('p4').style.background='var(--bg)';
+  document.getElementById('simBalBar').style.display='flex';
+  setAgentWalking([]);
+  var chat='homeChat';
+  document.getElementById(chat).innerHTML='';
+  ['ag0','ag1','ag2','ag3','ag4'].forEach(function(id){lightAgent(id,'on')});
+  document.getElementById('officeStatus').textContent='Simulation Complete';
+  updateSimBal(8800,-1200,'-12.0%','green');
+  addMsg(chat,'👔','Fund Manager','<strong>72 hours simulated.</strong> Here\'s how your AI team performed:','rgba(205,255,0,.06)');
+  setTimeout(function(){
+    addHTML(chat,'<div class="chat-results"><div class="cr-title">Simulation Results · May 7-14, 2022</div>'
+      +'<div class="cr-row best"><span style="font-weight:700;color:var(--gold)">★ Your AI Team</span><span style="color:var(--green);font-weight:700">-$1,200 (-12%)</span></div>'
+      +'<div class="cr-row"><span style="color:var(--ter)">If you just held</span><span style="color:var(--red);font-weight:700">-$2,800 (-28%)</span></div>'
+      +'<div class="cr-row"><span style="color:var(--ter)">If using basic DCA</span><span style="color:var(--red);font-weight:700">-$1,900 (-19%)</span></div>'
+      +'<div class="cr-saved"><div class="cr-saved-label">Your AI Team Saved You</div><div class="cr-saved-num">$1,600</div><div class="cr-saved-sub">vs. just holding through the crash</div></div>'
+      +'<div style="font-size:10px;color:var(--ter);margin-top:6px;text-align:center">Results vary by parameters · Range: -8% to -16%</div>'
+      +'<button class="share-btn" onclick="this.textContent=\'Copied! 🎉\'">📤 Share Result</button></div>');
+    setTimeout(function(){
+      document.getElementById('homeInputBar').style.display='flex';
+      addMsg(chat,'👔','Fund Manager','Your team just navigated the worst crash of 2022. Ask anything — what triggered the sells, how we timed re-entry, or what would happen in a different scenario.','rgba(205,255,0,.06)');
+      setTimeout(function(){addChips(chat)},400);
+      homePhase='qa';qaStartTime=Date.now();
+    },600);
+  },400);
+}
+function updateSimBal(val,pnl,pnlPct,color){
+  document.getElementById('simBal').textContent='$'+val.toLocaleString('en',{minimumFractionDigits:2});
+  document.getElementById('simPnl').textContent=(pnl>=0?'+':'')+('$'+Math.abs(pnl).toLocaleString('en',{minimumFractionDigits:0}))+' ('+pnlPct+')';
+  document.getElementById('simPnl').style.color='var(--'+color+')';
+}
+function updateBtcChart(price,change,changePct,color,time,chartPts){
+  document.getElementById('btcPrice').textContent='$'+price.toLocaleString('en');
+  document.getElementById('btcPrice').style.color=color==='red'?'var(--red)':color==='green'?'var(--green)':'var(--text)';
+  document.getElementById('btcChange').textContent=changePct;
+  document.getElementById('btcChange').style.color='var(--'+color+')';
+  document.getElementById('btcTime').textContent=time;
+  if(chartPts){document.getElementById('btcChartWrap').innerHTML=drawSVG(chartPts,color==='red'?'#F87171':color==='green'?'#34D399':'#888',90,35)}
+}
+function setAgentWalking(ids){
+  ['ag0','ag1','ag2','ag3','ag4'].forEach(function(id){
+    var el=document.getElementById(id);if(!el)return;
+    el.classList.remove('px-walking','px-huddle');
+  });
+  ids.forEach(function(id){
+    var el=document.getElementById(id);if(el)el.classList.add('px-walking');
+  });
+}
+function setAgentHuddle(){
+  ['ag0','ag1','ag2','ag3','ag4'].forEach(function(id){
+    var el=document.getElementById(id);if(!el)return;
+    el.classList.remove('px-walking');
+    el.classList.add('px-huddle');
+    el.style.setProperty('--huddle-x',(Math.random()>0.5?1:-1)*(4+Math.random()*6)+'px');
+    el.style.setProperty('--huddle-y',(Math.random()>0.5?1:-1)*(2+Math.random()*4)+'px');
+  });
+}
+function startHomeSimulation(){
+  var chat='homeChat';
+  document.getElementById(chat).innerHTML='';
+  document.getElementById('homeInputBar').style.display='none';
+  document.getElementById('skipBtn').style.display='block';
+  document.getElementById('simBalBar').style.display='flex';
+  document.getElementById('btcPanel').classList.remove('show','crisis');
+  document.getElementById('p4').style.background='var(--bg)';
+  updateSimBal(10000,0,'0.0%','sec');
+  var seq=[
+    // Phase 0: All agents appear + compact team card
+    {t:300,fn:function(){['ag0','ag1','ag2','ag3','ag4'].forEach(function(id,i){setTimeout(function(){lightAgent(id,'on')},i*150)})}},
+    {t:800,fn:function(){
+      addMsg(chat,'👔','Fund Manager','Team ready. Starting <strong>May 2022 simulation</strong> — $10,000 deployed.','rgba(205,255,0,.06)');
+    }},
+    {t:2200,fn:function(){
+      addHTML(chat,'<div style="background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:10px 12px;font-size:11px;line-height:1.8">'
+        +'<div style="font-size:9px;color:var(--sec);font-weight:700;letter-spacing:1px;margin-bottom:4px">YOUR AI TEAM</div>'
+        +'<div>👔 <strong>Fund Manager</strong> — coordinates & reports</div>'
+        +'<div>🔍 <strong>Researcher</strong> — scans markets & on-chain data</div>'
+        +'<div>🧠 <strong>Strategist</strong> — quant analysis & fund allocation</div>'
+        +'<div>🛡 <strong>Sentinel</strong> — risk control & guardrails</div>'
+        +'<div>💹 <strong>Trader</strong> — execution & order management</div></div>');
+      document.getElementById('officeStatus').textContent='Simulating May 2022...';
+    }},
+
+    // Phase 1: Calm — BTC chart slides in
+    {t:4500,fn:function(){
+      document.getElementById('btcPanel').classList.add('show');
+      updateBtcChart(36000,0,'0.0%','sec','May 7',[36000,35800,35900,36100,36000]);
+      lightAgent('ag0','working');
+      addMsg(chat,'🔍','Researcher','May 7: BTC $36,000. Markets stable. DCA running on schedule.','rgba(96,165,250,.1)');
+    }},
+
+    // Phase 2: First warning
+    {t:7500,fn:function(){
+      updateBtcChart(34800,-1200,'-3.3%','red','May 8',[36000,35800,35500,35200,34800]);
+      updateSimBal(9670,-330,'-3.3%','red');
+      document.getElementById('p4MonBtc').textContent='BTC $34,800';
+      lightAgent('ag0','working');
+      addMsg(chat,'🔍','Researcher','May 8: Unusual selling pressure. Anchor Protocol TVL dropping. Monitoring UST peg.','rgba(96,165,250,.1)');
+      setAgentWalking(['ag0','ag1']);
+    }},
+
+    // Phase 3: Crisis detection — the dramatic moment
+    {t:10500,fn:function(){
+      updateBtcChart(32500,-3500,'-9.7%','red','May 9',[36000,35800,35200,34800,33500,32500]);
+      updateSimBal(9030,-970,'-9.7%','red');
+      document.getElementById('p4MonBtc').textContent='BTC $32,500';
+      document.getElementById('btcPanel').classList.add('crisis');
+      lightAgent('ag0','working');
+      addMsg(chat,'🔍','Researcher','<span style="color:var(--red)">⚠ ALERT:</span> UST depegging. Anchor outflows surging. <strong>Contagion risk HIGH.</strong>','rgba(248,113,113,.1)');
+      setAgentHuddle();
+    }},
+    {t:13000,fn:function(){
+      lightAgent('ag3','working');
+      addMsg(chat,'🛡','Sentinel','<span style="color:var(--yellow)">🚨</span> Reducing exposure 40%. Moving $3,600 to cash. Pausing DCA.','rgba(248,113,113,.08)');
+    }},
+
+    // Phase 4: FAST FORWARD — cinematic blur
+    {t:15000,fn:function(){
+      document.getElementById('officeStatus').innerHTML='<span style="color:var(--yellow)">⏩ FAST FORWARD</span>';
+      addMsg(chat,'👔','Fund Manager','<em style="color:var(--ter)">Accelerating 48 hours…</em>','rgba(205,255,0,.04)');
+      // Blur effect on office + chat
+      document.querySelector('.sim-stage').classList.add('ff-active');
+      // Rapid price flashes during blur
+      var ffPrices=[{p:30200,t:'May 10'},{p:29000,t:'May 11'},{p:27200,t:'May 12'},{p:26100,t:'May 13'}];
+      ffPrices.forEach(function(pp,i){
+        setTimeout(function(){
+          document.getElementById('btcPrice').textContent='$'+pp.p.toLocaleString();
+          document.getElementById('btcTime').textContent=pp.t;
+          var pnl=pp.p/36000*10000-10000;
+          updateSimBal(10000+pnl,pnl,(pnl/100).toFixed(1)+'%','red');
+        },500+i*500);
+      });
+    }},
+
+    // Phase 5: Crisis clears, stop-loss executed
+    {t:18000,fn:function(){
+      document.querySelector('.sim-stage').classList.remove('ff-active');
+      updateBtcChart(26100,-9900,'-27.5%','red','May 12',[36000,34800,32500,29000,27200,26100]);
+      updateSimBal(8120,-1880,'-18.8%','red');
+      document.getElementById('p4').style.background='#0D0507';
+      document.getElementById('officeStatus').innerHTML='<span style="color:var(--red)">● CRISIS MODE</span>';
+      document.getElementById('p4MonBtc').textContent='BTC $26,100';
+      lightAgent('ag3','working');
+      addMsg(chat,'🛡','Sentinel','<strong style="color:var(--red)">STOP-LOSS EXECUTED</strong> at $30,600. Cash reserve: $8,120. Slippage: 0.4%','rgba(248,113,113,.12)');
+      setAgentHuddle();
+    }},
+
+    // Phase 6: Recovery
+    {t:20500,fn:function(){
+      updateBtcChart(30400,-5600,'+16.5% from low','green','May 14',[36000,34800,32500,29000,26100,28800,30400]);
+      document.getElementById('p4').style.background='var(--bg)';
+      document.getElementById('officeStatus').innerHTML='<span style="color:var(--green)">● RECOVERY</span>';
+      document.getElementById('p4MonBtc').textContent='BTC $30,400';
+      document.getElementById('btcPanel').classList.remove('crisis');
+      lightAgent('ag1','working');
+      addMsg(chat,'🧠','Strategist','Bottom confirmed. <strong>Re-entering in 3 tranches</strong> at $27.1K, $26.8K, $29.2K.','rgba(192,132,252,.1)');
+      setAgentWalking(['ag1','ag4']);
+    }},
+    {t:22500,fn:function(){
+      lightAgent('ag4','working');
+      addMsg(chat,'💹','Trader','<span style="color:var(--green)">✓ All 3 tranches filled.</span> 0.163 BTC acquired at avg $27,700.','rgba(52,211,153,.08)');
+      updateSimBal(8800,-1200,'-12.0%','red');
+    }},
+
+    // Phase 7: Results
+    {t:23500,fn:function(){
+      document.getElementById('officeStatus').textContent='Simulation Complete';
+      document.getElementById('btcPanel').classList.remove('show');
+      setAgentWalking([]);
+      ['ag0','ag1','ag2','ag3','ag4'].forEach(function(id){lightAgent(id,'on')});
+      addMsg(chat,'👔','Fund Manager','<strong>72 hours simulated.</strong> Here\'s how your AI team performed:','rgba(205,255,0,.06)');
+    }},
+    {t:25500,fn:function(){
+      // Key decisions summary
+      addHTML(chat,'<div class="chat-results"><div class="cr-title">Key Decisions by Your AI Team</div>'
+        +'<div style="font-size:11px;line-height:1.7;color:rgba(255,255,255,.8);padding:4px 0">'
+        +'<div style="padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)">🔍 <strong>May 8</strong> — Researcher detected Anchor Protocol TVL dropping</div>'
+        +'<div style="padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)">🛡 <strong>May 9</strong> — Sentinel reduced position 40%, moved $3,600 to cash</div>'
+        +'<div style="padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="color:var(--red)">🛡 <strong>May 10</strong></span> — Stop-loss triggered at $30,600, protected remaining capital</div>'
+        +'<div style="padding:4px 0">🧠 <strong>May 13</strong> — Re-entered in 3 tranches at avg $27,700 after bottom confirmed</div>'
+        +'</div></div>');
+    }},
+    {t:27500,fn:function(){
+      // P&L comparison
+      addHTML(chat,'<div class="chat-results"><div class="cr-title">P&L Comparison · May 7-14, 2022</div>'
+        +'<div class="cr-row best"><span style="font-weight:700;color:var(--gold)">★ Your AI Team</span><span style="color:var(--green);font-weight:700">-$1,200 (-12%)</span></div>'
+        +'<div class="cr-row"><span style="color:var(--ter)">If you just held</span><span style="color:var(--red);font-weight:700">-$2,800 (-28%)</span></div>'
+        +'<div class="cr-row"><span style="color:var(--ter)">If using basic DCA</span><span style="color:var(--red);font-weight:700">-$1,900 (-19%)</span></div>'
+        +'<div class="cr-saved"><div class="cr-saved-label">Your AI Team Saved You</div><div class="cr-saved-num">$1,600</div><div class="cr-saved-sub">vs. just holding through the crash</div></div>'
+        +'<div style="font-size:10px;color:var(--ter);margin-top:6px;text-align:center">Results vary by parameters · Range: -8% to -16%</div>'
+        +'<button class="share-btn" onclick="this.textContent=\'Copied! 🎉\'">📤 Share Result</button></div>');
+      updateSimBal(8800,-1200,'-12.0%','green');
+    }},
+
+    // Phase 8: Q&A
+    {t:30000,fn:function(){
+      document.getElementById('skipBtn').style.display='none';
+      document.getElementById('homeInputBar').style.display='flex';
+      addMsg(chat,'👔','Fund Manager','Ask anything — why we sold when we did, how we timed re-entry, or what happens in a different scenario.','rgba(205,255,0,.06)');
+      setTimeout(function(){addChips(chat)},400);
+      homePhase='qa';
+      qaStartTime=Date.now();
+    }}
+  ];
+  seq.forEach(function(s){simTimers.push(setTimeout(s.fn,s.t))});
+}
+
+// ====== Q&A PHASE ======
+var homePhase='sim',qaCount=0,qaStartTime=0;
+var qaAnswers={
+  'Why did you sell at $30.6K and not earlier?':{icon:'🛡',name:'Sentinel',bg:'rgba(248,113,113,.1)',text:'Our stop-loss was set at -15% drawdown from entry. BTC entered at $36K, so the trigger was ~$30,600. Selling earlier means more false alarms in normal dips. This level balances protection with staying in the trade.'},
+  'What if the stop-loss didn\'t trigger in time?':{icon:'🛡',name:'Sentinel',bg:'rgba(248,113,113,.1)',text:'We monitor 24/7 with sub-second execution on OKX orderbook. Slippage was only 0.4%. In an extreme flash crash, we use limit orders at multiple levels as backup. The $30,600 fill was clean.'},
+  'Why buy back at $27K? Could\'ve gone lower.':{icon:'🧠',name:'Strategist',bg:'rgba(192,132,252,.1)',text:'Nobody catches the exact bottom. We use RSI (hit 12, extreme oversold) + volume capitulation signals. 3-tranche re-entry at $27.1K, $26.8K, $29.2K averages out risk. Waiting for "the bottom" means missing the bounce.'},
+  'How did you detect the UST risk so fast?':{icon:'🔍',name:'Researcher',bg:'rgba(96,165,250,.1)',text:'I monitor 200+ on-chain metrics in real-time via TradeKit. Anchor Protocol TVL dropped 18% in 6 hours — that\'s a screaming red flag. Cross-referencing UST peg deviation + BTC correlation gave us a ~2 hour head start on most traders.'},
+  'What\'s my actual worst case with this strategy?':{icon:'🛡',name:'Sentinel',bg:'rgba(248,113,113,.1)',text:'Hard floor = your stop-loss. On $10K with -15% limit, max loss is $1,500. Even in our worst backtest (March 2020 COVID crash), the team limited loss to -11.3%. Your cash reserve is never at risk.'},
+  'Would you have done anything different in hindsight?':{icon:'🧠',name:'Strategist',bg:'rgba(192,132,252,.1)',text:'Honestly? We could\'ve sold 20% more at $32.5K when UST first wobbled. But the signal wasn\'t strong enough yet — acting too early on every rumor would hurt returns long-term. The tradeoff was right.'},
+  'How is this different from a trading bot?':{icon:'👔',name:'Fund Manager',bg:'rgba(205,255,0,.06)',text:'A bot follows ONE rule blindly. Our team adapts in real-time. When Researcher spotted UST depeg, Sentinel overrode DCA, Strategist paused buying, and Trader managed the exit. No single bot does cross-signal reasoning like that.'}
+};
+var defaultChips=['Why sell at $30.6K not earlier?','How did you detect UST risk?','Why buy back at $27K?','What\'s my worst case?'];
+
+var chipToKey={
+  'Why sell at $30.6K not earlier?':'Why did you sell at $30.6K and not earlier?',
+  'How did you detect UST risk?':'How did you detect the UST risk so fast?',
+  'Why buy back at $27K?':'Why buy back at $27K? Could\'ve gone lower.',
+  'What\'s my worst case?':'What\'s my actual worst case with this strategy?',
+  'What if stop-loss didn\'t trigger?':'What if the stop-loss didn\'t trigger in time?',
+  'Anything different in hindsight?':'Would you have done anything different in hindsight?',
+  'How is this vs a bot?':'How is this different from a trading bot?'
+};
+var allChips=['Why sell at $30.6K not earlier?','How did you detect UST risk?','Why buy back at $27K?','What\'s my worst case?','What if stop-loss didn\'t trigger?','Anything different in hindsight?','How is this vs a bot?'];
+var usedChips=[];
+function addChips(container){
+  var el=document.getElementById(container);
+  var d=document.createElement('div');d.className='hc-chips';
+  var available=allChips.filter(function(c){return usedChips.indexOf(c)===-1});
+  var show=available.slice(0,4);
+  show.forEach(function(t,i){
+    var c=document.createElement('button');
+    c.className='hc-chip'+(i===0?' gold':'');
+    c.textContent=t;
+    c.onclick=function(){usedChips.push(t);handleQ(container,chipToKey[t]||t);d.remove()};
+    d.appendChild(c);
+  });
+  el.appendChild(d);el.scrollTop=el.scrollHeight;
+}
+function handleQ(container,q){
+  addMsg(container,'','','',null,true).querySelector('.hc-text').textContent=q;
+  qaCount++;
+  var a=qaAnswers[q]||{icon:'👔',name:'Fund Manager',bg:'rgba(205,255,0,.06)',text:'The key insight: your AI team adapts to any condition. We monitor 24/7, enforce your limits, and act on opportunities you\'d miss.'};
+  var typ=addTyping(container,a.icon,a.bg);
+  setTimeout(function(){
+    typ.remove();
+    addMsg(container,a.icon,a.name,a.text,a.bg);
+    checkConvert(container);
+  },1000);
+}
+function handleHomeChat(){
+  var inp=document.getElementById('homeInp');
+  var txt=inp.value.trim();if(!txt)return;inp.value='';
+  handleQ('homeChat',txt);
+}
+document.getElementById('homeInp').addEventListener('keydown',function(e){if(e.key==='Enter')handleHomeChat()});
+
+function checkConvert(container){
+  var elapsed=(Date.now()-qaStartTime)/1000;
+  if(qaCount>=3||(qaCount>=1&&elapsed>10)){
+    setTimeout(function(){showConvert(container)},1200);
+  } else {
+    setTimeout(function(){addChips(container)},500);
+  }
+}
+function showConvert(container){
+  addMsg(container,'👔','Fund Manager','Your AI team saved $1,600 in the simulation. The process is real — 24/7 monitoring, risk limits, adaptive response. Ready to put us to work on <strong>your</strong> portfolio?','rgba(205,255,0,.06)');
+  setTimeout(function(){
+    addHTML(container,'<div class="hc-conv"><h4>Put Your AI Team to Work</h4><p>Set your goals, risk limits, and budget.<br>Your AI team handles the rest.</p>'
+      +'<button class="btn-gold" style="margin-bottom:8px" onclick="goPage(\'p5\')">Start With Real Money</button>'
+      +'<button class="btn-outline" onclick="qaCount=0;qaStartTime=Date.now();addChips(\'homeChat\')">I have more questions</button></div>');
+  },800);
+}
+
+// ====== P7 OFFICE CONFIG ======
+function startP7Chat(){
+  var c='p7Chat';document.getElementById(c).innerHTML='';
+  var seq=[
+    {t:400,fn:function(){addMsg(c,'👔','Fund Manager','AI account created with <strong>$5,000 USDT</strong> and <strong>Smart DCA + Protection</strong>. Let me set up safety guardrails — takes 30 seconds.','rgba(205,255,0,.06)')}},
+    {t:2500,fn:function(){
+      addHTML(c,'<div class="guard-card"><h5>🛡 Recommended Guardrails</h5>'
+        +'<div class="guard-item"><span class="guard-check">✓</span> Max 25% of budget per trade</div>'
+        +'<div class="guard-item"><span class="guard-check">✓</span> Stop-loss at -15% drawdown</div>'
+        +'<div class="guard-item"><span class="guard-check">✓</span> Alert before trades > $500</div>'
+        +'<div class="guard-item"><span class="guard-check">✓</span> Daily summary at 9 AM</div></div>'
+        +'<div style="display:flex;gap:8px;margin-top:8px">'
+        +'<button class="btn-gold" style="padding:10px;font-size:13px" onclick="p7ConfirmGuard()">Looks Good ✓</button>'
+        +'<button class="btn-outline" style="padding:10px;font-size:13px;width:auto;flex-shrink:0">Edit</button></div>');
+    }}
+  ];
+  seq.forEach(function(s){setTimeout(s.fn,s.t)});
+}
+function p7ConfirmGuard(){
+  var c='p7Chat';
+  addMsg(c,'','','',null,true).querySelector('.hc-text').textContent='Looks good!';
+  setTimeout(function(){addMsg(c,'👔','Fund Manager','How much autonomy for the team?','rgba(205,255,0,.06)')},600);
+  setTimeout(function(){
+    addHTML(c,'<div class="auto-cards">'
+      +'<div class="auto-card" onclick="selAuto(this)"><div class="auto-card-icon">🚀</div><div class="auto-card-info"><div class="auto-card-name">Full Auto</div><div class="auto-card-desc">AI trades within guardrails. Notified after.</div></div></div>'
+      +'<div class="auto-card sel" onclick="selAuto(this)"><div class="auto-card-icon">✋</div><div class="auto-card-info"><div class="auto-card-name">Confirm Big Trades</div><div class="auto-card-desc">You approve trades over threshold. Most users start here.</div></div></div>'
+      +'<div class="auto-card" onclick="selAuto(this)"><div class="auto-card-icon">👀</div><div class="auto-card-info"><div class="auto-card-name">Approve Everything</div><div class="auto-card-desc">You approve every trade.</div></div></div></div>'
+      +'<button class="btn-gold" style="margin-top:8px;padding:10px;font-size:13px" onclick="p7ConfirmAuto()">Confirm</button>');
+  },1500);
+}
+function selAuto(el){document.querySelectorAll('.auto-card').forEach(function(c){c.classList.remove('sel')});el.classList.add('sel')}
+function p7ConfirmAuto(){
+  var c='p7Chat';
+  document.getElementById(c).innerHTML='';
+  addMsg(c,'👔','Fund Manager','All set. Here\'s your strategy summary:','rgba(205,255,0,.06)');
+  setTimeout(function(){
+    addHTML(c,'<div class="summary-card"><h5>📋 Strategy Summary</h5>'
+      +'<div class="sum-row"><div class="sum-label">Strategy</div><div class="sum-val">Smart DCA + Protection</div></div>'
+      +'<div class="sum-row"><div class="sum-label">Goal</div><div class="sum-val">Grow Steadily</div></div>'
+      +'<div class="sum-row"><div class="sum-label">Budget</div><div class="sum-val">$5,000 USDT</div></div>'
+      +'<div class="sum-row"><div class="sum-label">Max Drawdown</div><div class="sum-val" style="color:var(--red)">-15%</div></div>'
+      +'<div class="sum-row"><div class="sum-label">Autonomy</div><div class="sum-val" style="color:var(--green)">Confirm Big Trades</div></div></div>'
+      +'<div class="disclaimer-box" style="margin-top:8px"><strong style="color:var(--red)">Important:</strong><br>• Simulation uses historical data — live results will differ<br>• AI decisions may vary from simulation in live markets<br>• Stop-loss limits drawdown but slippage may occur in extreme volatility<br>• <strong>You are responsible for all profits and losses</strong></div>'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:11px;color:var(--sec)"><span style="color:var(--green);font-weight:700">✓</span> I understand and want to proceed.</div>'
+      +'<button class="launch-btn" onclick="goPage(\'p8\');startLaunch()">🚀 Launch My AI Strategy</button>');
+  },600);
+}
+
+// ====== LAUNCH ======
+function startHomePageSetup(){
+  var chat=document.getElementById('hpChat');
+  chat.innerHTML='';
+  // Show typing immediately
+  var typ=document.createElement('div');typ.className='hc-msg show';
+  typ.innerHTML='<div class="hc-av" style="background:rgba(205,255,0,.06)">👔</div><div class="hc-body"><div class="hc-typing"><span></span><span></span><span></span></div></div>';
+  chat.appendChild(typ);
+  setTimeout(function(){
+    typ.remove();
+    addMsg('hpChat','👔','Fund Manager','Welcome! <strong>$5,000 deployed</strong> with Smart DCA + Protection. Before we start, let me confirm your safety guardrails.','rgba(205,255,0,.06)');
+    setTimeout(function(){
+      addHTML('hpChat','<div class="guard-card"><h5>🛡 Safety Guardrails</h5>'
+        +'<div class="guard-item"><span class="guard-check">✓</span> Max 25% of budget per trade</div>'
+        +'<div class="guard-item"><span class="guard-check">✓</span> Stop-loss at -15% drawdown</div>'
+        +'<div class="guard-item"><span class="guard-check">✓</span> Alert before trades > $500</div>'
+        +'<div class="guard-item"><span class="guard-check">✓</span> Daily summary at 9 AM</div></div>'
+        +'<div style="display:flex;gap:8px;margin-top:8px">'
+        +'<button class="btn-gold" style="padding:10px;font-size:13px" onclick="hpConfirmGuardrails()">Looks Good ✓</button>'
+        +'<button class="btn-outline" style="padding:10px;font-size:13px;width:auto;flex-shrink:0">Customize</button></div>');
+    },600);
+  },1200);
+}
+function hpConfirmGuardrails(){
+  addMsg('hpChat','','','',null,true).querySelector('.hc-text').textContent='Looks good!';
+  setTimeout(function(){
+    addMsg('hpChat','👔','Fund Manager','One more thing — how hands-on do you want to be?','rgba(205,255,0,.06)');
+    setTimeout(function(){
+      addHTML('hpChat','<div class="auto-cards">'
+        +'<div class="auto-card" onclick="selAuto(this)"><div class="auto-card-icon">🚀</div><div class="auto-card-info"><div class="auto-card-name">Full Auto</div><div class="auto-card-desc">AI trades within guardrails. Notified after.</div></div></div>'
+        +'<div class="auto-card sel" onclick="selAuto(this)"><div class="auto-card-icon">✋</div><div class="auto-card-info"><div class="auto-card-name">Confirm Big Trades</div><div class="auto-card-desc">You approve trades over threshold.</div></div></div>'
+        +'<div class="auto-card" onclick="selAuto(this)"><div class="auto-card-icon">👀</div><div class="auto-card-info"><div class="auto-card-name">Approve Everything</div><div class="auto-card-desc">You approve every trade.</div></div></div></div>'
+        +'<button class="btn-gold" style="margin-top:8px;padding:10px;font-size:13px" onclick="hpConfirmAuto()">Confirm</button>');
+    },600);
+  },600);
+}
+function hpConfirmAuto(){
+  addMsg('hpChat','','','',null,true).querySelector('.hc-text').textContent='Confirm Big Trades — let\'s go!';
+  setTimeout(function(){
+    // Clear setup chat and start the live agent flow
+    document.getElementById('hpChat').innerHTML='';
+    startLaunch();
+  },800);
+}
+
+function toggleQuickActions(){
+  var ov=document.getElementById('qaOverlay');
+  var pn=document.getElementById('qaPanel');
+  var showing=pn.classList.contains('show');
+  if(showing){pn.classList.remove('show');ov.classList.remove('show')}
+  else{ov.classList.add('show');pn.classList.add('show')}
+}
+
+function startLaunch(){
+  var chat=document.getElementById('hpChat');
+  var toast=document.getElementById('launchToast');
+  chat.innerHTML='';
+  // Show typing indicator immediately
+  var ph=document.createElement('div');ph.className='hc-msg show';ph.id='hpPlaceholder';
+  ph.innerHTML='<div class="hc-av" style="background:rgba(205,255,0,.06)">👔</div><div class="hc-body"><div class="hc-typing"><span></span><span></span><span></span></div></div>';
+  chat.appendChild(ph);
+  // Show toast popup — compact pill, quick dismiss
+  setTimeout(function(){toast.classList.add('show')},300);
+  setTimeout(function(){toast.classList.add('hide')},2200);
+  setTimeout(function(){toast.classList.remove('show','hide')},2700);
+  // Agent chat messages after toast
+  var msgs=[
+    {t:1800,icon:'👔',name:'Fund Manager',text:'Team assembled. Scanning markets now…',bg:'rgba(205,255,0,.06)',agent:'manager'},
+    {t:4000,icon:'🔍',name:'Researcher',text:'BTC $67,240 (+1.2%) — Fear & Greed 62. Conditions favorable for entry.',bg:'rgba(96,165,250,.1)',agent:'researcher'},
+    {t:6200,icon:'🧠',name:'Strategist',text:'Deploying first tranche: <strong>$625 → BTC at $67,240</strong> (12.5% of budget).',bg:'rgba(192,132,252,.08)',agent:'strategist'},
+    {t:8500,icon:'🛡',name:'Sentinel',text:'Stop-loss set at -8%. Guardrails active across all positions.',bg:'rgba(248,113,113,.1)',agent:'sentinel'},
+    {t:10500,icon:'💹',name:'Trader',text:'<span style="color:var(--green)">✓ FILLED</span> 0.00929 BTC @ $67,240. Next buy: tomorrow 9 AM UTC.',bg:'rgba(52,211,153,.08)',agent:'trader'},
+    {t:13000,icon:'👔',name:'Fund Manager',text:'<strong>All systems go.</strong> Daily reports at 9 AM. We\'re on it 24/7.',bg:'rgba(205,255,0,.06)',agent:'manager'}
+  ];
+  var agentMap={manager:0,researcher:1,strategist:2,sentinel:3,trader:4};
+  msgs.forEach(function(m){
+    setTimeout(function(){
+      // Remove typing placeholder on first message
+      var oldPh=document.getElementById('hpPlaceholder');if(oldPh)oldPh.remove();
+      // Light this agent's dot + bounce
+      var stations=document.querySelectorAll('#p8 .p4-station');
+      stations.forEach(function(s){s.classList.remove('active')});
+      if(agentMap[m.agent]!==undefined&&stations[agentMap[m.agent]])stations[agentMap[m.agent]].classList.add('active');
+      // Add chat bubble with timestamp
+      var d=document.createElement('div');d.className='hc-msg';
+      d.innerHTML='<div class="hc-av" style="background:'+m.bg+'">'+m.icon+'</div><div class="hc-body"><div class="hc-name">'+m.name+'<span style="font-size:8px;color:var(--ter);font-weight:400;margin-left:6px">just now</span></div><div class="hc-text">'+m.text+'</div></div>';
+      chat.appendChild(d);setTimeout(function(){d.classList.add('show')},30);
+      chat.scrollTop=chat.scrollHeight;
+    },m.t);
+  });
+  // Update balance after last message
+  setTimeout(function(){
+    document.getElementById('hpBal').textContent='$5,000.00';
+    document.getElementById('hpPnl').innerHTML='<span style="color:var(--green)">+$0.00 (0.00%)</span>';
+    document.querySelectorAll('#p8 .p4-station').forEach(function(s){s.classList.remove('active')});
+  },14500);
+  // Rotating placeholder suggestions
+  var hpPhs=['Ask: "Why BTC first?"','Ask: "What if BTC drops 10%?"','Ask: "Show me the full plan"','Ask: "When is the next buy?"','Talk to your AI team...'];
+  var hpPhIdx=0;
+  setInterval(function(){
+    var inp=document.getElementById('hpInp');
+    if(inp&&!inp.value&&document.getElementById('p8').classList.contains('active')){
+      hpPhIdx=(hpPhIdx+1)%hpPhs.length;
+      inp.setAttribute('placeholder',hpPhs[hpPhIdx]);
+    }
+  },4000);
+}
+
+function handleHpChat(){
+  var inp=document.getElementById('hpInp');
+  var chat=document.getElementById('hpChat');
+  var text=inp.value.trim();if(!text)return;
+  // Show user message
+  var d=document.createElement('div');d.className='hc-msg user-msg';
+  d.innerHTML='<div class="hc-body"><div class="hc-text user-bub">'+text+'</div></div>';
+  chat.appendChild(d);setTimeout(function(){d.classList.add('show')},30);
+  inp.value='';chat.scrollTop=chat.scrollHeight;
+  // Show typing indicator
+  var typing=document.createElement('div');typing.className='hc-msg';
+  typing.innerHTML='<div class="hc-av" style="background:rgba(205,255,0,.06)">👔</div><div class="hc-body"><div class="hc-typing"><span></span><span></span><span></span></div></div>';
+  chat.appendChild(typing);setTimeout(function(){typing.classList.add('show')},30);
+  chat.scrollTop=chat.scrollHeight;
+  // Simulate response
+  setTimeout(function(){
+    chat.removeChild(typing);
+    var replies=[
+      'Your portfolio is currently 100% allocated. BTC position: 0.00929 BTC ($625). Next DCA buy scheduled tomorrow 9 AM UTC.',
+      'All 5 agents are active and monitoring. No alerts at this time. Market volatility is low.',
+      'Current strategy: Smart DCA with Downside Protection. Running for less than 1 hour. Everything is on track.',
+      'I\'ll coordinate with the team and get back to you. Researcher is scanning for any relevant market moves.'
+    ];
+    var reply=replies[Math.floor(Math.random()*replies.length)];
+    var r=document.createElement('div');r.className='hc-msg';
+    r.innerHTML='<div class="hc-av" style="background:rgba(205,255,0,.06)">👔</div><div class="hc-body"><div class="hc-name">Fund Manager</div><div class="hc-text">'+reply+'</div></div>';
+    chat.appendChild(r);setTimeout(function(){r.classList.add('show')},30);
+    chat.scrollTop=chat.scrollHeight;
+  },1800);
+}
+</script>
+</body>
+</html>
