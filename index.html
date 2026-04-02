@@ -75,10 +75,7 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
 .p1-proof-num{font-size:18px;font-weight:900;color:var(--gold)}
 .p1-proof-label{font-size:10px;color:var(--sec);margin-top:2px}
 .p1-proof-divider{width:1px;height:28px;background:rgba(255,255,255,.1)}
-/* P1 activity indicator */
-.p1-activity{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:10px}
-.p1-act-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 1.2s infinite}
-.p1-act-text{font-size:10px;color:var(--sec);font-style:italic}
+/* (activity indicator removed) */
 .p1-office .px-station:nth-child(5){animation-delay:.1s}
 .p1-office .px-station:nth-child(6){animation-delay:.2s}
 .p1-office .px-station:nth-child(7){animation-delay:.3s}
@@ -692,24 +689,30 @@ body{margin:0;background:#0A0A0A;font-family:'Inter',sans-serif;display:flex;jus
     <!-- Bulletin board bottom-left -->
     <div style="position:absolute;bottom:8px;left:8px;width:20px;height:16px;background:#3D3428;border:1px solid #5C4A32;border-radius:1px;z-index:3;display:flex;flex-wrap:wrap;gap:1px;padding:2px"><span style="width:4px;height:3px;background:var(--red);border-radius:1px"></span><span style="width:4px;height:3px;background:var(--blue);border-radius:1px"></span><span style="width:4px;height:3px;background:var(--gold);border-radius:1px"></span></div>
   </div>
-  <div class="p1-activity">
-    <span class="p1-act-dot"></span>
-    <span class="p1-act-text" id="p1ActText">Researcher scanning BTC markets...</span>
+  <div class="p1-proof">
+    <div class="p1-proof-item"><div class="p1-proof-num">5</div><div class="p1-proof-label">AI Agents</div></div>
+    <div class="p1-proof-divider"></div>
+    <div class="p1-proof-item"><div class="p1-proof-num">24/7</div><div class="p1-proof-label">Always On</div></div>
+    <div class="p1-proof-divider"></div>
+    <div class="p1-proof-item"><div class="p1-proof-num">3</div><div class="p1-proof-label">Scenarios</div></div>
   </div>
-  <div class="vp-container">
-    <div class="vp-track">
-      <div class="vp-item"><div class="vp-text">Detect crashes before they hit<span>Researcher scans markets & on-chain data 24/7</span></div></div>
-      <div class="vp-item"><div class="vp-text">Auto-protect in market panics<span>Sentinel enforces stop-losses & guardrails</span></div></div>
-      <div class="vp-item"><div class="vp-text">Buy the dip at the right time<span>Strategist allocates with quant reasoning</span></div></div>
-      <div class="vp-item"><div class="vp-text">Execute trades with zero emotion<span>Trader handles slippage & order timing</span></div></div>
-      <div class="vp-item"><div class="vp-text">Complex strategies in one tap<span>Delta neutral, yield farming, DCA & more</span></div></div>
-      <div class="vp-item"><div class="vp-text">Sleep while your team works<span>Fund Manager coordinates everything 24/7</span></div></div>
-      <div class="vp-item"><div class="vp-text">Detect crashes before they hit<span>Researcher scans markets & on-chain data 24/7</span></div></div>
+  <div style="display:flex;flex-direction:column;gap:8px;width:100%;margin-bottom:auto">
+    <div style="display:flex;align-items:center;gap:8px;background:var(--card);border-radius:10px;padding:10px 14px;border:1px solid rgba(255,255,255,.06)">
+      <span style="font-size:16px">🛡</span>
+      <div style="text-align:left"><div style="font-size:11px;font-weight:600;color:var(--text)">Crash Protection</div><div style="font-size:10px;color:var(--sec)">Detect & hedge before panic hits</div></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;background:var(--card);border-radius:10px;padding:10px 14px;border:1px solid rgba(255,255,255,.06)">
+      <span style="font-size:16px">⚖️</span>
+      <div style="text-align:left"><div style="font-size:11px;font-weight:600;color:var(--text)">Delta-Neutral Strategies</div><div style="font-size:10px;color:var(--sec)">Market-neutral yield in one tap</div></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;background:var(--card);border-radius:10px;padding:10px 14px;border:1px solid rgba(255,255,255,.06)">
+      <span style="font-size:16px">🔄</span>
+      <div style="text-align:left"><div style="font-size:11px;font-weight:600;color:var(--text)">Yield Rotation</div><div style="font-size:10px;color:var(--sec)">Auto-optimize idle funds for max APY</div></div>
     </div>
   </div>
   <div class="p1-cta">
     <button class="btn-gold" onclick="goPage('p2')">See Your AI Team in Action</button>
-    <div class="p1-note">Watch them handle a real BTC crash — 2 min, free</div>
+    <div class="p1-note">Choose a scenario and watch them work — 2 min, free</div>
   </div>
 </div>
 
@@ -1396,14 +1399,6 @@ function drawSVG(pts,color,w,h){
   var gid='sg'+Math.random().toString(36).substr(2,5);
   return '<svg viewBox="0 0 '+w+' '+h+'" style="width:100%;height:'+h+'px"><defs><linearGradient id="'+gid+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+color+'" stop-opacity=".15"/><stop offset="1" stop-color="'+color+'" stop-opacity="0"/></linearGradient></defs><polygon points="'+pad+','+h+' '+coords.join(' ')+' '+(w-pad)+','+h+'" fill="url(#'+gid+')"/><polyline points="'+coords.join(' ')+'" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 }
-
-// ====== P1 ACTIVITY ROTATION ======
-var p1Acts=['Researcher scanning BTC markets...','Sentinel checking risk levels...','Strategist analyzing funding rates...','Trader monitoring order books...'];
-var p1ActIdx=0;
-setInterval(function(){
-  var el=document.getElementById('p1ActText');
-  if(el){p1ActIdx=(p1ActIdx+1)%p1Acts.length;el.textContent=p1Acts[p1ActIdx]}
-},3000);
 
 // ====== HOME SIMULATION ======
 var simTimers=[];
